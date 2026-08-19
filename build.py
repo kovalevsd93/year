@@ -3,6 +3,7 @@ import re
 from data import *
 from css import CSS
 from icons import icon, cond_icon, any_icon, marker_uri
+import dims
 from figure import figure, spot_css, HOTSPOTS
 
 ACCENT = "#6C5FC0"
@@ -72,7 +73,7 @@ def hero():
 
    <figure class="hero-figure">
      <div class="glowwrap"></div>
-     <div class="portrait"><img src="{PAVEL}" alt="Павел Федоренко" loading="eager"></div>
+     <div class="portrait"><img src="{PAVEL}"{dims.attrs(PAVEL)} alt="Павел Федоренко" loading="eager"></div>
      <figcaption class="cred">
        <div class="cred-name">Павел Федоренко</div>
        <div class="cred-role">Ведущий специалист по тревожно-фобическим
@@ -154,7 +155,8 @@ def prog_photo():
     """Only the flagship carries a portrait; the rest stay text."""
     import base64
     b = base64.b64encode(open("assets/pavel-course.jpg", "rb").read()).decode()
-    return (f'<div class="prog-photo"><img src="data:image/jpeg;base64,{b}" '
+    d = dims.attrs("assets/pavel-course.jpg")
+    return (f'<div class="prog-photo"><img src="data:image/jpeg;base64,{b}"{d} '
             f'alt="Павел Федоренко" loading="lazy" decoding="async"></div>')
 
 def prog_top(kicker, t1, t2, desc, bullets, part=None, photo=False):
@@ -304,8 +306,9 @@ def bonuses(shots=None):
         if imgs:
             cells = "".join(
                 f'<button type="button" aria-label="Отзыв {k+1}">'
-                f'<img src="{u}" alt="Отзыв участника" loading="lazy" decoding="async">'
-                f'</button>' for k, u in enumerate(imgs))
+                f'<img src="{u}"{dims.attrs(f)} alt="Отзыв участника" '
+                f'loading="lazy" decoding="async"></button>'
+                for k, (u, f) in enumerate(imgs))
             arrow = ('<span class="hint-arrow" aria-hidden="true">'
                      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
                      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
@@ -354,8 +357,8 @@ def price():
     inc += "".join(f'<li class="inc-bonus"><span>{x}</span>'
                    f'<span class="inc-tag">Бонус</span></li>'
                    for x in INCLUDED_BONUSES)
-    pay = "".join(f'<img src="{u}" alt="" loading="lazy">' for u in PAY_LOGOS)
-    ins = "".join(f'<img src="{u}" alt="" loading="lazy">' for u in INST_LOGOS)
+    pay = "".join(f'<img src="{u}"{dims.attrs(u)} alt="" loading="lazy">' for u in PAY_LOGOS)
+    ins = "".join(f'<img src="{u}"{dims.attrs(u)} alt="" loading="lazy">' for u in INST_LOGOS)
     return f"""
 <section class="sec price-sec" id="order">
  <div class="glow glow-a"></div>
@@ -423,10 +426,11 @@ def reviews(inline=None):
         cells = []
         for j, rel in enumerate(imgs):
             src = inline(rel) if inline else (CDN + rel)
+            dim = dims.attrs(CDN + rel)
             cells.append(
                 f'<figure class="rev-card">'
                 f'<button type="button" class="rev-shot" aria-label="Открыть отзыв {j+1}">'
-                f'<img src="{src}" alt="Отзыв участника" loading="lazy"></button>'
+                f'<img src="{src}"{dim} alt="Отзыв участника" loading="lazy"></button>'
                 f'<a class="rev-src" href="{REVIEW_SOURCE}" target="_blank" rel="noopener">'
                 f'Оригинал отзыва'
                 f'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -476,7 +480,7 @@ def footer():
 <footer>
  <div class="wrap foot">
   <div style="display:flex;gap:14px;align-items:center">
-    <img src="{LOGO_FOOT}" alt="">
+    <img src="{LOGO_FOOT}"{dims.attrs(LOGO_FOOT)} alt="">
     <div class="col" style="color:var(--ink-2)">Академия здорового мышления<br>Павла Федоренко</div>
   </div>
   <div class="col">Copyright © 2012 — 2026. ИП «Федоренко Павел Алексеевич»<br>
@@ -615,4 +619,5 @@ if __name__ == "__main__":
     import inline as _inline
     doc = with_fonts(render(shots=_inline.local_shots), GILROY).replace("__MANNEQUIN__", mannequin_uri())
     open("index.html", "w", encoding="utf-8").write(doc)
+    dims.save()
     print("index.html written")

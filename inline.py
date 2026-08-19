@@ -64,5 +64,5 @@ def local_shots(folder, width=760, quality=62):
             if r.returncode != 0 or not os.path.exists(dst):
                 print(f"  ! пропустил {os.path.basename(f)}: sips не смог открыть")
                 continue
-        out.append(datauri(dst))
+        out.append((datauri(dst), dst))
     return out

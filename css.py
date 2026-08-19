@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 CSS = r"""
-@font-face{font-family:'Gilroy';src:url('__GILROY_R__') format('woff');font-weight:400;font-style:normal;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('__GILROY_M__') format('woff');font-weight:500;font-style:normal;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('__GILROY_S__') format('woff');font-weight:600;font-style:normal;font-display:swap}
-@font-face{font-family:'Gilroy';src:url('__GILROY_B__') format('woff');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Gilroy';src:url('__GILROY_R__') format('woff');font-weight:400;font-style:normal;font-display:block}
+@font-face{font-family:'Gilroy';src:url('__GILROY_M__') format('woff');font-weight:500;font-style:normal;font-display:block}
+@font-face{font-family:'Gilroy';src:url('__GILROY_S__') format('woff');font-weight:600;font-style:normal;font-display:block}
+@font-face{font-family:'Gilroy';src:url('__GILROY_B__') format('woff');font-weight:700;font-style:normal;font-display:block}
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -226,7 +226,7 @@ p{margin:0}
   background:radial-gradient(circle,var(--warm) 0%,var(--warm-2) 44%,rgba(231,233,246,0) 68%);
   opacity:.85}
 .portrait{position:relative;margin-bottom:-44px}
-.portrait img{width:100%}
+.portrait img{width:100%;height:auto}
 
 /* the card the portrait stands behind — it hides the crop and carries the facts */
 .cred{position:relative;z-index:2;background:var(--surface);border:1px solid var(--line);
