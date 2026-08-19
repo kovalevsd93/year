@@ -366,15 +366,14 @@ __SPOTS__
 /* only the flagship carries a portrait; it is pre-composited on the card's tint */
 .prog-top.has-photo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 16px;
   padding-right:0;padding-bottom:0}
-.prog-photo{width:clamp(240px,30vw,410px);align-self:end;justify-self:end;
-  margin-top:-30px}   /* поднят на всю верхнюю подложку карточки */
+.prog-photo{width:clamp(210px,25vw,330px);align-self:end;justify-self:end}
 .prog-photo img{display:block;width:100%;height:auto}
-@media(max-width:1000px){.prog-photo{width:240px}}
-@media(max-width:820px){.prog-photo{width:280px}}
+@media(max-width:1000px){.prog-photo{width:200px}}
+@media(max-width:820px){.prog-photo{width:240px}}
 @media(max-width:560px){
   /* на телефоне Павел уходит под текст и встаёт в угол карточки */
   .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:0}
-  .prog-photo{width:min(80%,290px);justify-self:end;margin-top:10px}}
+  .prog-photo{width:min(96%,360px);justify-self:end;margin-top:-14px}}
 .prog-kicker{display:inline-block;border:1px solid var(--line-2);border-radius:999px;
   padding:5px 12px;font-size:11px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
 .prog-title{margin-top:20px;font-size:clamp(25px,2.6vw,31px);font-weight:400;line-height:1.1;
@@ -412,7 +411,7 @@ __SPOTS__
 .prog-anchor{border-color:var(--accent-line)}
 .prog-anchor .prog-top{background:var(--accent-tint);border-bottom:0}
 .prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--accent)}
-.prog-anchor .prog-inner{display:grid;grid-template-columns:1.45fr .55fr;gap:0}
+.prog-anchor .prog-inner{display:grid;grid-template-columns:1.38fr .62fr;gap:0}
 .prog-anchor .prog-bot{border-left:1px solid var(--accent-line)}
 @media(max-width:820px){
   .prog-anchor .prog-inner{grid-template-columns:1fr}
@@ -552,7 +551,15 @@ __SPOTS__
 .bonus-shots img{display:block;width:100%;height:auto}
 .bonus-shots::-webkit-scrollbar{height:8px}
 .bonus-shots::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:99px}
-.bonus-shots-hint{margin-top:8px;font-size:12.5px;color:var(--ink-3)}
+.bonus-shots-hint{display:flex;align-items:center;gap:7px;margin-top:8px;
+  font-size:12.5px;color:var(--ink-3)}
+.hint-tail{color:var(--ink-3);opacity:.85}
+.hint-tail::before{content:"·";margin-right:7px}
+/* стрелка мягко уходит вбок и возвращается — подсказка, что справа есть ещё.
+   Мигание для этой аудитории не годится, поэтому только медленный сдвиг */
+.hint-arrow{display:inline-flex;color:var(--accent)}
+.hint-arrow svg{width:15px;height:15px;animation:nudge 2.8s ease-in-out infinite}
+@keyframes nudge{0%,55%,100%{transform:none}28%{transform:translateX(5px)}}
 
 /* ------------------------------------------------------------------
    PRICE

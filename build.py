@@ -304,7 +304,12 @@ def bonuses(shots=None):
                 f'<button type="button" aria-label="Отзыв {k+1}">'
                 f'<img src="{u}" alt="Отзыв участника" loading="lazy" decoding="async">'
                 f'</button>' for k, u in enumerate(imgs))
-            hint = ('<p class="bonus-shots-hint">Листайте вбок · нажмите, чтобы открыть целиком</p>'
+            arrow = ('<span class="hint-arrow" aria-hidden="true">'
+                     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+                     'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+                     '<path d="M5 12h13M13 6l6 6-6 6"/></svg></span>')
+            hint = ('<p class="bonus-shots-hint">Листайте вбок' + arrow
+                    + '<span class="hint-tail">нажмите, чтобы открыть целиком</span></p>'
                     if len(imgs) > 1 else
                     '<p class="bonus-shots-hint">Нажмите, чтобы открыть целиком</p>')
             strip = (f'<div class="bonus-shots-h">{shots_title}</div>'
