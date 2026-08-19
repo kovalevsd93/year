@@ -245,16 +245,14 @@ p{margin:0}
   .hero-left{display:contents}
   .brandline{order:1}
   .hero-copy{order:2}
-  .hero-figure{order:3;max-width:300px;align-self:center}
+  .hero-figure{order:3;align-self:flex-start;width:100%;max-width:420px}
   .offer{order:4}
   .hero-act{order:5}
-  .portrait{margin-bottom:-34px}
-  .cred{padding:18px 20px 16px}
-  .cred-name{margin-top:6px;font-size:18px}
-  .cred-role{font-size:13px}
-  .cred-meta{font-size:12px}
-  .cred-note{margin-top:12px;padding:10px 13px;font-size:12px}
-  .cred-stats{margin-top:14px;padding-top:13px}
+  .portrait{margin-bottom:-46px}
+  .cred{padding:20px 22px 18px}
+  .cred-name{font-size:19px}
+  .cred-role{font-size:13.5px}
+  .cred-note{font-size:13px}
 }
 
 /* ------------------------------------------------------------------
@@ -336,7 +334,7 @@ __SPOTS__
 .hot:hover .lbl,.hot:focus-visible .lbl{opacity:1}
 
 .model-tabs{display:flex;flex-wrap:wrap;gap:8px}
-.model-tab{padding:10px 20px;border-radius:999px;background:transparent;
+.model-tab{padding:10px 20px;border-radius:999px;background:transparent;white-space:nowrap;
   border:1.5px solid var(--line-2);color:var(--ink-2);font-size:14.5px;cursor:pointer;
   transition:all .3s ease}
 .model-tab:hover{border-color:var(--c);color:var(--ink)}
@@ -378,8 +376,9 @@ __SPOTS__
 @media(max-width:1000px){.prog-photo{width:200px}}
 @media(max-width:820px){.prog-photo{width:240px}}
 @media(max-width:560px){
-  .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:28px}
-  .prog-photo{display:none}}
+  /* на телефоне Павел уходит под текст и встаёт в угол карточки */
+  .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:0}
+  .prog-photo{width:180px;justify-self:end;margin-top:14px}}
 .prog-kicker{display:inline-block;border:1px solid var(--line-2);border-radius:999px;
   padding:5px 12px;font-size:11px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
 .prog-title{margin-top:20px;font-size:clamp(25px,2.6vw,31px);font-weight:400;line-height:1.1;
@@ -690,5 +689,16 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 @media(prefers-reduced-motion:reduce){
   *{animation:none !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
   .rv{opacity:1;transform:none}
+}
+
+/* на телефоне четыре уровня и кнопки первого экрана держим в одну строку */
+@media(max-width:620px){
+  .model-tabs{flex-wrap:nowrap;gap:6px}
+  .model-tab{flex:0 1 auto;padding:9px 12px;font-size:clamp(11.5px,3.3vw,14px)}
+}
+@media(max-width:940px){
+  .hero-act .btn-row{flex-wrap:nowrap;gap:10px}
+  .hero-act .btn{flex:1 1 0;min-width:0;padding:14px 10px;white-space:nowrap;
+    font-size:clamp(12px,3.4vw,16px)}
 }
 """
