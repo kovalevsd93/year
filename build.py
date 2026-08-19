@@ -14,9 +14,11 @@ def cta(label="Оформить подписку", cls="btn btn-lg"):
     return f'<a class="{cls}" href="{ORDER_LINK}">{label}</a>'
 
 def timer(cls="timer"):
-    units = [("d","дней"),("h","часов"),("m","минут"),("s","секунд")]
+    # короткие подписи — для телефона, там строка должна остаться одной
+    units = [("d","дней","д"),("h","часов","ч"),("m","минут","м"),("s","секунд","с")]
     u = "".join(f'<span class="u"><span class="n" data-t="{k}">—</span>'
-                f'<span class="l">{v}</span></span>' for k,v in units)
+                f'<span class="l">{v}</span><span class="l-s">{sh}</span></span>'
+                for k,v,sh in units)
     return f'<div class="{cls}" role="timer" aria-label="До конца акции">{u}</div>'
 
 def heading(label, title, lead=None, center=True, wide=False):
@@ -156,13 +158,13 @@ def prog_photo():
             f'alt="Павел Федоренко" loading="lazy" decoding="async"></div>')
 
 def prog_top(kicker, t1, t2, desc, bullets, part=None, photo=False):
-    sub = f"<span>{t2}</span>" if t2 else ""
+    title = f"{t1} {t2}".strip()
     bl = ("<ul class='prog-list'>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>") if bullets else ""
     badge = f'<span class="prog-part">Часть {part}</span>' if part else ""
     cls = "prog-top has-photo" if photo else "prog-top"
     return (f'<div class="{cls}"><div class="prog-head">'
             f'<div class="prog-kickrow">{badge}<span class="prog-kicker">{kicker}</span></div>'
-            f'<h3 class="prog-title">{t1}{sub}</h3>'
+            f'<h3 class="prog-title">{title}</h3>'
             f'<p class="prog-desc">{desc}</p>{bl}</div>'
             f'{prog_photo() if photo else ""}</div>')
 
@@ -174,7 +176,7 @@ def course_card(n, kicker, t1, t2, desc, hl, body):
     ic, ci, tags = COURSE_META[n]
     ink, tint, tile = SPECTRUM[ci] if ci is not None else (ACCENT, "var(--accent-tint)",
                                                            "var(--accent-tint)")
-    sub = f"<span>{t2}</span>" if t2 else ""
+    title = f"{t1} {t2}".strip()
     chips = "".join(
         (f'<span class="tag" style="--tc:{SPECTRUM[j][0]};--tt:{SPECTRUM[j][1]}">{lbl}</span>'
          if j is not None else f'<span class="tag tag-plain">{lbl}</span>')
@@ -186,7 +188,7 @@ def course_card(n, kicker, t1, t2, desc, hl, body):
      <span class="course-ico">{any_icon(ic, ink, 24)}</span>
      <span class="course-kicker">{kicker}</span>
    </div>
-   <h3 class="course-title">{t1}{sub}</h3>
+   <h3 class="course-title">{title}</h3>
    <p class="course-desc">{desc}</p>
    <div class="course-res">
      <p class="course-res-t">{hl}</p>

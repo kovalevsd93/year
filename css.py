@@ -153,20 +153,21 @@ p{margin:0}
 .timer .u{display:flex;align-items:baseline;gap:5px}
 .timer .n{font-size:17px;font-weight:600;color:var(--ink);line-height:1.2}
 .timer .l{font-size:11px;color:var(--ink-3)}
+.timer .l-s{display:none}
 .t-short{display:none}
 @media(max-width:900px){.t-full{display:none}.t-short{display:inline}}
-/* на телефоне таймер разворачивается: подпись сверху, единицы под цифрами */
+/* на телефоне подпись, таймер и кнопка держатся в одну строку:
+   единицы времени сокращаются до одной буквы */
 @media(max-width:620px){
-  .topbar-in{display:grid;grid-template-columns:1fr auto;
-    grid-template-areas:"txt btn" "timer btn";align-items:center;gap:3px 12px;padding:8px 14px}
-  .topbar-txt{grid-area:txt;font-size:10px;font-weight:600;letter-spacing:.14em;
-    text-transform:uppercase;color:var(--ink-3)}
-  .timer{grid-area:timer;gap:16px}
-  .timer .u{flex-direction:column;align-items:center;gap:1px}
-  .timer .n{font-size:16px;line-height:1.1}
-  .timer .l{font-size:9px;letter-spacing:.06em;text-transform:uppercase}
-  .topbar .btn{grid-area:btn;align-self:center;padding:10px 16px;font-size:12.5px;
-    white-space:nowrap}
+  .topbar-in{padding:8px 12px;gap:8px}
+  .topbar-txt{font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);line-height:1.25;max-width:6.5em}
+  .timer{gap:8px;flex:0 0 auto}
+  .timer .u{gap:2px}
+  .timer .n{font-size:15px}
+  .timer .l{display:none}
+  .timer .l-s{display:inline;font-size:11px;color:var(--ink-3)}
+  .topbar .btn{padding:9px 14px;font-size:12px;white-space:nowrap}
 }
 @media(max-width:420px){.timer .u:nth-child(4){display:none}}
 
@@ -385,10 +386,8 @@ __SPOTS__
   .prog-photo{width:min(96%,360px);justify-self:end;margin-top:-14px}}
 .prog-kicker{display:inline-block;border:1px solid var(--line-2);border-radius:999px;
   padding:5px 12px;font-size:11px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
-.prog-title{margin-top:20px;font-size:clamp(25px,2.6vw,31px);font-weight:400;line-height:1.1;
-  letter-spacing:-.03em;color:var(--ink)}
-.prog-title span{display:block;font-size:.6em;font-weight:600;color:var(--ink-2);margin-top:7px;
-  letter-spacing:-.014em}
+.prog-title{margin-top:18px;font-size:clamp(20px,2vw,24px);font-weight:500;line-height:1.2;
+  letter-spacing:-.024em;color:var(--ink);text-wrap:balance}
 .prog-desc{margin-top:15px;font-size:14.5px;line-height:1.65;color:var(--ink-2);max-width:44ch}
 .prog-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:6px}
 .prog-list li{position:relative;padding-left:19px;font-size:14px;color:var(--ink-2)}
@@ -443,10 +442,8 @@ __SPOTS__
   background:var(--ctile)}
 .course-kicker{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
   color:var(--ink-3);line-height:1.4}
-.course-title{margin-top:20px;font-size:clamp(24px,2.5vw,30px);font-weight:400;line-height:1.1;
-  letter-spacing:-.03em;color:var(--ink)}
-.course-title span{display:block;font-size:.58em;font-weight:600;color:var(--ink-2);
-  margin-top:7px;letter-spacing:-.014em}
+.course-title{margin-top:18px;font-size:clamp(20px,2.1vw,26px);font-weight:500;line-height:1.2;
+  letter-spacing:-.024em;color:var(--ink);text-wrap:balance}
 .course-desc{margin-top:14px;font-size:14.5px;line-height:1.65;color:var(--ink-2);max-width:46ch}
 
 .course-res{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
