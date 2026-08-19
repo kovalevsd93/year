@@ -580,7 +580,7 @@ def render(inline=None, shots=None):
 
 <div class="topbar">
  <div class="topbar-in">
-  <div class="topbar-txt">Акция действует до <b>{DEADLINE_TEXT}</b></div>
+  <div class="topbar-txt"><span class="t-full">Акция действует до <b>{DEADLINE_TEXT}</b></span><span class="t-short">До конца акции</span></div>
   {timer()}
   <a class="btn" href="{ORDER_LINK}">Участвовать</a>
  </div>

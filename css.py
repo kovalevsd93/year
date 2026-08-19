@@ -153,11 +153,20 @@ p{margin:0}
 .timer .u{display:flex;align-items:baseline;gap:5px}
 .timer .n{font-size:17px;font-weight:600;color:var(--ink);line-height:1.2}
 .timer .l{font-size:11px;color:var(--ink-3)}
-@media(max-width:900px){.topbar-txt{display:none}}
+.t-short{display:none}
+@media(max-width:900px){.t-full{display:none}.t-short{display:inline}}
+/* на телефоне таймер разворачивается: подпись сверху, единицы под цифрами */
 @media(max-width:620px){
-  .topbar-in{padding:9px 14px;gap:10px}
-  .timer{gap:9px}.timer .n{font-size:15px}.timer .l{font-size:10px}
-  .topbar .btn{padding:9px 16px;font-size:12.5px;white-space:nowrap}
+  .topbar-in{display:grid;grid-template-columns:1fr auto;
+    grid-template-areas:"txt btn" "timer btn";align-items:center;gap:3px 12px;padding:8px 14px}
+  .topbar-txt{grid-area:txt;font-size:10px;font-weight:600;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ink-3)}
+  .timer{grid-area:timer;gap:16px}
+  .timer .u{flex-direction:column;align-items:center;gap:1px}
+  .timer .n{font-size:16px;line-height:1.1}
+  .timer .l{font-size:9px;letter-spacing:.06em;text-transform:uppercase}
+  .topbar .btn{grid-area:btn;align-self:center;padding:10px 16px;font-size:12.5px;
+    white-space:nowrap}
 }
 @media(max-width:420px){.timer .u:nth-child(4){display:none}}
 
