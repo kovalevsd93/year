@@ -224,19 +224,13 @@ p{margin:0}
 .cred-meta{margin-top:7px;font-size:12.5px;line-height:1.5;color:var(--ink-3)}
 .cred-note{margin-top:12px;padding:10px 13px;border-radius:11px;background:var(--accent-tint);
   font-size:12.5px;line-height:1.45;color:var(--accent)}
-.cred-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:13px;
-  padding-top:12px;border-top:1px solid var(--line)}
-.cred-stats > div{padding:0 12px;border-left:1px solid var(--line)}
-.cred-stats > div:first-child{padding-left:0;border-left:0}
-.cred-stats > div:last-child{padding-right:0}
-.cred-stats b{display:block;font-size:15.5px;font-weight:600;color:var(--ink);letter-spacing:-.02em;
-  font-variant-numeric:tabular-nums;line-height:1.2}
-.cred-stats span{display:block;margin-top:3px;font-size:11.5px;line-height:1.35;color:var(--ink-3)}
-@media(max-width:420px){
-  .cred-stats{grid-template-columns:1fr;gap:11px}
-  .cred-stats > div{padding:0;border-left:0}
-  .cred-stats > div + div{padding-top:11px;border-top:1px solid var(--line)}
-}
+.cred-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px;
+  margin-top:13px;padding-top:12px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-3)}
+.cred-stats span{display:inline-flex;align-items:baseline;gap:5px;white-space:nowrap}
+.cred-stats span + span::before{content:"·";margin-right:4px;opacity:.55}
+.cred-stats b{font-weight:600;color:var(--ink);font-size:14px;letter-spacing:-.01em;
+  font-variant-numeric:tabular-nums}
 
 /* on a phone the headline comes first; Павел sits between the copy and the buttons */
 @media(max-width:940px){
@@ -371,10 +365,10 @@ __SPOTS__
 /* only the flagship carries a portrait; it is pre-composited on the card's tint */
 .prog-top.has-photo{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:0 16px;
   padding-right:0;padding-bottom:0}
-.prog-photo{width:clamp(210px,25vw,330px);align-self:end;justify-self:end}
+.prog-photo{width:clamp(240px,29vw,392px);align-self:end;justify-self:end}
 .prog-photo img{display:block;width:100%;height:auto}
-@media(max-width:1000px){.prog-photo{width:200px}}
-@media(max-width:820px){.prog-photo{width:240px}}
+@media(max-width:1000px){.prog-photo{width:240px}}
+@media(max-width:820px){.prog-photo{width:280px}}
 @media(max-width:560px){
   /* на телефоне Павел уходит под текст и встаёт в угол карточки */
   .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:0}
@@ -416,7 +410,7 @@ __SPOTS__
 .prog-anchor{border-color:var(--accent-line)}
 .prog-anchor .prog-top{background:var(--accent-tint);border-bottom:0}
 .prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--accent)}
-.prog-anchor .prog-inner{display:grid;grid-template-columns:1.38fr .62fr;gap:0}
+.prog-anchor .prog-inner{display:grid;grid-template-columns:1.45fr .55fr;gap:0}
 .prog-anchor .prog-bot{border-left:1px solid var(--accent-line)}
 @media(max-width:820px){
   .prog-anchor .prog-inner{grid-template-columns:1fr}
