@@ -378,7 +378,7 @@ __SPOTS__
 @media(max-width:560px){
   /* на телефоне Павел уходит под текст и встаёт в угол карточки */
   .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:0}
-  .prog-photo{width:180px;justify-self:end;margin-top:14px}}
+  .prog-photo{width:min(80%,290px);justify-self:end;margin-top:10px}}
 .prog-kicker{display:inline-block;border:1px solid var(--line-2);border-radius:999px;
   padding:5px 12px;font-size:11px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
 .prog-title{margin-top:20px;font-size:clamp(25px,2.6vw,31px);font-weight:400;line-height:1.1;
@@ -693,8 +693,11 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 
 /* на телефоне четыре уровня и кнопки первого экрана держим в одну строку */
 @media(max-width:620px){
+  h2{font-size:23px;line-height:1.2}
+  h2 br{display:none}
   .model-tabs{flex-wrap:nowrap;gap:6px}
-  .model-tab{flex:0 1 auto;padding:9px 12px;font-size:clamp(11.5px,3.3vw,14px)}
+  .model-tab{flex:1 1 0;min-width:0;padding:9px 6px;text-align:center;
+    font-size:clamp(11px,3.1vw,14px)}
 }
 @media(max-width:940px){
   .hero-act .btn-row{flex-wrap:nowrap;gap:10px}

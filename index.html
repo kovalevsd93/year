@@ -384,7 +384,7 @@ p{margin:0}
 @media(max-width:560px){
   /* на телефоне Павел уходит под текст и встаёт в угол карточки */
   .prog-top.has-photo{grid-template-columns:1fr;padding-right:30px;padding-bottom:0}
-  .prog-photo{width:180px;justify-self:end;margin-top:14px}}
+  .prog-photo{width:min(80%,290px);justify-self:end;margin-top:10px}}
 .prog-kicker{display:inline-block;border:1px solid var(--line-2);border-radius:999px;
   padding:5px 12px;font-size:11px;color:var(--ink-3);letter-spacing:.01em;white-space:nowrap}
 .prog-title{margin-top:20px;font-size:clamp(25px,2.6vw,31px);font-weight:400;line-height:1.1;
@@ -699,8 +699,11 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 
 /* на телефоне четыре уровня и кнопки первого экрана держим в одну строку */
 @media(max-width:620px){
+  h2{font-size:23px;line-height:1.2}
+  h2 br{display:none}
   .model-tabs{flex-wrap:nowrap;gap:6px}
-  .model-tab{flex:0 1 auto;padding:9px 12px;font-size:clamp(11.5px,3.3vw,14px)}
+  .model-tab{flex:1 1 0;min-width:0;padding:9px 6px;text-align:center;
+    font-size:clamp(11px,3.1vw,14px)}
 }
 @media(max-width:940px){
   .hero-act .btn-row{flex-wrap:nowrap;gap:10px}
@@ -784,7 +787,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 
 <section class="sec sec-alt">
  <div class="wrap stack stack-l">
-  <div class="stack stack-m center rv"><div class="label">Четыре уровня работы</div><h2>Вы получаете комплексное решение<br>для устойчивого результата</h2><p class="lead">С помощью научно обоснованных методов мы помогаем глубоко проработать тревожные расстройства на уровне эмоций, тела, мыслей и поведения, чтобы вы могли получить устойчивый результат и освободиться от типичных проявлений тревоги.</p></div>
+  <div class="stack stack-m center rv"><div class="label">Четыре уровня работы</div><h2>Вы получаете комплексное решение<br>для устойчивого результата</h2><p class="lead">Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, мыслей и поведения — ради устойчивого результата.</p></div>
 
   <div class="model rv" id="model">
    <div class="model-figure">
@@ -920,7 +923,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
  <div class="glow glow-a"></div>
  <div class="glow glow-b"></div>
  <div class="wrap stack stack-l">
-  <div class="stack stack-m center rv"><div class="label">Условия</div><h2>Знания и методики, которые меняют жизнь</h2><p class="lead lead-w">Подписка на 1 год (365 дней) на библиотеку всех программ по преодолению тревожных расстройств и неврозов. Акционное предложение действует до 7 сентября.</p></div>
+  <div class="stack stack-m center rv"><div class="label">Тариф</div><h2>Знания и методики, которые меняют жизнь</h2><p class="lead">Подписка на 1 год (365 дней) на библиотеку всех программ по преодолению тревожных расстройств и неврозов.</p></div>
 
 
   <div class="price-grid">
