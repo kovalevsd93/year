@@ -128,11 +128,14 @@ def levels():
                     f'style="--x:{x};--y:{y};--c:{line}" aria-label="{title}">'
                     f'<span class="lbl">{title}</span><i></i></button>')
         tabs.append(f'<button class="model-tab" role="tab" id="mt{i}" aria-controls="mp{i}" '
-                    f'aria-selected="{pressed}" style="--c:{line};--ct:{tint}">{title}</button>')
+                    f'aria-selected="{pressed}" data-wash="{wash}" data-tint="{tint}" '
+                    f'style="--c:{line};--ct:{tint}">{title}</button>')
         li = "".join(f"<li>{x}</li>" for x in items)
         panes.append(f'<div class="model-pane" role="tabpanel" id="mp{i}" aria-labelledby="mt{i}"'
-                     f'{"" if i == 0 else " hidden"} style="--c:{line}">'
-                     f'<p class="cap">{cap}</p><ul>{li}</ul></div>')
+                     f'{"" if i == 0 else " hidden"} style="--c:{line};--ci:{LEVEL_INK[i]}">'
+                     f'<p class="cap">{cap}</p>'
+                     f'<div class="pane-count">{len(items)} проявлений</div>'
+                     f'<ul>{li}</ul></div>')
 
     return f"""
 <section class="sec sec-alt">
@@ -142,8 +145,8 @@ def levels():
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
 
-  <div class="model rv" id="model">
-   <div class="model-figure">
+  <div class="model rv" id="model" style="--wash:{LEVEL_COLORS[0][0]};--washt:{LEVEL_COLORS[0][2]}">
+   <div class="model-fig">
      <div class="figbox">{figure(LEVELS)}{''.join(hots)}</div>
    </div>
    <div class="model-panel">
@@ -321,8 +324,17 @@ def bonuses(shots=None):
                     + '<span class="hint-tail">нажмите, чтобы открыть целиком</span></p>'
                     if len(imgs) > 1 else
                     '<p class="bonus-shots-hint">Нажмите, чтобы открыть целиком</p>')
+            nav = ('<button class="shots-nav prev" type="button" aria-label="Предыдущие отзывы">'
+                   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+                   'stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>'
+                   '</button>'
+                   '<button class="shots-nav next" type="button" aria-label="Следующие отзывы">'
+                   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+                   'stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>'
+                   '</button>')
             strip = (f'<div class="bonus-shots-h">{shots_title}</div>'
-                     f'<div class="bonus-shots">{cells}</div>{hint}')
+                     f'<div class="shots-wrap">{nav}'
+                     f'<div class="bonus-shots">{cells}</div></div>{hint}')
         bink, btint, _ = SPECTRUM[6]   # оба бонуса одним тоном
         cards.append(f"""<article class="bonus rv" style="--c:{bink};--ct:{btint}">
    <div class="bonus-head">
@@ -532,7 +544,12 @@ JS = """
   var mTabs = [].slice.call(document.querySelectorAll(".model-tab"));
   var mHots = [].slice.call(document.querySelectorAll(".hot"));
   var mZones = [].slice.call(document.querySelectorAll(".mq-lit"));
+  var modelBox = document.getElementById("model");
   function selectLevel(i){
+    if(modelBox && mTabs[i]){
+      modelBox.style.setProperty("--wash", mTabs[i].dataset.wash);
+      modelBox.style.setProperty("--washt", mTabs[i].dataset.tint);
+    }
     mTabs.forEach(function(t,j){
       t.setAttribute("aria-selected", j===i ? "true":"false");
       document.getElementById("mp"+j).hidden = (j!==i);
@@ -564,6 +581,28 @@ JS = """
         document.getElementById("tp"+j).hidden = (j!==i);
       });
     });
+  });
+
+  document.querySelectorAll(".shots-wrap").forEach(function(w){
+    var strip = w.querySelector(".bonus-shots");
+    var prev = w.querySelector(".prev"), next = w.querySelector(".next");
+    function step(){
+      var card = strip.querySelector("button");
+      return card ? card.getBoundingClientRect().width + 14 : strip.clientWidth * .8;
+    }
+    function sync(){
+      var max = strip.scrollWidth - strip.clientWidth - 1;
+      prev.disabled = strip.scrollLeft <= 0;
+      next.disabled = strip.scrollLeft >= max;
+      w.classList.toggle("no-nav", max <= 0);
+    }
+    prev.addEventListener("click", function(){
+      strip.scrollBy({left: -step(), behavior: "smooth"}); });
+    next.addEventListener("click", function(){
+      strip.scrollBy({left: step(), behavior: "smooth"}); });
+    strip.addEventListener("scroll", sync, {passive: true});
+    addEventListener("resize", sync);
+    sync();
   });
 
   var lb = document.getElementById("lb"), lbImg = lb.querySelector("img");

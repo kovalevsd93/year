@@ -305,16 +305,29 @@ p{margin:0}
    Selecting a level lights the part of the body it works on and
    swaps in that level's symptoms. Nothing moves on its own.
    ------------------------------------------------------------------ */
-.model{display:grid;grid-template-columns:.82fr 1.18fr;gap:52px;align-items:center}
-@media(max-width:900px){.model{grid-template-columns:1fr;gap:34px}
-  .figbox{max-width:min(250px,62vw)}}
+.model{display:grid;grid-template-columns:.85fr 1.15fr;align-items:stretch;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  overflow:hidden;box-shadow:0 26px 60px -40px rgba(28,20,60,.28)}
+@media(max-width:900px){.model{grid-template-columns:1fr}
+  .figbox{max-width:min(240px,56vw)}
+  .model-fig{padding-top:clamp(18px,5vw,32px)}}
 
-.figbox{position:relative;width:100%;max-width:min(300px,58vw);margin:0 auto}
+/* фигура стоит на собственном фоне, который красится в цвет активного уровня */
+.model-fig{position:relative;display:grid;place-items:end center;
+  padding:clamp(20px,3vw,40px) clamp(16px,2vw,32px) 0;
+  background:var(--washt);transition:background .55s ease}
+.model-fig::before{content:"";position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
+  width:104%;padding-bottom:104%;border-radius:50%;
+  background:radial-gradient(circle,var(--wash) 0%,transparent 66%);
+  opacity:.42;transition:background .55s ease}
+.model-panel{padding:clamp(24px,3vw,44px)}
 
-/* the mannequin: its own alpha is the mask, a gradient inside picks the zone */
+.figbox{position:relative;width:100%;max-width:min(320px,60vw);margin:0 auto}
+
+/* сам манекен: его альфа-канал — маска, градиент внутри выбирает зону */
 .mq{position:relative;width:100%;aspect-ratio:419/688;isolation:isolate}
-.mq::before{content:"";position:absolute;left:12%;right:6%;bottom:-2%;height:5%;
-  background:radial-gradient(ellipse at center,rgba(96,86,140,.20),rgba(96,86,140,0) 70%)}
+.mq::before{content:"";position:absolute;left:12%;right:6%;bottom:-1%;height:5%;
+  background:radial-gradient(ellipse at center,rgba(96,86,140,.22),rgba(96,86,140,0) 70%)}
 .mq-base,.mq-lit{position:absolute;inset:0;background-repeat:no-repeat;
   background-size:contain;background-position:center}
 .mq-base{background-image:var(--mq)}
@@ -331,39 +344,43 @@ __SPOTS__
 .hot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
   width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;
   display:grid;place-items:center;z-index:2}
-.hot i{display:block;width:11px;height:11px;border-radius:50%;background:var(--surface);
-  border:2px solid var(--line-2);box-shadow:0 2px 8px rgba(60,50,110,.18);
+.hot i{display:block;width:12px;height:12px;border-radius:50%;background:var(--surface);
+  border:2px solid var(--c);box-shadow:0 2px 10px rgba(60,50,110,.22);
   transition:all .4s cubic-bezier(.2,.7,.3,1)}
-.hot:hover i{border-color:var(--c);transform:scale(1.15)}
-.hot[aria-pressed="true"] i{background:var(--c);border-color:var(--c);transform:scale(1.3)}
+.hot:hover i{transform:scale(1.18)}
+.hot[aria-pressed="true"] i{background:var(--c);transform:scale(1.35);
+  box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}
 .hot:focus-visible{outline:2px solid var(--c);outline-offset:2px;border-radius:50%}
 .hot .lbl{position:absolute;left:50%;top:-30px;transform:translateX(-50%);
   white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);
   background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 11px;
   opacity:0;pointer-events:none;transition:opacity .3s ease}
-.hot:hover .lbl,.hot:focus-visible .lbl{opacity:1}
+.hot:hover .lbl,.hot:focus-visible .lbl,.hot[aria-pressed="true"] .lbl{opacity:1}
 
-.model-tabs{display:flex;flex-wrap:nowrap;gap:8px}
+.model-tabs{display:flex;flex-wrap:nowrap;gap:6px;padding:5px;
+  background:var(--ground-2);border-radius:999px}
 .model-tab{flex:1 1 0;min-width:0;text-align:center;
-  padding:10px 14px;border-radius:999px;background:transparent;white-space:nowrap;
-  border:1.5px solid var(--line-2);color:var(--ink-2);font-size:14.5px;cursor:pointer;
+  padding:11px 14px;border-radius:999px;background:transparent;white-space:nowrap;
+  border:1.5px solid transparent;color:var(--ink-2);font-size:14.5px;cursor:pointer;
   transition:all .3s ease}
 .model-tab:hover{border-color:var(--c);color:var(--ink)}
-.model-tab[aria-selected="true"]{background:var(--ct);border-color:var(--c);
-  color:var(--ink);font-weight:600}
+.model-tab[aria-selected="true"]{background:var(--surface);border-color:var(--c);
+  color:var(--ink);font-weight:600;box-shadow:0 4px 14px -8px rgba(28,20,60,.4)}
 .model-tab:focus-visible{outline:2px solid var(--c);outline-offset:3px}
 
-.model-body{margin-top:30px;min-height:280px}
+.model-body{margin-top:26px;min-height:300px}
 .model-pane[hidden]{display:none}
 .model-pane{animation:paneIn .38s cubic-bezier(.2,.7,.3,1) both}
 @keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.model-pane .cap{font-size:15.5px;line-height:1.66;color:var(--ink-2);max-width:52ch}
-.model-pane ul{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:0}
-.model-pane li{position:relative;padding:12px 0 12px 26px;font-size:15.5px;line-height:1.6;
+.model-pane .cap{font-size:16px;line-height:1.62;color:var(--ink-2);max-width:52ch}
+.pane-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ci)}
+.model-pane ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.model-pane li{position:relative;padding:13px 0 13px 28px;font-size:15.5px;line-height:1.55;
   color:var(--ink-2);border-top:1px solid var(--line)}
 .model-pane li:first-child{border-top:0}
-.model-pane li::before{content:"";position:absolute;left:2px;top:20px;width:6px;height:6px;
-  border-radius:50%;background:var(--c)}
+.model-pane li::before{content:"";position:absolute;left:0;top:19px;width:8px;height:8px;
+  border-radius:50%;background:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 18%,transparent)}
 @media(max-width:900px){.model-body{min-height:0}}
 
 @media(prefers-reduced-motion:reduce){.model-pane{animation:none}}
@@ -561,8 +578,25 @@ __SPOTS__
 
 .bonus-shots-h{margin-top:28px;font-size:11px;font-weight:600;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ink-3)}
-.bonus-shots{display:flex;gap:14px;overflow-x:auto;margin-top:16px;padding-bottom:10px;
-  scroll-snap-type:x proximity}
+.shots-wrap{position:relative;margin-top:16px}
+.bonus-shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;
+  scroll-snap-type:x proximity;scrollbar-width:thin;
+  scrollbar-color:var(--line-2) transparent}
+/* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
+.shots-nav{position:absolute;top:calc(50% - 26px);z-index:3;width:46px;height:46px;
+  border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);
+  backdrop-filter:blur(8px);color:var(--ink);cursor:pointer;display:grid;place-items:center;
+  box-shadow:0 10px 26px -12px rgba(28,20,60,.35);
+  transition:opacity .25s ease,transform .25s ease,background .25s ease}
+.shots-nav svg{width:20px;height:20px}
+.shots-nav.prev{left:-14px}
+.shots-nav.next{right:-14px}
+.shots-nav:hover{background:#fff;transform:scale(1.06)}
+.shots-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.shots-nav[disabled]{opacity:0;pointer-events:none}
+.no-nav .shots-nav{display:none}
+@media(hover:none){.shots-nav{display:none}}
+@media(max-width:640px){.shots-nav{display:none}}
 .bonus-shots button{flex:none;width:min(540px,84vw);padding:0;border:1px solid var(--line);
   background:var(--surface);border-radius:14px;overflow:hidden;cursor:zoom-in;display:block;
   scroll-snap-align:start;transition:border-color .3s ease,transform .4s cubic-bezier(.2,.7,.3,1)}
@@ -578,6 +612,7 @@ __SPOTS__
 /* стрелка мягко уходит вбок и возвращается — подсказка, что справа есть ещё.
    Мигание для этой аудитории не годится, поэтому только медленный сдвиг */
 .hint-arrow{display:inline-flex;color:var(--accent)}
+@media(hover:hover){.hint-arrow{display:none}}
 .hint-arrow svg{width:15px;height:15px;animation:nudge 2.8s ease-in-out infinite}
 @keyframes nudge{0%,55%,100%{transform:none}28%{transform:translateX(5px)}}
 
