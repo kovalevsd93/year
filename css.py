@@ -264,16 +264,29 @@ p{margin:0}
    ------------------------------------------------------------------ */
 .cond{position:relative;display:block;background:var(--surface);border:1px solid var(--line);
   border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
-  transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-.cond:hover{transform:translateY(-4px);border-color:transparent;
-  box-shadow:0 22px 50px -30px rgba(28,20,60,.30)}
+  transition:border-color .35s ease,background .35s ease,
+    transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.cond:hover{transform:translateY(-4px);border-color:var(--c);background:var(--c);
+  box-shadow:0 22px 50px -30px rgba(28,20,60,.34)}
+.cond:hover .cond-h{color:#fff}
+.cond:hover .cond-d{color:rgba(255,255,255,.9)}
+.cond:hover .cond-ico{background:rgba(255,255,255,.2);color:#fff}
+.cond:hover .cond-tick{border-color:rgba(255,255,255,.55)}
+/* отмеченная карточка остаётся отмеченной и под курсором */
+.cond[aria-pressed="true"]:hover{background:var(--ct)}
+.cond[aria-pressed="true"]:hover .cond-h{color:var(--ink)}
+.cond[aria-pressed="true"]:hover .cond-d{color:var(--ink-2)}
+.cond[aria-pressed="true"]:hover .cond-ico{background:var(--surface);color:var(--c)}
+.cond[aria-pressed="true"]:hover .cond-tick{background:var(--c);border-color:var(--c)}
 
 .cond-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;
-  background:var(--ctile);margin-bottom:20px}
+  background:var(--ctile);color:var(--c);margin-bottom:20px;
+  transition:background .35s ease,color .35s ease}
 .cond-txt{display:block}
-.cond-h{display:block;font-size:17.5px;font-weight:600;color:var(--ink);
+.cond-h{display:block;font-size:17.5px;font-weight:600;color:var(--ink);transition:color .35s ease;
   letter-spacing:-.016em;line-height:1.28}
-.cond-d{display:block;margin-top:11px;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+.cond-d{display:block;margin-top:11px;font-size:14.5px;line-height:1.65;color:var(--ink-2);
+  transition:color .35s ease}
 
 /* seven cards in a three-up grid: the last one runs the full width on purpose */
 .cond-wide{grid-column:1/-1;display:grid;grid-template-columns:auto 1fr;gap:0 22px;
@@ -730,14 +743,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
     font-size:clamp(12px,3.4vw,16px)}
 }
 
-/* одна карточка в ряду залита цветом — приём из присланных референсов */
-.is-accent{background:var(--accent);border-color:var(--accent)}
-.is-accent .cond-h,.is-accent h3,.is-accent .cap{color:#fff}
-.is-accent .cond-d,.is-accent li,.is-accent p{color:rgba(255,255,255,.88)}
-.is-accent .cond-ico,.is-accent .ico{background:rgba(255,255,255,.18)}
-.is-accent .cond-tick{border-color:rgba(255,255,255,.5)}
-.is-accent[aria-pressed="true"]{background:var(--accent-hover)}
-.is-accent li::before{background:rgba(255,255,255,.55)}
+
 
 .price-side .btn{background:#fff;color:var(--ink)}
 .price-side .btn:hover{background:#fff}

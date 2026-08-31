@@ -100,11 +100,9 @@ def conditions():
     for i, (key, title, desc) in enumerate(DISORDERS):
         ink, tint, tile = SPECTRUM[i]
         last = " cond-wide" if i == len(DISORDERS) - 1 else ""
-        acc = " is-accent" if i == 1 else ""          # одна карточка в ряду залита
-        mark = "#FFFFFF" if acc else ink
         cards.append(
-            f'<article class="cond{last}{acc} rv" style="--c:{ink};--ct:{tint};--ctile:{tile}">'
-            f'<span class="cond-ico">{cond_icon(key, mark)}</span>'
+            f'<article class="cond{last} rv" style="--c:{ink};--ct:{tint};--ctile:{tile}">'
+            f'<span class="cond-ico">{cond_icon(key, "currentColor")}</span>'
             f'<span class="cond-txt"><span class="cond-h">{title}</span>'
             f'<span class="cond-d">{desc}</span></span></article>')
     return f"""
