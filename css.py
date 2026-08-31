@@ -18,6 +18,8 @@ button{font:inherit;color:inherit}
 :root{
   --ground:#FBFAFD;
   --ground-2:#F5F3FA;
+  --field:#EAE6F7;            /* регион, которым владеет акцент */
+  --field-warm:#FAF0E9;
   --surface:#FFFFFF;
   --line:#EBE8F4;
   --line-2:#DFDAEE;
@@ -35,8 +37,8 @@ button{font:inherit;color:inherit}
   --warm:#F3E4E0;             /* morning light — hero glow only */
   --warm-2:#E7E9F6;
 
-  --shadow:0 30px 70px -46px rgba(48,38,96,.30);
-  --shadow-s:0 14px 34px -26px rgba(48,38,96,.28);
+  --shadow:0 18px 48px -24px rgba(48,38,96,.22), 0 2px 6px -2px rgba(48,38,96,.10);
+  --shadow-s:0 8px 22px -12px rgba(48,38,96,.20), 0 1px 3px -1px rgba(48,38,96,.08);
 
   --r-lg:30px; --r-md:22px; --r-sm:14px;
   --maxw:1160px;
@@ -73,10 +75,10 @@ body{
   text-wrap:balance;
 }
 h2{
-  font-size:clamp(27px,3.5vw,42px);
+  font-size:clamp(28px,4.4vw,54px);
   font-weight:400;
-  line-height:1.13;
-  letter-spacing:-.031em;
+  line-height:1.08;
+  letter-spacing:-.034em;
   color:var(--ink);
   margin:0;
   text-wrap:balance;
@@ -109,6 +111,10 @@ p{margin:0}
 .sec{position:relative;padding:78px 0}
 .sec-tight{padding:56px 0}
 .sec-alt{background:var(--ground-2)}
+/* секция-поле: цвет держит целую область, а не рассыпан акцентами */
+.sec-field{background:var(--field)}
+.sec-field .card,.sec-field .club,.sec-field .panel{border-color:#DCD5F0}
+.sec-warm{background:var(--field-warm)}
 /* соседние секции на одном фоне не должны складывать отступы */
 .sec-alt + .sec-alt{padding-top:0}
 @media(max-width:760px){.sec{padding:52px 0}.sec-tight{padding:40px 0}.wrap{padding:0 18px}}
@@ -468,16 +474,23 @@ __SPOTS__
 /* ------------------------------------------------------------------
    CLUB
    ------------------------------------------------------------------ */
-.club{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:28px;
-  display:flex;flex-direction:column;gap:15px;
-  transition:border-color .4s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-.club:hover{border-color:var(--c);transform:translateY(-3px)}
-.club .head{display:flex;gap:14px;align-items:flex-start}
-.club .ico{width:42px;height:42px;border-radius:13px;flex:none;display:grid;place-items:center;
-  background:var(--ctile)}
-.club h3{font-size:17px}
-.club p{font-size:14px;line-height:1.68;color:var(--ink-2)}
-.club .txt{display:grid;gap:9px}
+.club-list{border-top:1px solid #D6CEEE}
+.club{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.25fr);
+  gap:0 clamp(20px,3vw,48px);align-items:start;
+  padding:clamp(22px,2.6vw,34px) 0;border-bottom:1px solid #D6CEEE;
+  transition:background .35s ease}
+.club:hover{background:rgba(255,255,255,.45)}
+.club .ico{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;
+  background:var(--surface);box-shadow:var(--shadow-s)}
+.club .head{display:contents}
+.club h3{font-size:clamp(17px,1.7vw,21px);font-weight:600;letter-spacing:-.018em;line-height:1.3}
+.club .txt{display:grid;gap:10px}
+.club p{font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.club-lead{font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5}
+@media(max-width:820px){
+  .club{grid-template-columns:auto minmax(0,1fr);gap:0 18px}
+  .club .txt{grid-column:1/-1;margin-top:14px}
+}
 
 /* the quote carries itself typographically — no container needed */
 .quote{margin:0;background:var(--surface);border:1px solid var(--line);
@@ -712,7 +725,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 
 /* на телефоне четыре уровня и кнопки первого экрана держим в одну строку */
 @media(max-width:620px){
-  h2{font-size:23px;line-height:1.2}
+  h2{font-size:25px;line-height:1.18}
   h2 br{display:none}
   .model-tabs{flex-wrap:nowrap;gap:6px}
   .model-tab{padding:11px 6px;font-size:clamp(11px,3.1vw,14px)}

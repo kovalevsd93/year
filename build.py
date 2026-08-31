@@ -236,11 +236,11 @@ def club():
         lead = f'<p class="club-lead">{paras[0]}</p>'
         rest = "".join(f"<p>{p}</p>" for p in paras[1:])
         cards.append(f'<article class="club rv" style="--c:{ink};--ctile:{tile}">'
-                     f'<div class="head"><div class="ico">{icon(ic, ink)}</div>'
-                     f'<div><h3>{title}</h3></div></div>'
+                     f'<div class="ico">{icon(ic, ink)}</div>'
+                     f'<h3>{title}</h3>'
                      f'<div class="txt">{lead}{rest}</div></article>')
     return f"""
-<section class="sec sec-alt">
+<section class="sec sec-field">
  <div class="wrap stack stack-l">
   {heading('Самое главное', 'Терапевтический клуб <br>с поддержкой 24/7')}
 
@@ -265,7 +265,7 @@ def club():
    </div>
   </div>
 
-  <div class="grid g3">{''.join(cards)}</div>
+  <div class="club-list">{''.join(cards)}</div>
  </div>
 </section>"""
 
