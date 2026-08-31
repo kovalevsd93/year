@@ -607,13 +607,13 @@ p{margin:0}
 /* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
 .shots-nav{position:absolute;top:calc(50% - 26px);z-index:3;width:46px;height:46px;
   border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);color:var(--ink);cursor:pointer;display:grid;place-items:center;
+  backdrop-filter:blur(8px);color:var(--accent);cursor:pointer;display:grid;place-items:center;
   box-shadow:0 10px 26px -12px rgba(28,20,60,.35);
-  transition:opacity .25s ease,transform .25s ease,background .25s ease}
-.shots-nav svg{width:20px;height:20px}
+  transition:opacity .25s ease,transform .25s ease,background .25s ease,color .25s ease}
+.shots-nav svg{width:20px;height:20px;stroke-width:2.4}
 .shots-nav.prev{left:-14px}
 .shots-nav.next{right:-14px}
-.shots-nav:hover{background:#fff;transform:scale(1.06)}
+.shots-nav:hover{background:var(--accent);color:#fff;transform:scale(1.06)}
 .shots-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .shots-nav[disabled]{opacity:0;pointer-events:none}
 .no-nav .shots-nav{display:none}
