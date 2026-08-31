@@ -704,7 +704,14 @@ p{margin:0}
 .tariff-list .yes::before{content:"✓";color:var(--accent);font-weight:600}
 .tariff-best .tariff-list .yes::before{color:#fff}
 .tariff-list .no{color:var(--ink-3)}
-.tariff-list .no::before{content:"—";color:var(--ink-3)}
+.tariff-list .no::before{content:"";background:no-repeat center/13px
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B849B' stroke-width='2.6' stroke-linecap='round'><path d='M6 6l12 12M18 6L6 18'/></svg>")}
+/* исключения отбиты подзаголовком: иначе они читаются как продолжение списка */
+.tariff-list .sep{padding:20px 0 8px 0;border-top:1px solid var(--line);
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3)}
+.tariff-list .sep::before{content:none}
+.tariff-list .sep + .no{border-top:0}
 .side{margin-top:20px}
 
 /* ------------------------------------------------------------------
@@ -1032,7 +1039,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
    </div>
    <div class="tariff-inst">В рассрочку от 1 374 ₽/мес · 365 дней доступа</div>
    <a class="btn btn-lg" href="#order">Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a>
-   <ul class="tariff-list"><li class="yes">Главная программа «Свобода от тревоги, паники и страхов»</li><li class="yes">Продвинутый курс «Здоровое мышление»</li><li class="yes">Практический курс «Паники.НЕТ»</li><li class="yes">Практический курс «Свобода от страха за здоровье»</li><li class="yes">Практический курс «7 телесных практик от тревоги»</li><li class="yes">Курс «Как не воспитать невротика»</li><li class="no">Поддержка психологов и кураторов</li><li class="no">ИИ-ассистент Павла Федоренко</li><li class="no">Интерактивная платформа для работы с тревогой</li></ul>
+   <ul class="tariff-list"><li class="yes">Главная программа «Свобода от тревоги, паники и страхов»</li><li class="yes">Продвинутый курс «Здоровое мышление»</li><li class="yes">Практический курс «Паники.НЕТ»</li><li class="yes">Практический курс «Свобода от страха за здоровье»</li><li class="yes">Практический курс «7 телесных практик от тревоги»</li><li class="yes">Курс «Как не воспитать невротика»</li><li class="sep">Не входит в этот тариф</li><li class="no">Поддержка психологов и кураторов</li><li class="no">ИИ-ассистент Павла Федоренко</li><li class="no">Интерактивная платформа для работы с тревогой</li></ul>
   </article><article class="tariff tariff-best rv">
    <span class="tariff-tag">Рекомендуем</span>
    <div class="tariff-name">Всё включено</div>

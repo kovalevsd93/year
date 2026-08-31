@@ -359,7 +359,10 @@ def tariff_card(t):
     best = " tariff-best" if t.get("best") else ""
     tag = '<span class="tariff-tag">Рекомендуем</span>' if t.get("best") else ""
     has = "".join(f'<li class="yes">{x}</li>' for x in t["has"])
-    no  = "".join(f'<li class="no">{x}</li>' for x in t["hasnt"])
+    no = ""
+    if t["hasnt"]:
+        no = ('<li class="sep">Не входит в этот тариф</li>'
+              + "".join(f'<li class="no">{x}</li>' for x in t["hasnt"]))
     return f"""<article class="tariff{best} rv">
    {tag}
    <div class="tariff-name">{t['name']}</div>

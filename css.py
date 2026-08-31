@@ -683,7 +683,14 @@ __SPOTS__
 .tariff-list .yes::before{content:"✓";color:var(--accent);font-weight:600}
 .tariff-best .tariff-list .yes::before{color:#fff}
 .tariff-list .no{color:var(--ink-3)}
-.tariff-list .no::before{content:"—";color:var(--ink-3)}
+.tariff-list .no::before{content:"";background:no-repeat center/13px
+  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238B849B' stroke-width='2.6' stroke-linecap='round'><path d='M6 6l12 12M18 6L6 18'/></svg>")}
+/* исключения отбиты подзаголовком: иначе они читаются как продолжение списка */
+.tariff-list .sep{padding:20px 0 8px 0;border-top:1px solid var(--line);
+  font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3)}
+.tariff-list .sep::before{content:none}
+.tariff-list .sep + .no{border-top:0}
 .side{margin-top:20px}
 
 /* ------------------------------------------------------------------
