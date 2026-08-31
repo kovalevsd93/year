@@ -262,15 +262,15 @@ p{margin:0}
 /* ------------------------------------------------------------------
    CONDITIONS — no numbering. The set is unordered, so nothing numbers it.
    ------------------------------------------------------------------ */
-.cond{position:relative;display:block;background:var(--surface);border:1px solid var(--line);
+.cond{position:relative;display:block;background:var(--ct);border:1px solid transparent;
   border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,background .35s ease,
     transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
-.cond:hover{transform:translateY(-4px);border-color:var(--line-2);
+.cond:hover{transform:translateY(-4px);border-color:var(--c);
   box-shadow:0 22px 50px -30px rgba(28,20,60,.28)}
 
 .cond-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;
-  background:var(--ctile);color:var(--c);margin-bottom:20px;
+  background:var(--surface);color:var(--c);margin-bottom:20px;
   transition:background .35s ease,color .35s ease}
 .cond-txt{display:block}
 .cond-h{display:block;font-size:17.5px;font-weight:600;color:var(--ink);transition:color .35s ease;
@@ -456,21 +456,21 @@ __SPOTS__
    The chip colour is the same colour that condition carries in the
    grid above, so the palette says the same thing in both places.
    ------------------------------------------------------------------ */
-.course{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
+.course{display:flex;flex-direction:column;background:var(--ct);
+  border:1px solid transparent;border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-.course:hover{transform:translateY(-4px);border-color:transparent;
+.course:hover{transform:translateY(-4px);border-color:var(--c);
   box-shadow:0 22px 50px -30px rgba(28,20,60,.30)}
 .course-head{display:flex;align-items:center;gap:12px}
 .course-ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  background:var(--ctile)}
+  background:var(--surface)}
 .course-kicker{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ink-3);line-height:1.4}
+  color:var(--c);line-height:1.4}
 .course-title{margin-top:18px;font-size:clamp(20px,2.1vw,26px);font-weight:500;line-height:1.2;
   letter-spacing:-.024em;color:var(--ink);text-wrap:balance}
 .course-desc{margin-top:14px;font-size:14.5px;line-height:1.65;color:var(--ink-2);max-width:46ch}
 
-.course-res{margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.course-res{margin-top:22px;padding-top:20px;border-top:1px solid rgba(23,19,32,.1)}
 .course-res-t{font-size:15px;font-weight:600;line-height:1.45;color:var(--c);
   letter-spacing:-.012em}
 .course-res p{margin-top:9px;font-size:14px;line-height:1.65;color:var(--ink-2)}

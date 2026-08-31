@@ -183,8 +183,8 @@ def prog_bot(hl, body):
 
 def course_card(n, kicker, t1, t2, desc, hl, body):
     ic, ci, tags = COURSE_META[n]
-    ink, tint, tile = SPECTRUM[ci] if ci is not None else (ACCENT, "var(--accent-tint)",
-                                                           "var(--accent-tint)")
+    ink, tint, tile = SPECTRUM[ci] if ci is not None else ("var(--accent-on-tint)",
+                                                           "var(--accent-tint)", "var(--accent-tint)")
     title = f"{t1} {t2}".strip()
     chips = "".join(
         (f'<span class="tag" style="--tc:{SPECTRUM[j][0]};--tt:{SPECTRUM[j][1]}">{lbl}</span>'
@@ -192,7 +192,7 @@ def course_card(n, kicker, t1, t2, desc, hl, body):
         for lbl, j in tags)
     # one bold line only: the promise. the rest reads as running text
     txt = "".join(f"<p>{re.sub(r'</?b>', '', x)}</p>" for x in body)
-    return f"""<article class="course rv" style="--c:{ink};--ctile:{tile}">
+    return f"""<article class="course rv" style="--c:{ink};--ct:{tint};--ctile:{tile}">
    <div class="course-head">
      <span class="course-ico">{any_icon(ic, ink, 24)}</span>
      <span class="course-kicker">{kicker}</span>
