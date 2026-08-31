@@ -48,7 +48,7 @@ def hero():
     <div class="hero-copy stack stack-m">
       <div class="label">Годовая подписка · новый учебный год</div>
       <h1>Начните учебный год <br>со спокойствия</h1>
-      <p class="hero-sub">Скидка 79% на все программы Павла Федоренко
+      <p class="hero-sub">Скидка до 85% на все программы Павла Федоренко
         по преодолению тревожных расстройств и неврозов.</p>
     </div>
 
@@ -355,6 +355,25 @@ INCLUDED_MARKS = [
  ("people", ACCENT),          # Как не воспитать невротика
 ]
 
+def tariff_card(t):
+    best = " tariff-best" if t.get("best") else ""
+    tag = '<span class="tariff-tag">Рекомендуем</span>' if t.get("best") else ""
+    has = "".join(f'<li class="yes">{x}</li>' for x in t["has"])
+    no  = "".join(f'<li class="no">{x}</li>' for x in t["hasnt"])
+    return f"""<article class="tariff{best} rv">
+   {tag}
+   <div class="tariff-name">{t['name']}</div>
+   <p class="tariff-lead">{t['lead']}</p>
+   <div class="tariff-price">
+     <span class="now">{t['price']}</span>
+     <span class="old">{t['old']}</span>
+     <span class="cut">{t['cut']}</span>
+   </div>
+   <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
+   <a class="btn btn-lg" href="{ORDER_LINK}">Оформить подписку{ARROW}</a>
+   <ul class="tariff-list">{has}{no}</ul>
+  </article>"""
+
 def price():
     inc = "".join(f'<li style="--tick:{marker_uri(*INCLUDED_MARKS[i])}">{x}</li>'
                   for i, x in enumerate(INCLUDED))
@@ -373,47 +392,24 @@ def price():
            'по преодолению тревожных расстройств и неврозов.')}
 
 
-  <div class="price-grid">
-   <div class="price-main rv">
-    <div class="price-cols">
-     <div>
-      <div class="label muted">В подписку входит</div>
-      <ul class="inc">{inc}</ul>
-     </div>
-     <div class="price-side">
-      <div class="keynote">
-        <div class="label">Главное</div>
-        <p>12 месяцев участия в закрытом терапевтическом клубе с постоянным сопровождением
-           психологов клиники когнитивной психотерапии Федоренко.</p>
-      </div>
-      <div class="pricebox">
-        <div class="price-now">22 800 ₽</div>
-        <div class="price-old">110 000 ₽</div>
-        <div class="price-badge">−79%</div>
-      </div>
-      <div class="price-inst">В рассрочку от 1 900 ₽/мес · осталось 29 из 50 абонементов</div>
-      <div class="btn-row">{cta()}</div>
-      <p class="btn-note">Верните спокойствие и уверенность в свою жизнь
-        с помощью научно доказанных практик.</p>
-     </div>
-    </div>
-   </div>
+  <div class="tariffs">
+   {"".join(tariff_card(t) for t in TARIFFS)}
+  </div>
 
-   <div class="side">
-    <div class="box rv" style="--ctile:{SPECTRUM[5][2]}">
-      <div class="box-ico">{icon('shield', SPECTRUM[5][0])}</div>
-      <h3>Оплата любыми банковскими картами</h3>
-      <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
-         после выберите удобную систему.</p>
-      <div class="logos">{pay}</div>
-    </div>
-    <div class="box rv" style="--ctile:{SPECTRUM[3][2]}">
-      <div class="box-ico">{icon('calendar', SPECTRUM[3][0])}</div>
-      <h3>Рассрочка до 24 месяцев или оплата частями</h3>
-      <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
-         после выберите удобный сервис и количество месяцев рассрочки.</p>
-      <div class="logos">{ins}</div>
-    </div>
+  <div class="side">
+   <div class="box rv" style="--ctile:{SPECTRUM[5][2]}">
+     <div class="box-ico">{icon('shield', SPECTRUM[5][0])}</div>
+     <h3>Оплата любыми банковскими картами</h3>
+     <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
+        после выберите удобную систему.</p>
+     <div class="logos">{pay}</div>
+   </div>
+   <div class="box rv" style="--ctile:{SPECTRUM[3][2]}">
+     <div class="box-ico">{icon('calendar', SPECTRUM[3][0])}</div>
+     <h3>Рассрочка до 24 месяцев или оплата частями</h3>
+     <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
+        после выберите удобный сервис и количество месяцев рассрочки.</p>
+     <div class="logos">{ins}</div>
    </div>
   </div>
  </div>

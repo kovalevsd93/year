@@ -266,18 +266,8 @@ p{margin:0}
   border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,background .35s ease,
     transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
-.cond:hover{transform:translateY(-4px);border-color:var(--c);background:var(--c);
-  box-shadow:0 22px 50px -30px rgba(28,20,60,.34)}
-.cond:hover .cond-h{color:#fff}
-.cond:hover .cond-d{color:rgba(255,255,255,.9)}
-.cond:hover .cond-ico{background:rgba(255,255,255,.2);color:#fff}
-.cond:hover .cond-tick{border-color:rgba(255,255,255,.55)}
-/* отмеченная карточка остаётся отмеченной и под курсором */
-.cond[aria-pressed="true"]:hover{background:var(--ct)}
-.cond[aria-pressed="true"]:hover .cond-h{color:var(--ink)}
-.cond[aria-pressed="true"]:hover .cond-d{color:var(--ink-2)}
-.cond[aria-pressed="true"]:hover .cond-ico{background:var(--surface);color:var(--c)}
-.cond[aria-pressed="true"]:hover .cond-tick{background:var(--c);border-color:var(--c)}
+.cond:hover{transform:translateY(-4px);border-color:var(--line-2);
+  box-shadow:0 22px 50px -30px rgba(28,20,60,.28)}
 
 .cond-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;
   background:var(--ctile);color:var(--c);margin-bottom:20px;
@@ -650,6 +640,51 @@ __SPOTS__
 .side p{margin-top:10px;font-size:13.5px;line-height:1.65;color:var(--ink-3)}
 .logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
 .logos img{height:20px;width:auto;opacity:.62;filter:grayscale(1)}
+
+
+/* ------------------------------------------------------------------
+   ДВА ТАРИФА
+   ------------------------------------------------------------------ */
+.tariffs{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:860px){.tariffs{grid-template-columns:1fr}}
+.tariff{position:relative;display:flex;flex-direction:column;gap:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(26px,3vw,40px)}
+.tariff-best{background:var(--dark);border-color:var(--dark);color:#fff}
+.tariff-tag{position:absolute;top:20px;right:22px;padding:6px 14px;border-radius:999px;
+  background:rgba(255,255,255,.16);font-size:12px;font-weight:600;letter-spacing:.04em}
+.tariff-name{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3)}
+.tariff-best .tariff-name{color:rgba(255,255,255,.62)}
+.tariff-lead{font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:42ch}
+.tariff-best .tariff-lead{color:rgba(255,255,255,.78)}
+.tariff-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-top:4px}
+.tariff-price .now{font-size:clamp(34px,4.2vw,52px);font-weight:600;letter-spacing:-.042em;
+  line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.tariff-best .tariff-price .now{color:#fff}
+.tariff-price .old{font-size:17px;color:var(--ink-3);text-decoration:line-through;
+  font-variant-numeric:tabular-nums}
+.tariff-best .tariff-price .old{color:rgba(255,255,255,.45)}
+.tariff-price .cut{padding:5px 12px;border-radius:999px;background:var(--accent-tint);
+  color:var(--accent-on-tint);font-size:13px;font-weight:600}
+.tariff-best .tariff-price .cut{background:rgba(255,255,255,.16);color:#fff}
+.tariff-inst{font-size:14px;color:var(--ink-3)}
+.tariff-best .tariff-inst{color:rgba(255,255,255,.62)}
+.tariff .btn{align-self:flex-start;margin-top:4px}
+.tariff-best .btn{background:#fff;color:var(--ink)}
+.tariff-best .btn:hover{background:#fff}
+.tariff-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}
+.tariff-list li{position:relative;padding:11px 0 11px 30px;font-size:15px;line-height:1.5;
+  border-top:1px solid var(--line)}
+.tariff-best .tariff-list li{border-top-color:rgba(255,255,255,.14)}
+.tariff-list li:first-child{border-top:0}
+.tariff-list li::before{position:absolute;left:0;top:11px;width:19px;height:19px;
+  display:grid;place-items:center;font-size:15px;line-height:1}
+.tariff-list .yes::before{content:"✓";color:var(--accent);font-weight:600}
+.tariff-best .tariff-list .yes::before{color:#fff}
+.tariff-list .no{color:var(--ink-3)}
+.tariff-list .no::before{content:"—";color:var(--ink-3)}
+.side{margin-top:20px}
 
 /* ------------------------------------------------------------------
    REVIEWS

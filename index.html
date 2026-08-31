@@ -284,18 +284,8 @@ p{margin:0}
   border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,background .35s ease,
     transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
-.cond:hover{transform:translateY(-4px);border-color:var(--c);background:var(--c);
-  box-shadow:0 22px 50px -30px rgba(28,20,60,.34)}
-.cond:hover .cond-h{color:#fff}
-.cond:hover .cond-d{color:rgba(255,255,255,.9)}
-.cond:hover .cond-ico{background:rgba(255,255,255,.2);color:#fff}
-.cond:hover .cond-tick{border-color:rgba(255,255,255,.55)}
-/* отмеченная карточка остаётся отмеченной и под курсором */
-.cond[aria-pressed="true"]:hover{background:var(--ct)}
-.cond[aria-pressed="true"]:hover .cond-h{color:var(--ink)}
-.cond[aria-pressed="true"]:hover .cond-d{color:var(--ink-2)}
-.cond[aria-pressed="true"]:hover .cond-ico{background:var(--surface);color:var(--c)}
-.cond[aria-pressed="true"]:hover .cond-tick{background:var(--c);border-color:var(--c)}
+.cond:hover{transform:translateY(-4px);border-color:var(--line-2);
+  box-shadow:0 22px 50px -30px rgba(28,20,60,.28)}
 
 .cond-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;
   background:var(--ctile);color:var(--c);margin-bottom:20px;
@@ -672,6 +662,51 @@ p{margin:0}
 .logos{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
 .logos img{height:20px;width:auto;opacity:.62;filter:grayscale(1)}
 
+
+/* ------------------------------------------------------------------
+   ДВА ТАРИФА
+   ------------------------------------------------------------------ */
+.tariffs{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:stretch}
+@media(max-width:860px){.tariffs{grid-template-columns:1fr}}
+.tariff{position:relative;display:flex;flex-direction:column;gap:14px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(26px,3vw,40px)}
+.tariff-best{background:var(--dark);border-color:var(--dark);color:#fff}
+.tariff-tag{position:absolute;top:20px;right:22px;padding:6px 14px;border-radius:999px;
+  background:rgba(255,255,255,.16);font-size:12px;font-weight:600;letter-spacing:.04em}
+.tariff-name{font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3)}
+.tariff-best .tariff-name{color:rgba(255,255,255,.62)}
+.tariff-lead{font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:42ch}
+.tariff-best .tariff-lead{color:rgba(255,255,255,.78)}
+.tariff-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 14px;margin-top:4px}
+.tariff-price .now{font-size:clamp(34px,4.2vw,52px);font-weight:600;letter-spacing:-.042em;
+  line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.tariff-best .tariff-price .now{color:#fff}
+.tariff-price .old{font-size:17px;color:var(--ink-3);text-decoration:line-through;
+  font-variant-numeric:tabular-nums}
+.tariff-best .tariff-price .old{color:rgba(255,255,255,.45)}
+.tariff-price .cut{padding:5px 12px;border-radius:999px;background:var(--accent-tint);
+  color:var(--accent-on-tint);font-size:13px;font-weight:600}
+.tariff-best .tariff-price .cut{background:rgba(255,255,255,.16);color:#fff}
+.tariff-inst{font-size:14px;color:var(--ink-3)}
+.tariff-best .tariff-inst{color:rgba(255,255,255,.62)}
+.tariff .btn{align-self:flex-start;margin-top:4px}
+.tariff-best .btn{background:#fff;color:var(--ink)}
+.tariff-best .btn:hover{background:#fff}
+.tariff-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}
+.tariff-list li{position:relative;padding:11px 0 11px 30px;font-size:15px;line-height:1.5;
+  border-top:1px solid var(--line)}
+.tariff-best .tariff-list li{border-top-color:rgba(255,255,255,.14)}
+.tariff-list li:first-child{border-top:0}
+.tariff-list li::before{position:absolute;left:0;top:11px;width:19px;height:19px;
+  display:grid;place-items:center;font-size:15px;line-height:1}
+.tariff-list .yes::before{content:"✓";color:var(--accent);font-weight:600}
+.tariff-best .tariff-list .yes::before{color:#fff}
+.tariff-list .no{color:var(--ink-3)}
+.tariff-list .no::before{content:"—";color:var(--ink-3)}
+.side{margin-top:20px}
+
 /* ------------------------------------------------------------------
    REVIEWS
    ------------------------------------------------------------------ */
@@ -791,7 +826,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
     <div class="hero-copy stack stack-m">
       <div class="label">Годовая подписка · новый учебный год</div>
       <h1>Начните учебный год <br>со спокойствия</h1>
-      <p class="hero-sub">Скидка 79% на все программы Павла Федоренко
+      <p class="hero-sub">Скидка до 85% на все программы Павла Федоренко
         по преодолению тревожных расстройств и неврозов.</p>
     </div>
 
@@ -985,47 +1020,48 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
   <div class="stack stack-m center rv"><div class="label">Тариф</div><h2>Знания и методики, которые меняют жизнь</h2><p class="lead">Подписка на 1 год (365 дней) на библиотеку всех программ по преодолению тревожных расстройств и неврозов.</p></div>
 
 
-  <div class="price-grid">
-   <div class="price-main rv">
-    <div class="price-cols">
-     <div>
-      <div class="label muted">В подписку входит</div>
-      <ul class="inc"><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%236C5FC0%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%22M20%206L9%2017l-5-5%22%2F%3E%3C%2Fsvg%3E)">Главная программа Павла Федоренко «Свобода от тревоги, паники и страхов»</li><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%236C5FC0%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%22M20%206L9%2017l-5-5%22%2F%3E%3C%2Fsvg%3E)">Продвинутый курс «Здоровое мышление»</li><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23A84955%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Cpath%20d%3D%22M12%203v4M12%2017v4M3%2012h4M17%2012h4M5.6%205.6l2.8%202.8M15.6%2015.6l2.8%202.8M18.4%205.6l-2.8%202.8M8.4%2015.6l-2.8%202.8%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3C%2Fsvg%3E)">Практический курс «Паники.НЕТ»</li><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23477934%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2210.5%22%20cy%3D%2210.5%22%20r%3D%226%22%2F%3E%3Cpath%20d%3D%22M15%2015l5.5%205.5%22%2F%3E%3Cpath%20d%3D%22M10.5%208v5M8%2010.5h5%22%2F%3E%3C%2Fsvg%3E)">Практический курс «Свобода от страха за здоровье»</li><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%238C623D%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%225%22%20r%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M12%207.6v7M12%2014.6%208.6%2020M12%2014.6%2015.4%2020M7.5%2010.5h9%22%2F%3E%3C%2Fsvg%3E)">Практический курс «7 телесных практик от тревоги»</li><li style="--tick:url(data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%236C5FC0%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%20stroke-linejoin%3D%27round%27%3E%3Ccircle%20cx%3D%229%22%20cy%3D%229%22%20r%3D%222.8%22%2F%3E%3Cpath%20d%3D%22M3.8%2019a5.4%205.4%200%200%201%2010.4%200%22%2F%3E%3Cpath%20d%3D%22M16%206.4a2.8%202.8%200%200%201%200%205.4M17.4%2014.4A5.4%205.4%200%200%201%2020.5%2019%22%2F%3E%3C%2Fsvg%3E)">Курс «Как не воспитать невротика»</li><li class="inc-bonus"><span>ИИ-ассистент Павла Федоренко</span><span class="inc-tag">Бонус</span></li><li class="inc-bonus"><span>Интерактивная платформа для работы с тревогой</span><span class="inc-tag">Бонус</span></li></ul>
-     </div>
-     <div class="price-side">
-      <div class="keynote">
-        <div class="label">Главное</div>
-        <p>12 месяцев участия в закрытом терапевтическом клубе с постоянным сопровождением
-           психологов клиники когнитивной психотерапии Федоренко.</p>
-      </div>
-      <div class="pricebox">
-        <div class="price-now">22 800 ₽</div>
-        <div class="price-old">110 000 ₽</div>
-        <div class="price-badge">−79%</div>
-      </div>
-      <div class="price-inst">В рассрочку от 1 900 ₽/мес · осталось 29 из 50 абонементов</div>
-      <div class="btn-row"><a class="btn btn-lg" href="#order">Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a></div>
-      <p class="btn-note">Верните спокойствие и уверенность в свою жизнь
-        с помощью научно доказанных практик.</p>
-     </div>
-    </div>
+  <div class="tariffs">
+   <article class="tariff rv">
+   
+   <div class="tariff-name">Программы</div>
+   <p class="tariff-lead">Все шесть программ Академии на 365 дней. Занимаетесь самостоятельно.</p>
+   <div class="tariff-price">
+     <span class="now">16 490 ₽</span>
+     <span class="old">110 000 ₽</span>
+     <span class="cut">−85%</span>
    </div>
+   <div class="tariff-inst">В рассрочку от 1 374 ₽/мес · 365 дней доступа</div>
+   <a class="btn btn-lg" href="#order">Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a>
+   <ul class="tariff-list"><li class="yes">Главная программа «Свобода от тревоги, паники и страхов»</li><li class="yes">Продвинутый курс «Здоровое мышление»</li><li class="yes">Практический курс «Паники.НЕТ»</li><li class="yes">Практический курс «Свобода от страха за здоровье»</li><li class="yes">Практический курс «7 телесных практик от тревоги»</li><li class="yes">Курс «Как не воспитать невротика»</li><li class="no">Поддержка психологов и кураторов</li><li class="no">ИИ-ассистент Павла Федоренко</li><li class="no">Интерактивная платформа для работы с тревогой</li></ul>
+  </article><article class="tariff tariff-best rv">
+   <span class="tariff-tag">Рекомендуем</span>
+   <div class="tariff-name">Всё включено</div>
+   <p class="tariff-lead">Всё из тарифа «Программы» и то, что превращает курсы в сопровождение.</p>
+   <div class="tariff-price">
+     <span class="now">19 900 ₽</span>
+     <span class="old">110 000 ₽</span>
+     <span class="cut">−82%</span>
+   </div>
+   <div class="tariff-inst">В рассрочку от 1 658 ₽/мес · 365 дней доступа</div>
+   <a class="btn btn-lg" href="#order">Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a>
+   <ul class="tariff-list"><li class="yes">Все шесть программ Академии</li><li class="yes">Поддержка психологов и кураторов 24/7</li><li class="yes">ИИ-ассистент Павла Федоренко</li><li class="yes">Интерактивная платформа для работы с тревогой</li></ul>
+  </article>
+  </div>
 
-   <div class="side">
-    <div class="box rv" style="--ctile:#CFDAF4">
-      <div class="box-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4966AC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.5-7 9.3-4.1-1.8-7-5.1-7-9.3V6l7-2.5Z"/></svg></div>
-      <h3>Оплата любыми банковскими картами</h3>
-      <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
-         после выберите удобную систему.</p>
-      <div class="logos"><img src="https://static.tildacdn.com/tild3331-6437-4233-a633-663465396537/123.png" width="1177" height="1110" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3138-3465-4631-a663-333565363064/gcpay-frg.png" width="172" height="39" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild6133-3864-4538-b562-323930663132/gcpay-ru.png" width="165" height="38" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3463-3832-4739-b031-366538613462/image.png" width="2452" height="605" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3436-3432-4466-b139-646539646239/photo.png" width="1253" height="444" alt="" loading="lazy"></div>
-    </div>
-    <div class="box rv" style="--ctile:#D9F4CF">
-      <div class="box-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#477934" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/></svg></div>
-      <h3>Рассрочка до 24 месяцев или оплата частями</h3>
-      <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
-         после выберите удобный сервис и количество месяцев рассрочки.</p>
-      <div class="logos"><img src="https://static.tildacdn.com/tild3761-3161-4839-a261-613332363534/dolyame_black_1.svg" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3030-3162-4163-a534-356235323161/_.png" width="557" height="153" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3836-3566-4064-a339-346265333665/image.png" width="1024" height="218" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3035-3038-4538-a233-626461343138/download.png" width="242" height="233" alt="" loading="lazy"></div>
-    </div>
+  <div class="side">
+   <div class="box rv" style="--ctile:#CFDAF4">
+     <div class="box-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4966AC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.5-7 9.3-4.1-1.8-7-5.1-7-9.3V6l7-2.5Z"/></svg></div>
+     <h3>Оплата любыми банковскими картами</h3>
+     <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
+        после выберите удобную систему.</p>
+     <div class="logos"><img src="https://static.tildacdn.com/tild3331-6437-4233-a633-663465396537/123.png" width="1177" height="1110" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3138-3465-4631-a663-333565363064/gcpay-frg.png" width="172" height="39" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild6133-3864-4538-b562-323930663132/gcpay-ru.png" width="165" height="38" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3463-3832-4739-b031-366538613462/image.png" width="2452" height="605" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3436-3432-4466-b139-646539646239/photo.png" width="1253" height="444" alt="" loading="lazy"></div>
+   </div>
+   <div class="box rv" style="--ctile:#D9F4CF">
+     <div class="box-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#477934" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/></svg></div>
+     <h3>Рассрочка до 24 месяцев или оплата частями</h3>
+     <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
+        после выберите удобный сервис и количество месяцев рассрочки.</p>
+     <div class="logos"><img src="https://static.tildacdn.com/tild3761-3161-4839-a261-613332363534/dolyame_black_1.svg" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3030-3162-4163-a534-356235323161/_.png" width="557" height="153" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3836-3566-4064-a339-346265333665/image.png" width="1024" height="218" alt="" loading="lazy"><img src="https://static.tildacdn.com/tild3035-3038-4538-a233-626461343138/download.png" width="242" height="233" alt="" loading="lazy"></div>
    </div>
   </div>
  </div>
