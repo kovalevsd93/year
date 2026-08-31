@@ -239,13 +239,17 @@ def programs():
 def club():
     cards = []
     for i, (n, title, ic, paras) in enumerate(CLUB):
-        ink, tint, tile = SPECTRUM[i % len(SPECTRUM)]
+        ink, wash, _tile = SPECTRUM[i % len(SPECTRUM)]
         lead = f'<p class="club-lead">{paras[0]}</p>'
-        rest = "".join(f"<p>{p}</p>" for p in paras[1:])
-        cards.append(f'<article class="club rv" style="--c:{ink};--ctile:{tile}">'
+        mid = "".join(f"<p>{p}</p>" for p in paras[1:-1])
+        take = (f'<p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" '
+                f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+                f'<path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>{paras[-1]}</span></p>'
+                if len(paras) > 1 else "")
+        cards.append(f'<article class="club rv" style="--c:{ink};--ct:{wash}">'
                      f'<div class="ico">{icon(ic, ink)}</div>'
                      f'<h3>{title}</h3>'
-                     f'<div class="txt">{lead}{rest}</div></article>')
+                     f'<div class="txt">{lead}{mid}{take}</div></article>')
     return f"""
 <section class="sec sec-field">
  <div class="wrap stack stack-l">

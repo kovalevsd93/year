@@ -494,9 +494,13 @@ __SPOTS__
   background:var(--surface);box-shadow:var(--shadow-s)}
 .club .head{display:contents}
 .club h3{font-size:clamp(17px,1.7vw,21px);font-weight:600;letter-spacing:-.018em;line-height:1.3}
-.club .txt{display:grid;gap:10px}
-.club p{font-size:14.5px;line-height:1.7;color:var(--ink-2)}
+.club .txt{display:grid;gap:8px}
+.club p{font-size:14.5px;line-height:1.6;color:var(--ink-2)}
 .club-lead{font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.5}
+.club-take{display:flex;align-items:flex-start;gap:9px;margin-top:8px;
+  background:var(--ct);color:var(--c);border-radius:14px;padding:11px 14px}
+.club-take svg{width:16px;height:16px;flex:none;margin-top:2px}
+.club-take span{font-size:14px;line-height:1.5;color:var(--c);font-weight:600}
 @media(max-width:820px){
   .club{grid-template-columns:auto minmax(0,1fr);gap:0 18px}
   .club .txt{grid-column:1/-1;margin-top:14px}
@@ -534,9 +538,6 @@ __SPOTS__
   .clock-seg span{white-space:normal}
 }
 
-/* club cards: first line is the takeaway, the rest supports it */
-.club-lead{font-size:15px;font-weight:600;color:var(--ink);line-height:1.5;
-  letter-spacing:-.012em}
 
 /* ------------------------------------------------------------------
    BONUSES
