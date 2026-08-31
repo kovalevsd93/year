@@ -7,10 +7,15 @@ PAVEL = CDN + "tild6536-3036-4466-b330-333635636335/IMG_1073___2.png"
 LOGO  = CDN + "tild3366-3662-4538-b261-326231323933/Logo_for_web.png"
 LOGO_FOOT = CDN + "tild6665-3862-4238-a432-663835363962/Logo.png"
 
+# боевой адрес — нужен для абсолютных ссылок в og-тегах
+SITE_URL = "https://azm-september.netlify.app"
+
 ORDER_LINK = "#order"
 # куда ведёт «Оригинал отзыва». Сейчас один адрес на все карточки —
 # если есть ссылки на каждый пост, замените на список
 REVIEW_SOURCE = "https://pavelfdrk.ru/gd"
+# заявка на консультацию. Заменить на форму GetCourse, когда будет адрес
+CONSULT_LINK = "mailto:info@fdrk.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D0%BD%D0%B0%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E"
 
 # ordered by how readily people recognise themselves in it, not alphabetically;
 # the colour walks the logo's own spectrum, so the row reads as one sequence
@@ -33,13 +38,13 @@ DISORDERS = [
 
 # the logo is a spectrum tree; these walk the same wheel, muted to a 5:1 contrast
 SPECTRUM = [                       # ink, card wash, icon tile
- ("#B34F5C", "#F9E9EB", "#F4CFD4"),
- ("#92663F", "#F9F0E9", "#F4E0CF"),
- ("#7F6E37", "#F9F5E9", "#F4EBCF"),
- ("#487B35", "#EDF9E9", "#D9F4CF"),
- ("#347A6C", "#E9F9F6", "#CFF4ED"),
- ("#4F6DB4", "#E9EEF9", "#CFDAF4"),
- ("#715EBA", "#ECE9F9", "#D7CFF4"),
+ ("#A84955", "#F9E9EB", "#F4CFD4"),   # ink держит >=4.75:1 на своей подложке,
+ ("#8C623D", "#F9F0E9", "#F4E0CF"),   # а не только на белом — на подложках
+ ("#7C6C36", "#F9F5E9", "#F4EBCF"),   # он и стоит: чипы, метки, значки
+ ("#477934", "#EDF9E9", "#D9F4CF"),
+ ("#33786B", "#E9F9F6", "#CFF4ED"),
+ ("#4966AC", "#E9EEF9", "#CFDAF4"),
+ ("#6B57B7", "#ECE9F9", "#D7CFF4"),
 ]
 
 LEVELS = [
@@ -175,7 +180,6 @@ GILROY = {
  "__GILROY_R__": CDN + "tild3831-3737-4536-a564-356132376237/Gilroy-Regular.woff",
  "__GILROY_M__": CDN + "tild6435-6266-4933-b163-613631613561/Gilroy-Medium.woff",
  "__GILROY_S__": CDN + "tild3137-3533-4339-b338-643336306138/Gilroy-Semibold.woff",
- "__GILROY_B__": CDN + "tild6163-3034-4635-b635-663632326135/Gilroy-Bold.woff",
 }
 
 # инструменты платформы — с их же скриншота, обращение приведено к «вы»

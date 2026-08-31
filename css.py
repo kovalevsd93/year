@@ -3,7 +3,6 @@ CSS = r"""
 @font-face{font-family:'Gilroy';src:url('__GILROY_R__') format('woff');font-weight:400;font-style:normal;font-display:block}
 @font-face{font-family:'Gilroy';src:url('__GILROY_M__') format('woff');font-weight:500;font-style:normal;font-display:block}
 @font-face{font-family:'Gilroy';src:url('__GILROY_S__') format('woff');font-weight:600;font-style:normal;font-display:block}
-@font-face{font-family:'Gilroy';src:url('__GILROY_B__') format('woff');font-weight:700;font-style:normal;font-display:block}
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
@@ -30,6 +29,7 @@ button{font:inherit;color:inherit}
   --accent:#6C5FC0;
   --accent-hover:#5B4FAB;
   --accent-tint:#EFECFA;
+  --accent-on-tint:#685ABE;   /* акцент, читаемый поверх --accent-tint */
   --accent-line:#C9C1EC;
 
   --warm:#F3E4E0;             /* morning light — hero glow only */
@@ -43,6 +43,9 @@ button{font:inherit;color:inherit}
   --mq:url("__MANNEQUIN__");
   --font:'Gilroy',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
 }
+
+::selection{background:var(--accent-tint);color:var(--ink)}
+html{scrollbar-color:var(--line-2) transparent}
 
 body{
   font-family:var(--font);
@@ -167,13 +170,13 @@ p{margin:0}
   .timer .n{font-size:15px}
   .timer .l{display:none}
   .timer .l-s{display:inline;font-size:11px;color:var(--ink-3)}
-  .topbar .btn{padding:9px 14px;font-size:12px;white-space:nowrap}
+  .topbar .btn{padding:12px 14px;font-size:12px;white-space:nowrap}
 }
 @media(max-width:400px){
   .topbar-in{gap:6px;padding:8px 10px}
   .topbar-txt{font-size:9px;letter-spacing:.06em;max-width:5.6em}
   .timer{gap:6px}.timer .n{font-size:14px}.timer .l-s{font-size:10px}
-  .topbar .btn{padding:9px 11px;font-size:11.5px}
+  .topbar .btn{padding:12px 11px;font-size:11.5px}
 }
 
 /* ------------------------------------------------------------------
@@ -238,7 +241,7 @@ p{margin:0}
 .cred-role{margin-top:6px;font-size:13px;line-height:1.45;color:var(--ink-2)}
 .cred-meta{margin-top:7px;font-size:12.5px;line-height:1.5;color:var(--ink-3)}
 .cred-note{margin-top:12px;padding:10px 13px;border-radius:11px;background:var(--accent-tint);
-  font-size:12.5px;line-height:1.45;color:var(--accent)}
+  font-size:12.5px;line-height:1.45;color:var(--accent-on-tint)}
 .cred-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px;
   margin-top:13px;padding-top:12px;border-top:1px solid var(--line);
   font-size:12.5px;color:var(--ink-3)}
@@ -328,7 +331,7 @@ p{margin:0}
 __SPOTS__
 
 .hot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
-  width:34px;height:34px;padding:0;border:0;background:none;cursor:pointer;
+  width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;
   display:grid;place-items:center;z-index:2}
 .hot i{display:block;width:11px;height:11px;border-radius:50%;background:var(--surface);
   border:2px solid var(--line-2);box-shadow:0 2px 8px rgba(60,50,110,.18);
@@ -423,7 +426,7 @@ __SPOTS__
 
 .prog-anchor{border-color:var(--accent-line)}
 .prog-anchor .prog-top{background:var(--accent-tint);border-bottom:0}
-.prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--accent)}
+.prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--ink-2)}
 .prog-anchor .prog-inner{display:grid;grid-template-columns:1.38fr .62fr;gap:0}
 .prog-anchor .prog-bot{border-left:1px solid var(--accent-line)}
 @media(max-width:820px){
@@ -601,12 +604,13 @@ __SPOTS__
 .inc-bonus{display:flex;align-items:center;justify-content:space-between;gap:14px;
   color:var(--ink)}
 .inc-tag{flex:none;padding:3px 10px;border-radius:999px;
-  background:var(--accent-tint);color:var(--accent);font-size:10.5px;font-weight:600;
+  background:var(--accent-tint);color:var(--accent-on-tint);font-size:10.5px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase}
 .inc li.inc-bonus::before{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C5FC0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 4l1.9 5.1L19 11l-5.1 1.9L12 18l-1.9-5.1L5 11l5.1-1.9L12 4Z'/></svg>")}
 
 .keynote{margin-top:0;padding:24px;border:1px solid var(--accent-line);border-radius:var(--r-md);
   background:var(--accent-tint)}
+.keynote .label{color:var(--accent-on-tint)}
 .keynote p{margin-top:12px;color:var(--ink-2);font-size:14.5px;line-height:1.66}
 
 .pricebox{margin-top:26px;padding-top:24px;border-top:1px solid var(--line);
@@ -614,7 +618,7 @@ __SPOTS__
 .price-now{font-size:clamp(34px,4.2vw,48px);font-weight:400;color:var(--ink);letter-spacing:-.035em;
   line-height:1;font-variant-numeric:tabular-nums}
 .price-old{font-size:18px;color:var(--ink-3);text-decoration:line-through;font-variant-numeric:tabular-nums}
-.price-badge{padding:5px 13px;border-radius:999px;background:#F9F0E9;color:#92663F;
+.price-badge{padding:5px 13px;border-radius:999px;background:#F9F0E9;color:#8C623D;
   font-size:13px;font-weight:600}
 .price-inst{margin-top:11px;font-size:14px;color:var(--ink-3)}
 
@@ -679,7 +683,8 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 .foot{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
 .foot img{width:32px;height:32px}
 .foot .col{font-size:13.5px;color:var(--ink-3);line-height:1.75;max-width:34ch}
-.foot a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-2)}
+.foot a{display:inline-block;padding:6px 0;color:var(--ink-2);text-decoration:none;
+  border-bottom:1px solid var(--line-2)}
 .foot a:hover{color:var(--accent)}
 
 .legal{background:var(--ground-2)}
@@ -710,7 +715,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
   h2{font-size:23px;line-height:1.2}
   h2 br{display:none}
   .model-tabs{flex-wrap:nowrap;gap:6px}
-  .model-tab{padding:9px 6px;font-size:clamp(11px,3.1vw,14px)}
+  .model-tab{padding:11px 6px;font-size:clamp(11px,3.1vw,14px)}
 }
 @media(max-width:940px){
   .hero-act .btn-row{flex-wrap:nowrap;gap:10px}

@@ -398,14 +398,14 @@ def price():
    <div class="side">
     <div class="box rv" style="--ctile:{SPECTRUM[5][2]}">
       <div class="box-ico">{icon('shield', SPECTRUM[5][0])}</div>
-      <h4>Оплата любыми банковскими картами</h4>
+      <h3>Оплата любыми банковскими картами</h3>
       <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
          после выберите удобную систему.</p>
       <div class="logos">{pay}</div>
     </div>
     <div class="box rv" style="--ctile:{SPECTRUM[3][2]}">
       <div class="box-ico">{icon('calendar', SPECTRUM[3][0])}</div>
-      <h4>Рассрочка до 24 месяцев или оплата частями</h4>
+      <h3>Рассрочка до 24 месяцев или оплата частями</h3>
       <p>Нажмите на кнопку «Оформить подписку», заполните данные и отправьте форму,
          после выберите удобный сервис и количество месяцев рассрочки.</p>
       <div class="logos">{ins}</div>
@@ -450,7 +450,7 @@ def reviews(inline=None):
  </div>
 </section>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Отзыв">
-  <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button><img alt="Отзыв участника">
+  <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button><img alt="Отзыв участника" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 </div>"""
 
 # ---------------------------------------------------------------- consult
@@ -468,7 +468,7 @@ def consult():
        и соглашаетесь с политикой конфиденциальности.</p>
    </div>
    <div class="btn-row">
-     <a class="btn btn-lg btn-quiet" href="#consult-form">Получить консультацию</a>
+     <a class="btn btn-lg btn-quiet" href="{CONSULT_LINK}">Получить консультацию</a>
    </div>
   </div>
  </div>
@@ -605,6 +605,52 @@ def render(inline=None, shots=None):
 <script>{JS}</script>
 """
 
+def favicon_uri():
+    """Логотип академии как иконка вкладки."""
+    import base64, subprocess, os
+    src, dst = "assets/Logo_for_web.png", "cache/favicon64.png"
+    os.makedirs("cache", exist_ok=True)
+    if not os.path.exists(dst):
+        subprocess.run(["sips", "-Z", "64", src, "--out", dst],
+                       check=True, capture_output=True)
+    return "data:image/png;base64," + base64.b64encode(open(dst, "rb").read()).decode()
+
+DESCRIPTION = ("Годовая подписка к новому учебному году: 12 месяцев доступа ко всем "
+               "программам Павла Федоренко по преодолению тревожных расстройств "
+               "и неврозов плюс закрытый терапевтический клуб с поддержкой 24/7.")
+
+def shell(doc):
+    """Полноценный документ для боевой сборки. В артефакт не идёт:
+       там обёртку <html>/<head>/<body> добавляет сама площадка."""
+    head, _, body = doc.partition("</style>")
+    head += "</style>"
+    head = head.replace('<meta charset="utf-8">\n', "").replace(
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n', "")
+    return f"""<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FBFAFD">
+<link rel="icon" href="{favicon_uri()}">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="{SITE_URL}/">
+<meta property="og:site_name" content="Академия здорового мышления Павла Федоренко">
+<meta property="og:title" content="Начните учебный год со спокойствия">
+<meta property="og:description" content="{DESCRIPTION}">
+<meta property="og:image" content="{SITE_URL}/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+{head.strip()}
+</head>
+<body>
+{body.strip()}
+</body>
+</html>
+"""
+
 def with_fonts(doc, mapping):
     for k, v in mapping.items():
         doc = doc.replace(k, v)
@@ -618,6 +664,7 @@ def mannequin_uri():
 if __name__ == "__main__":
     import inline as _inline
     doc = with_fonts(render(shots=_inline.local_shots), GILROY).replace("__MANNEQUIN__", mannequin_uri())
+    doc = shell(doc)
     open("index.html", "w", encoding="utf-8").write(doc)
     dims.save()
     print("index.html written")
