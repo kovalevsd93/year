@@ -15,6 +15,7 @@ for u, d in zip(data.PAY_LOGOS, PAY_D):  html = html.replace(u, d)
 for u, d in zip(data.INST_LOGOS, INST_D): html = html.replace(u, d)
 
 html = html.replace("__MANNEQUIN__", build.mannequin_uri())
+html = html.replace("{HERO_CARD}", build.hero_card_uri())
 assert "tildacdn" not in html, "remote asset left: " + re.search(r'https://\S*tildacdn\S{0,60}', html).group(0)
 open("preview.html", "w", encoding="utf-8").write(html)
 print("preview.html", round(len(html.encode())/1e6, 2), "MB")

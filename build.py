@@ -11,8 +11,12 @@ MUTED  = "#6F6A85"
 # ведёт практику с 2012 года; считаем от года акции, чтобы не забыть обновить
 YEARS_IN_PRACTICE = int(DEADLINE_ISO[:4]) - 2012
 
+ARROW = ('<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" '
+         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+         '<path d="M0 7h24M18 1l6 6-6 6"/></svg>')
+
 def cta(label="Оформить подписку", cls="btn btn-lg"):
-    return f'<a class="{cls}" href="{ORDER_LINK}">{label}</a>'
+    return f'<a class="{cls}" href="{ORDER_LINK}">{label}{ARROW}</a>'
 
 def timer(cls="timer"):
     # короткие подписи — для телефона, там строка должна остаться одной
@@ -62,7 +66,7 @@ def hero():
     <div class="hero-act stack stack-m">
       <div class="btn-row">
         {cta()}
-        <a class="btn btn-lg btn-quiet" href="#programs">Что входит в подписку</a>
+        <a class="btn btn-lg btn-quiet" href="#programs">Что входит в подписку{ARROW}</a>
       </div>
       <div class="hero-meta">
         <span>{icon('calendar', MUTED)} Акция действует до {DEADLINE_TEXT}</span>
@@ -72,19 +76,19 @@ def hero():
    </div>
 
    <figure class="hero-figure">
-     <div class="glowwrap"></div>
-     <div class="portrait"><img src="{PAVEL}"{dims.attrs(PAVEL)} alt="Павел Федоренко" loading="eager"></div>
-     <figcaption class="cred">
-       <div class="cred-name">Павел Федоренко</div>
-       <div class="cred-role">Ведущий специалист по тревожно-фобическим
-         расстройствам в России</div>
-       <p class="cred-note">Сам прошёл через тяжёлый невроз и знаю проблему изнутри</p>
-       <div class="cred-stats">
-         <span><b>{YEARS_IN_PRACTICE} лет</b> практики</span>
-         <span><b>100 000+</b> учеников</span>
-         <span><b>30+</b> книг</span>
-       </div>
-     </figcaption>
+     <div class="shot">
+       <div class="shot-tags"><span class="tag-glass">ИИ-ассистент</span>
+         <span class="tag-glass">Платформа</span><span class="tag-glass">Клуб 24/7</span></div>
+       <img src="{{HERO_CARD}}" width="900" height="1120" alt="Павел Федоренко" loading="eager">
+       <figcaption class="shot-foot">
+         <div class="nm">Павел Федоренко</div>
+         <div class="role">Ведущий специалист по тревожно-фобическим расстройствам
+           в России. Магистр психологии, основатель клиники и института КПТ.</div>
+         <div class="note">Сам прошёл через тяжёлый невроз и знаю проблему изнутри</div>
+         <div class="facts"><span><b>{YEARS_IN_PRACTICE} лет</b> практики</span>
+           <span><b>100 000+</b> учеников</span><span><b>30+</b> книг</span></div>
+       </figcaption>
+     </div>
    </figure>
   </div>
  </div>
@@ -96,9 +100,11 @@ def conditions():
     for i, (key, title, desc) in enumerate(DISORDERS):
         ink, tint, tile = SPECTRUM[i]
         last = " cond-wide" if i == len(DISORDERS) - 1 else ""
+        acc = " is-accent" if i == 1 else ""          # одна карточка в ряду залита
+        mark = "#FFFFFF" if acc else ink
         cards.append(
-            f'<article class="cond{last} rv" style="--c:{ink};--ct:{tint};--ctile:{tile}">'
-            f'<span class="cond-ico">{cond_icon(key, ink)}</span>'
+            f'<article class="cond{last}{acc} rv" style="--c:{ink};--ct:{tint};--ctile:{tile}">'
+            f'<span class="cond-ico">{cond_icon(key, mark)}</span>'
             f'<span class="cond-txt"><span class="cond-h">{title}</span>'
             f'<span class="cond-d">{desc}</span></span></article>')
     return f"""
@@ -468,7 +474,7 @@ def consult():
        и соглашаетесь с политикой конфиденциальности.</p>
    </div>
    <div class="btn-row">
-     <a class="btn btn-lg btn-quiet" href="{CONSULT_LINK}">Получить консультацию</a>
+     <a class="btn btn-lg btn-quiet" href="{CONSULT_LINK}">Получить консультацию{ARROW}</a>
    </div>
   </div>
  </div>
@@ -588,7 +594,7 @@ def render(inline=None, shots=None):
  <div class="topbar-in">
   <div class="topbar-txt"><span class="t-full">Акция действует до <b>{DEADLINE_TEXT}</b></span><span class="t-short">До конца акции</span></div>
   {timer()}
-  <a class="btn" href="{ORDER_LINK}">Участвовать</a>
+  <a class="btn" href="{ORDER_LINK}">Участвовать{ARROW}</a>
  </div>
 </div>
 {hero()}
@@ -656,6 +662,11 @@ def with_fonts(doc, mapping):
         doc = doc.replace(k, v)
     return doc
 
+def hero_card_uri():
+    import base64
+    return ("data:image/jpeg;base64,"
+            + base64.b64encode(open("assets/hero-card.jpg", "rb").read()).decode())
+
 def mannequin_uri():
     import base64
     return ("data:image/png;base64,"
@@ -664,6 +675,7 @@ def mannequin_uri():
 if __name__ == "__main__":
     import inline as _inline
     doc = with_fonts(render(shots=_inline.local_shots), GILROY).replace("__MANNEQUIN__", mannequin_uri())
+    doc = doc.replace("{HERO_CARD}", hero_card_uri())
     doc = shell(doc)
     open("index.html", "w", encoding="utf-8").write(doc)
     dims.save()

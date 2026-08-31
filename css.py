@@ -16,10 +16,11 @@ button{font:inherit;color:inherit}
    Neutrals biased toward the accent, never pure grey.
    ------------------------------------------------------------------ */
 :root{
-  --ground:#FBFAFD;
-  --ground-2:#F5F3FA;
-  --field:#EAE6F7;            /* регион, которым владеет акцент */
-  --field-warm:#FAF0E9;
+  --ground:#FFFFFF;
+  --ground-2:#F7F5FC;
+  --field:#F2EFFB;            /* регион, которым владеет акцент */
+  --field-warm:#FBF1EC;
+  --dark:#171320;             /* тёмное действие и тёмный блок цены */
   --surface:#FFFFFF;
   --line:#EBE8F4;
   --line-2:#DFDAEE;
@@ -40,7 +41,7 @@ button{font:inherit;color:inherit}
   --shadow:0 18px 48px -24px rgba(48,38,96,.22), 0 2px 6px -2px rgba(48,38,96,.10);
   --shadow-s:0 8px 22px -12px rgba(48,38,96,.20), 0 1px 3px -1px rgba(48,38,96,.08);
 
-  --r-lg:30px; --r-md:22px; --r-sm:14px;
+  --r-lg:32px; --r-md:26px; --r-sm:16px;
   --maxw:1160px;
   --mq:url("__MANNEQUIN__");
   --font:'Gilroy',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
@@ -66,19 +67,19 @@ body{
    bold display reads urgent, which is the wrong register here.
    ------------------------------------------------------------------ */
 .display,h1{
-  font-size:clamp(34px,4.6vw,55px);
-  font-weight:400;
-  line-height:1.06;
-  letter-spacing:-.035em;
+  font-size:clamp(40px,6.4vw,82px);
+  font-weight:600;
+  line-height:1.02;
+  letter-spacing:-.042em;
   color:var(--ink);
   margin:0;
   text-wrap:balance;
 }
 h2{
-  font-size:clamp(28px,4.4vw,54px);
-  font-weight:400;
-  line-height:1.08;
-  letter-spacing:-.034em;
+  font-size:clamp(30px,4.8vw,62px);
+  font-weight:600;
+  line-height:1.05;
+  letter-spacing:-.038em;
   color:var(--ink);
   margin:0;
   text-wrap:balance;
@@ -110,7 +111,7 @@ p{margin:0}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .sec{position:relative;padding:78px 0}
 .sec-tight{padding:56px 0}
-.sec-alt{background:var(--ground-2)}
+.sec-alt{background:var(--field)}
 /* секция-поле: цвет держит целую область, а не рассыпан акцентами */
 .sec-field{background:var(--field)}
 .sec-field .card,.sec-field .club,.sec-field .panel{border-color:#DCD5F0}
@@ -131,20 +132,21 @@ p{margin:0}
    ------------------------------------------------------------------ */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:10px;
-  padding:17px 34px;border-radius:999px;border:1px solid transparent;cursor:pointer;
-  font-size:16px;font-weight:600;letter-spacing:-.008em;text-decoration:none;
-  background:var(--accent);color:#fff;
+  padding:17px 30px;border-radius:999px;border:1px solid transparent;cursor:pointer;
+  font-size:16px;font-weight:500;letter-spacing:-.004em;text-decoration:none;
+  background:var(--dark);color:#fff;
   transition:background .3s ease,transform .4s cubic-bezier(.2,.7,.3,1),border-color .3s ease
 }
-.btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.btn:hover{background:#2C2438;transform:translateY(-2px)}
+.btn svg{width:20px;height:12px;flex:none}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.btn-quiet{background:transparent;color:var(--ink);border-color:var(--line-2)}
-.btn-quiet:hover{background:var(--surface);border-color:var(--accent-line)}
-.btn-lg{padding:20px 42px;font-size:17px}
+.btn-quiet{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
+.btn-quiet:hover{background:var(--surface);border-color:var(--ink)}
+.btn-lg{padding:19px 34px;font-size:17px}
 .btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .btn-note{font-size:13.5px;color:var(--ink-3);line-height:1.6}
-.price-side .btn-row{margin-top:26px}
-.price-side .btn-note{margin-top:14px}
+.price-side .btn-row{margin-top:22px}
+.price-side .btn-note{margin-top:14px;color:rgba(255,255,255,.6)}
 
 /* ------------------------------------------------------------------
    TOP BAR
@@ -227,34 +229,23 @@ p{margin:0}
   align-items:center;gap:8px 22px}
 .hero-meta span{display:inline-flex;align-items:center;gap:7px}
 
-.hero-figure{position:relative;justify-self:center;width:100%;max-width:392px;margin:0}
-.hero-figure .glowwrap{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);
-  width:124%;pointer-events:none}
-.hero-figure .glowwrap::before{content:"";display:block;padding-bottom:100%;
-  border-radius:50%;
-  background:radial-gradient(circle,var(--warm) 0%,var(--warm-2) 44%,rgba(231,233,246,0) 68%);
-  opacity:.85}
-.portrait{position:relative;margin-bottom:-44px}
-.portrait img{width:100%;height:auto}
-
-/* the card the portrait stands behind — it hides the crop and carries the facts */
-.cred{position:relative;z-index:2;background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r-md);padding:18px 20px 16px;box-shadow:0 24px 50px -34px rgba(48,38,96,.30)}
-.cred-label{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--accent)}
-.cred-name{font-size:18px;font-weight:600;color:var(--ink);
-  letter-spacing:-.02em;line-height:1.2}
-.cred-role{margin-top:6px;font-size:13px;line-height:1.45;color:var(--ink-2)}
-.cred-meta{margin-top:7px;font-size:12.5px;line-height:1.5;color:var(--ink-3)}
-.cred-note{margin-top:12px;padding:10px 13px;border-radius:11px;background:var(--accent-tint);
-  font-size:12.5px;line-height:1.45;color:var(--accent-on-tint)}
-.cred-stats{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 9px;
-  margin-top:13px;padding-top:12px;border-top:1px solid var(--line);
-  font-size:12.5px;color:var(--ink-3)}
-.cred-stats span{display:inline-flex;align-items:baseline;gap:5px;white-space:nowrap}
-.cred-stats span + span::before{content:"·";margin-right:4px;opacity:.55}
-.cred-stats b{font-weight:600;color:var(--ink);font-size:14px;letter-spacing:-.01em;
-  font-variant-numeric:tabular-nums}
+.hero-figure{position:relative;justify-self:center;width:100%;max-width:520px;margin:0}
+.shot{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--field);
+  box-shadow:0 34px 80px -44px rgba(28,20,60,.50)}
+.shot img{width:100%;height:auto}
+.shot-tags{position:absolute;top:20px;left:20px;right:20px;display:flex;flex-wrap:wrap;gap:8px}
+.tag-glass{padding:8px 15px;border-radius:999px;background:rgba(255,255,255,.74);
+  backdrop-filter:blur(8px);font-size:12.5px;font-weight:500;color:var(--ink)}
+.shot-foot{position:absolute;left:0;right:0;bottom:0;padding:110px 26px 24px;color:#fff;
+  background:linear-gradient(to top,rgba(14,9,26,.94) 0%,rgba(14,9,26,.80) 38%,
+    rgba(14,9,26,.42) 68%,rgba(14,9,26,0) 100%)}
+.shot-foot .nm{font-size:23px;font-weight:600;letter-spacing:-.024em;line-height:1.2}
+.shot-foot .role{margin-top:7px;font-size:14px;line-height:1.5;opacity:.86;max-width:40ch}
+.shot-foot .note{margin-top:12px;padding:9px 13px;border-radius:12px;
+  background:rgba(255,255,255,.14);font-size:13px;line-height:1.45}
+.shot-foot .facts{margin-top:13px;display:flex;flex-wrap:wrap;gap:5px 20px;font-size:13px;opacity:.9}
+.shot-foot .facts b{font-weight:600;font-variant-numeric:tabular-nums}
+@media(max-width:560px){.shot-foot{padding:64px 18px 18px}.shot-foot .role{display:none}}
 
 /* on a phone the headline comes first; Павел sits between the copy and the buttons */
 @media(max-width:940px){
@@ -263,23 +254,19 @@ p{margin:0}
   .hero-left{display:contents}
   .brandline{order:1}
   .hero-copy{order:2}
-  .hero-figure{order:3;align-self:flex-start;width:100%;max-width:420px}
+  .hero-figure{order:3;align-self:stretch;width:100%;max-width:520px}
   .offer{order:4}
   .hero-act{order:5}
-  .portrait{margin-bottom:-46px}
-  .cred{padding:20px 22px 18px}
-  .cred-name{font-size:19px}
-  .cred-role{font-size:13.5px}
-  .cred-note{font-size:13px}
 }
 
 /* ------------------------------------------------------------------
    CONDITIONS — no numbering. The set is unordered, so nothing numbers it.
    ------------------------------------------------------------------ */
 .cond{position:relative;display:block;background:var(--surface);border:1px solid var(--line);
-  border-radius:var(--r-md);padding:26px 26px 28px;
+  border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-.cond:hover{transform:translateY(-3px);border-color:var(--c)}
+.cond:hover{transform:translateY(-4px);border-color:transparent;
+  box-shadow:0 22px 50px -30px rgba(28,20,60,.30)}
 
 .cond-ico{display:grid;place-items:center;width:48px;height:48px;border-radius:15px;
   background:var(--ctile);margin-bottom:20px}
@@ -297,7 +284,9 @@ p{margin:0}
   .cond-wide .cond-ico{margin-bottom:20px}}
 
 /* levels — four named parts of one CBT model, so they read as a set */
-.lvl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:28px}
+.lvl{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(24px,2.3vw,30px);transition:transform .45s cubic-bezier(.2,.7,.3,1),box-shadow .45s}
+.lvl:hover{transform:translateY(-4px);box-shadow:0 22px 50px -30px rgba(28,20,60,.30)}
 .lvl .ico{width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
   background:var(--accent-tint);margin-bottom:20px}
 .lvl h3{font-size:16px;letter-spacing:.005em}
@@ -448,9 +437,10 @@ __SPOTS__
    grid above, so the palette says the same thing in both places.
    ------------------------------------------------------------------ */
 .course{display:flex;flex-direction:column;background:var(--surface);
-  border:1px solid var(--line);border-radius:var(--r-md);padding:28px 28px 24px;
+  border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
-.course:hover{transform:translateY(-3px);border-color:var(--c)}
+.course:hover{transform:translateY(-4px);border-color:transparent;
+  box-shadow:0 22px 50px -30px rgba(28,20,60,.30)}
 .course-head{display:flex;align-items:center;gap:12px}
 .course-ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
   background:var(--ctile)}
@@ -592,8 +582,11 @@ __SPOTS__
    PRICE
    ------------------------------------------------------------------ */
 .price-grid{display:grid;grid-template-columns:1fr;gap:20px}
-.price-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,4vw,56px)}
-.price-side{display:flex;flex-direction:column}
+.price-cols{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(24px,3vw,44px);
+  align-items:stretch}
+.price-side{display:flex;flex-direction:column;justify-content:center;
+  background:var(--dark);color:#fff;border-radius:var(--r-lg);
+  padding:clamp(26px,3vw,40px);margin:-8px 0}
 @media(max-width:900px){.price-cols{grid-template-columns:1fr;gap:30px}}
 /* мягкие цветные пятна за секцией со стоимостью */
 .price-sec{overflow:hidden}
@@ -626,14 +619,15 @@ __SPOTS__
 .keynote .label{color:var(--accent-on-tint)}
 .keynote p{margin-top:12px;color:var(--ink-2);font-size:14.5px;line-height:1.66}
 
-.pricebox{margin-top:26px;padding-top:24px;border-top:1px solid var(--line);
+.pricebox{margin-top:0;padding-top:0;border-top:0;
   display:flex;flex-wrap:wrap;align-items:baseline;gap:16px}
-.price-now{font-size:clamp(34px,4.2vw,48px);font-weight:400;color:var(--ink);letter-spacing:-.035em;
+.price-now{font-size:clamp(38px,4.8vw,58px);font-weight:600;color:#fff;letter-spacing:-.042em;
   line-height:1;font-variant-numeric:tabular-nums}
-.price-old{font-size:18px;color:var(--ink-3);text-decoration:line-through;font-variant-numeric:tabular-nums}
-.price-badge{padding:5px 13px;border-radius:999px;background:#F9F0E9;color:#8C623D;
-  font-size:13px;font-weight:600}
-.price-inst{margin-top:11px;font-size:14px;color:var(--ink-3)}
+.price-old{font-size:18px;color:rgba(255,255,255,.5);text-decoration:line-through;
+  font-variant-numeric:tabular-nums}
+.price-badge{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.16);
+  color:#fff;font-size:13px;font-weight:600}
+.price-inst{margin-top:12px;font-size:14px;color:rgba(255,255,255,.72);line-height:1.55}
 
 .side{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:820px){.side{grid-template-columns:1fr}}
@@ -735,4 +729,16 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
   .hero-act .btn{flex:1 1 0;min-width:0;padding:14px 10px;white-space:nowrap;
     font-size:clamp(12px,3.4vw,16px)}
 }
+
+/* одна карточка в ряду залита цветом — приём из присланных референсов */
+.is-accent{background:var(--accent);border-color:var(--accent)}
+.is-accent .cond-h,.is-accent h3,.is-accent .cap{color:#fff}
+.is-accent .cond-d,.is-accent li,.is-accent p{color:rgba(255,255,255,.88)}
+.is-accent .cond-ico,.is-accent .ico{background:rgba(255,255,255,.18)}
+.is-accent .cond-tick{border-color:rgba(255,255,255,.5)}
+.is-accent[aria-pressed="true"]{background:var(--accent-hover)}
+.is-accent li::before{background:rgba(255,255,255,.55)}
+
+.price-side .btn{background:#fff;color:var(--ink)}
+.price-side .btn:hover{background:#fff}
 """
