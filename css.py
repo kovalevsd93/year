@@ -816,8 +816,9 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
 }
 @media(max-width:940px){
   .hero-act .btn-row{flex-wrap:nowrap;gap:10px}
-  .hero-act .btn{flex:1 1 0;min-width:0;padding:14px 10px;white-space:nowrap;
-    font-size:clamp(12px,3.4vw,16px)}
+  .hero-act .btn{flex:1 1 0;min-width:0;padding:15px 8px;white-space:nowrap;
+    font-size:clamp(10.5px,2.9vw,16px);gap:6px}
+  .hero-act .btn svg{width:14px;height:9px}
 }
 
 
