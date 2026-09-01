@@ -269,12 +269,12 @@ p{margin:0}
   box-shadow:0 18px 40px -30px rgba(28,20,60,.22);
   transition:border-color .35s ease,background .35s ease,
     transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
-.cond::before{content:"";position:absolute;top:-55px;right:-45px;width:190px;height:190px;
-  border-radius:50%;background:var(--c);filter:blur(42px);opacity:.28;z-index:0;
+.cond::before{content:"";position:absolute;top:-95px;right:-85px;width:210px;height:210px;
+  border-radius:50%;background:var(--c);filter:blur(60px);opacity:.16;z-index:0;
   transition:opacity .4s ease}
 .cond:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--c) 45%,white);
   box-shadow:0 26px 55px -30px rgba(28,20,60,.32)}
-.cond:hover::before{opacity:.42}
+.cond:hover::before{opacity:.26}
 
 .cond-ico{position:relative;z-index:1;display:grid;place-items:center;width:48px;height:48px;
   border-radius:15px;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);color:var(--c);
@@ -468,12 +468,12 @@ __SPOTS__
   border:1px solid rgba(255,255,255,.6);border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   box-shadow:0 16px 38px -28px rgba(28,20,60,.22);
   transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
-.course::before{content:"";position:absolute;top:-60px;right:-50px;width:210px;height:210px;
-  border-radius:50%;background:var(--c);filter:blur(46px);opacity:.24;z-index:0;
+.course::before{content:"";position:absolute;top:-100px;right:-90px;width:230px;height:230px;
+  border-radius:50%;background:var(--c);filter:blur(64px);opacity:.14;z-index:0;
   transition:opacity .4s ease}
 .course:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 45%,white);
   box-shadow:0 26px 58px -28px rgba(28,20,60,.34)}
-.course:hover::before{opacity:.36}
+.course:hover::before{opacity:.22}
 .course>*{position:relative;z-index:1}
 .course-head{display:flex;align-items:center;gap:12px}
 .course-ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
