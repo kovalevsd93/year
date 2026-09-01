@@ -236,17 +236,19 @@ def programs():
 </section>"""
 
 # ---------------------------------------------------------------- club
+TAKE_INK, TAKE_WASH, _ = SPECTRUM[3]   # один зелёный для вывода во всех карточках клуба
+
 def club():
     cards = []
     for i, (n, title, ic, paras) in enumerate(CLUB):
-        ink, wash, _tile = SPECTRUM[i % len(SPECTRUM)]
+        ink, _wash, _tile = SPECTRUM[i % len(SPECTRUM)]
         lead = f'<p class="club-lead">{paras[0]}</p>'
         mid = "".join(f"<p>{p}</p>" for p in paras[1:-1])
         take = (f'<p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" '
                 f'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
                 f'<path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>{paras[-1]}</span></p>'
                 if len(paras) > 1 else "")
-        cards.append(f'<article class="club rv" style="--c:{ink};--ct:{wash}">'
+        cards.append(f'<article class="club rv" style="--c:{TAKE_INK};--ct:{TAKE_WASH}">'
                      f'<div class="ico">{icon(ic, ink)}</div>'
                      f'<h3>{title}</h3>'
                      f'<div class="txt">{lead}{mid}{take}</div></article>')
