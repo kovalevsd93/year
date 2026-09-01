@@ -463,15 +463,21 @@ __SPOTS__
    The chip colour is the same colour that condition carries in the
    grid above, so the palette says the same thing in both places.
    ------------------------------------------------------------------ */
-.course{display:flex;flex-direction:column;background:var(--ct);
+.course{position:relative;overflow:hidden;isolation:isolate;
+  display:flex;flex-direction:column;background:color-mix(in srgb,var(--ct) 65%,white);
   border:1px solid rgba(255,255,255,.6);border-radius:var(--r-lg);padding:clamp(24px,2.3vw,32px);
   box-shadow:0 16px 38px -28px rgba(28,20,60,.22);
   transition:border-color .35s ease,transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
-.course:hover{transform:translateY(-6px);border-color:var(--c);
+.course::before{content:"";position:absolute;top:-60px;right:-50px;width:210px;height:210px;
+  border-radius:50%;background:var(--c);filter:blur(46px);opacity:.24;z-index:0;
+  transition:opacity .4s ease}
+.course:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 45%,white);
   box-shadow:0 26px 58px -28px rgba(28,20,60,.34)}
+.course:hover::before{opacity:.36}
+.course>*{position:relative;z-index:1}
 .course-head{display:flex;align-items:center;gap:12px}
 .course-ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  background:var(--surface)}
+  background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
 .course-kicker{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
   color:var(--c);line-height:1.4}
 .course-title{margin-top:18px;font-size:clamp(20px,2.1vw,26px);font-weight:500;line-height:1.2;
