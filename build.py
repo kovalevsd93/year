@@ -391,8 +391,8 @@ def tariff_card(t):
      <span class="cut">{t['cut']}</span>
    </div>
    <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
-   <button class="btn btn-lg" type="button" data-pay-src="{t['widget_src']}"
-     data-pay-id="{t['widget_id']}">Оформить подписку{ARROW}</button>
+   <button class="btn btn-lg" type="button" data-pay-page="{SITE_URL}/{t['widget_page']}"
+     >Оформить подписку{ARROW}</button>
    <ul class="tariff-list">{has}{no}</ul>
   </article>"""
 
@@ -527,7 +527,7 @@ def pay_modal():
 <div class="pay-modal" id="payModal" role="dialog" aria-modal="true" aria-label="Оформление подписки">
   <div class="pay-modal-card">
     <button class="pay-modal-close" id="payModalClose" aria-label="Закрыть">✕</button>
-    <div class="pay-modal-body" id="payModalBody"></div>
+    <iframe class="pay-modal-body" id="payModalFrame" title="Оформление подписки"></iframe>
   </div>
 </div>"""
 
@@ -634,19 +634,15 @@ JS = """
   document.addEventListener("keydown", function(e){ if(e.key==="Escape") close(); });
 
   var payModal = document.getElementById("payModal"),
-      payBody = document.getElementById("payModalBody");
+      payFrame = document.getElementById("payModalFrame");
   function closePay(){
     payModal.classList.remove("on");
-    payBody.innerHTML = "";
+    payFrame.src = "about:blank";
     document.body.style.overflow = "";
   }
-  document.querySelectorAll("[data-pay-src]").forEach(function(btn){
+  document.querySelectorAll("[data-pay-page]").forEach(function(btn){
     btn.addEventListener("click", function(){
-      payBody.innerHTML = "";
-      var s = document.createElement("script");
-      s.id = btn.getAttribute("data-pay-id");
-      s.src = btn.getAttribute("data-pay-src");
-      payBody.appendChild(s);
+      payFrame.src = btn.getAttribute("data-pay-page");
       payModal.classList.add("on");
       document.body.style.overflow = "hidden";
     });

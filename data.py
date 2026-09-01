@@ -280,8 +280,7 @@ LEVEL_COLORS = [            # заливка по телу (пастель), л�
 TARIFFS = [
  {
   "id": "base",
-  "widget_id": "ab3391dc36a1751cd6d7963668fcc76d2ede3f08",
-  "widget_src": "https://pavelfdrk.ru/pl/lite/widget/script?id=1650617",
+  "widget_page": "pay/base.html",
   "name": "Программы",
   "price": "16 490 ₽",
   "old": "110 000 ₽",
@@ -304,8 +303,7 @@ TARIFFS = [
  },
  {
   "id": "full",
-  "widget_id": "6b45a753888bdeec00e44fcb4a4a898edc0d40b5",
-  "widget_src": "https://pavelfdrk.ru/pl/lite/widget/script?id=1650616",
+  "widget_page": "pay/full.html",
   "name": "Всё включено",
   "price": "19 900 ₽",
   "old": "110 000 ₽",

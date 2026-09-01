@@ -788,7 +788,7 @@ __SPOTS__
 .pay-modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
   border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:16px;
   color:var(--ink);line-height:1;z-index:1}
-.pay-modal-body{min-height:120px}
+.pay-modal-body{display:block;width:100%;height:min(70vh,620px);border:0}
 
 /* ------------------------------------------------------------------
    CONSULT / FOOTER / LEGAL
