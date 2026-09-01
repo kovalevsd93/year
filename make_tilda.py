@@ -1,19 +1,51 @@
 # -*- coding: utf-8 -*-
-"""Пакует страницу для вставки в Zero Block на Tilda: тот же код, что в
-index.html (картинки Павла/логотипов/отзывов и шрифты — с CDN самой Tilda,
-свои картинки — инлайном), только без <meta>/<title> в начале — это
-задаётся в настройках страницы Tilda, а не внутри блока."""
-import build
-import inline as _inline
+"""Пакует страницу для вставки в Zero Block на Tilda.
 
-doc = build.with_fonts(build.render(shots=_inline.local_shots), build.GILROY)
-doc = doc.replace("__MANNEQUIN__", build.mannequin_uri())
-doc = doc.replace("{HERO_CARD}", build.hero_card_uri())
+В отличие от index.html и preview.html, свои картинки (фото Павла с
+манекеном, шапка, скриншоты бонуса) здесь НЕ вшиваются base64 — Zero Block
+у Tilda отказывается сохранять блок, если в нём слишком много контента.
+Вместо этого картинки подгружаются по прямой ссылке с уже опубликованного
+GitHub Pages — код остаётся маленьким, а сама картинка остаётся той же.
+Шрифты, логотип и скриншоты отзывов и так берутся с CDN самой Tilda
+(как и в index.html) — тут ничего менять не нужно.
+"""
+import base64
+import glob
+import os
+import urllib.parse
+
+import build
+import dims
+
+GH_BASE = "https://kovalevsd93.github.io/year"
+
+
+def gh_shots(folder):
+    files = sorted(
+        f for f in glob.glob(os.path.join(folder, "*"))
+        if os.path.splitext(f)[1].lower() in (".png", ".jpg", ".jpeg", ".webp"))
+    return [(GH_BASE + "/" + urllib.parse.quote(f), f) for f in files]
+
+
+doc = build.with_fonts(build.render(shots=gh_shots), build.GILROY)
+doc = doc.replace("__MANNEQUIN__", f"{GH_BASE}/assets/mannequin.png")
+doc = doc.replace("{HERO_CARD}", f"{GH_BASE}/assets/hero-card.jpg")
+
+# prog_photo() вшивает assets/pavel-course.jpg как base64 безусловно —
+# меняем именно эту строку на ссылку, ничего в build.py не трогая
+pavel_b64 = ("data:image/jpeg;base64,"
+             + base64.b64encode(open("assets/pavel-course.jpg", "rb").read()).decode())
+doc = doc.replace(pavel_b64, f"{GH_BASE}/assets/pavel-course.jpg")
 
 lines = doc.split("\n")
 assert lines[0].startswith("<meta charset")
 assert lines[2].startswith("<title")
 body = "\n".join(lines[4:]).lstrip("\n")
 
+import re
+leftover = re.findall(r'data:image/(?:jpeg|png)[^"\')]*', body)
+assert not leftover, f"осталась незамененная картинка ({len(leftover)} шт.) — Zero Block снова разбухнет"
+
+dims.save()
 open("tilda-zeroblock.html", "w", encoding="utf-8").write(body)
-print("tilda-zeroblock.html", round(len(body.encode()) / 1e6, 2), "MB")
+print("tilda-zeroblock.html", round(len(body.encode()) / 1e6, 3), "MB")
