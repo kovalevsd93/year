@@ -8,7 +8,7 @@ LOGO  = CDN + "tild3366-3662-4538-b261-326231323933/Logo_for_web.png"
 LOGO_FOOT = CDN + "tild6665-3862-4238-a432-663835363962/Logo.png"
 
 # боевой адрес — нужен для абсолютных ссылок в og-тегах
-SITE_URL = "https://kovalevsd93.github.io/year"
+SITE_URL = "https://year.fedorenko.academy"
 
 ORDER_LINK = "#order"
 # куда ведёт «Оригинал отзыва». Сейчас один адрес на все карточки —
