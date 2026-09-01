@@ -1,5 +1,6 @@
-# Собирается из исходников: python3 build.py / make_preview.py
+# Собирается из исходников: python3 build.py / make_preview.py / make_tilda.py
 preview.html
+tilda-zeroblock.html
 
 # Кэш ужатых картинок, восстанавливается сам
 cache/
