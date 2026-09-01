@@ -39,8 +39,13 @@ doc = doc.replace(pavel_b64, f"{GH_BASE}/assets/pavel-course.jpg")
 
 lines = doc.split("\n")
 assert lines[0].startswith("<meta charset")
+assert lines[1].startswith("<meta name=\"viewport\"")
 assert lines[2].startswith("<title")
-body = "\n".join(lines[4:]).lstrip("\n")
+assert lines[3].startswith("<meta name=\"description\"")
+# viewport оставляем — без него мобильный Safari в Zero Block рендерит
+# страницу как десктопную и потом ужимает картинкой. Title/description
+# убираем: это поля настроек страницы в Tilda, а не самого блока.
+body = "\n".join([lines[1]] + lines[4:]).lstrip("\n")
 
 import re
 leftover = re.findall(r'data:image/(?:jpeg|png)[^"\')]*', body)
