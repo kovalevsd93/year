@@ -779,6 +779,17 @@ __SPOTS__
 .lb-close{position:absolute;top:22px;right:24px;width:44px;height:44px;border-radius:50%;border:0;
   background:rgba(255,255,255,.92);cursor:pointer;font-size:19px;color:var(--ink);line-height:1}
 
+.pay-modal{position:fixed;inset:0;z-index:100;background:rgba(36,31,53,.6);backdrop-filter:blur(8px);
+  display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.pay-modal.on{opacity:1;pointer-events:auto}
+.pay-modal-card{position:relative;width:100%;max-width:480px;max-height:88vh;overflow:auto;
+  background:var(--surface);border-radius:var(--r-lg);padding:28px;
+  box-shadow:0 40px 90px -30px rgba(28,20,60,.45)}
+.pay-modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:16px;
+  color:var(--ink);line-height:1;z-index:1}
+.pay-modal-body{min-height:120px}
+
 /* ------------------------------------------------------------------
    CONSULT / FOOTER / LEGAL
    ------------------------------------------------------------------ */

@@ -391,7 +391,8 @@ def tariff_card(t):
      <span class="cut">{t['cut']}</span>
    </div>
    <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
-   <a class="btn btn-lg" href="{ORDER_LINK}">Оформить подписку{ARROW}</a>
+   <button class="btn btn-lg" type="button" data-pay-src="{t['widget_src']}"
+     data-pay-id="{t['widget_id']}">Оформить подписку{ARROW}</button>
    <ul class="tariff-list">{has}{no}</ul>
   </article>"""
 
@@ -521,6 +522,15 @@ def legal(body):
  </div>
 </section>"""
 
+def pay_modal():
+    return """
+<div class="pay-modal" id="payModal" role="dialog" aria-modal="true" aria-label="Оформление подписки">
+  <div class="pay-modal-card">
+    <button class="pay-modal-close" id="payModalClose" aria-label="Закрыть">✕</button>
+    <div class="pay-modal-body" id="payModalBody"></div>
+  </div>
+</div>"""
+
 def privacy_html():
     import io, re
     lines = [l.strip() for l in io.open("privacy.txt", encoding="utf-8").read().split("\n") if l.strip()]
@@ -622,6 +632,30 @@ JS = """
   document.getElementById("lbClose").addEventListener("click", close);
   lb.addEventListener("click", function(e){ if(e.target===lb) close(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape") close(); });
+
+  var payModal = document.getElementById("payModal"),
+      payBody = document.getElementById("payModalBody");
+  function closePay(){
+    payModal.classList.remove("on");
+    payBody.innerHTML = "";
+    document.body.style.overflow = "";
+  }
+  document.querySelectorAll("[data-pay-src]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      payBody.innerHTML = "";
+      var s = document.createElement("script");
+      s.id = btn.getAttribute("data-pay-id");
+      s.src = btn.getAttribute("data-pay-src");
+      payBody.appendChild(s);
+      payModal.classList.add("on");
+      document.body.style.overflow = "hidden";
+    });
+  });
+  document.getElementById("payModalClose").addEventListener("click", closePay);
+  payModal.addEventListener("click", function(e){ if(e.target===payModal) closePay(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape" && payModal.classList.contains("on")) closePay();
+  });
 })();
 """ % DEADLINE_ISO
 
@@ -650,6 +684,7 @@ def render(inline=None, shots=None):
 {consult()}
 {footer()}
 {legal(privacy_html())}
+{pay_modal()}
 <script>{JS}</script>
 """
 
