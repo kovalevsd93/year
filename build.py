@@ -391,7 +391,7 @@ def tariff_card(t):
      <span class="cut">{t['cut']}</span>
    </div>
    <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
-   <button class="btn btn-lg" type="button" data-pay-page="{SITE_URL}/{t['widget_page']}"
+   <button class="btn btn-lg" type="button" data-pay-page="//{SITE_URL.split('://', 1)[1]}/{t['widget_page']}"
      >Оформить подписку{ARROW}</button>
    <ul class="tariff-list">{has}{no}</ul>
   </article>"""
