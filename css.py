@@ -331,7 +331,8 @@ p{margin:0}
 .hl-chevron{display:grid;place-items:center;color:var(--ink-3);transition:transform .3s ease,color .3s ease}
 .hl-chevron svg{width:18px;height:18px}
 .hl-row[open] .hl-chevron{transform:rotate(180deg);color:var(--c)}
-.hl-summary:focus-visible{outline:none;background:var(--ct);border-radius:10px}
+.hl-summary:focus-visible{outline:none}
+.hl-summary:focus-visible .hl-chevron{outline:2px solid var(--c);outline-offset:3px;border-radius:50%}
 
 .hl-panel{display:grid;grid-template-columns:1.22fr 1fr;gap:32px;align-items:start;
   padding:0 0 clamp(24px,2.8vw,30px) 72px;animation:hlOpen .3s ease both}
@@ -351,10 +352,10 @@ p{margin:0}
 /* медиа-слот инструмента платформы: рамка фиксированных пропорций,
    чтобы будущий <picture> со скриншотом не сдвинул раскладку */
 .hl-shot{margin:0}
-.hl-shot-frame{aspect-ratio:4/3;border-radius:14px;
-  display:grid;place-items:center;padding:18px;overflow:hidden;color:var(--c)}
-.hl-shot-frame svg{width:100%;height:100%}
-.hl-shot-frame img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hl-shot-frame{position:relative;aspect-ratio:4/3;border-radius:14px;
+  overflow:hidden;color:var(--c)}
+.hl-shot-frame svg,.hl-shot-frame img{position:absolute;inset:18px;
+  width:calc(100% - 36px);height:calc(100% - 36px);object-fit:contain;object-position:center}
 
 @media(max-width:640px){
   .hl-summary{grid-template-columns:32px 1fr 20px;gap:14px}
