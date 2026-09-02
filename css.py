@@ -112,8 +112,11 @@ p{margin:0}
 .sec{position:relative;padding:78px 0}
 .sec-tight{padding:56px 0}
 /* тот же мягкий градиент, что в hero — вместо плоской лавандовой заливки */
-.sec-alt{background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%)}
-.sec-field{background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%)}
+/* от белого к белому через едва заметный оттенок посередине — так
+   верхняя и нижняя кромка секции всегда совпадают с соседней белой
+   секцией пиксель в пиксель, и стыка не видно при любой высоте блока */
+.sec-alt{background:linear-gradient(180deg,var(--ground) 0%,#F7F4FC 50%,var(--ground) 100%)}
+.sec-field{background:linear-gradient(180deg,var(--ground) 0%,#F7F4FC 50%,var(--ground) 100%)}
 .sec-field .card,.sec-field .club,.sec-field .panel{border-color:#E7E3F2}
 .sec-warm{background:var(--field-warm)}
 /* соседние секции на одном фоне не должны складывать отступы */
