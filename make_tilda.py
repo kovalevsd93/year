@@ -35,7 +35,7 @@ doc = doc.replace("{HERO_CARD}", f"{GH_BASE}/assets/hero-card.jpg")
 def _b64(path, mime):
     return f"data:{mime};base64," + base64.b64encode(open(path, "rb").read()).decode()
 
-doc = doc.replace(_b64("assets/pavel-course.jpg", "image/jpeg"), f"{GH_BASE}/assets/pavel-course.jpg")
+doc = doc.replace(_b64("assets/pavel-course.png", "image/png"), f"{GH_BASE}/assets/pavel-course.png")
 doc = doc.replace(_b64("assets/logo-tree.png", "image/png"), f"{GH_BASE}/assets/logo-tree.png")
 
 lines = doc.split("\n")

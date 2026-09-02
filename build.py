@@ -180,11 +180,11 @@ def levels():
 
 # ---------------------------------------------------------------- programs
 def prog_photo():
-    """Only the flagship carries a portrait; the rest stay text."""
-    import base64
-    b = base64.b64encode(open("assets/pavel-course.jpg", "rb").read()).decode()
-    d = dims.attrs("assets/pavel-course.jpg")
-    return (f'<div class="prog-photo"><img src="data:image/jpeg;base64,{b}"{d} '
+    """Only the flagship carries a portrait; the rest stay text.
+    Вырезан из фона (был на плоской заливке #EEECF9, которая перестала
+    совпадать с фоном карточки, когда там появился градиент)."""
+    d = dims.attrs("assets/pavel-course.png")
+    return (f'<div class="prog-photo"><img src="{png_uri("assets/pavel-course.png")}"{d} '
             f'alt="Павел Федоренко" loading="lazy" decoding="async"></div>')
 
 def prog_top(kicker, t1, t2, desc, bullets, part=None, photo=False):
