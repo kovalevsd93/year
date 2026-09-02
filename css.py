@@ -308,94 +308,40 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   FOUR-LEVEL MODEL — a figure you can interrogate.
-   Selecting a level lights the part of the body it works on and
-   swaps in that level's symptoms. Nothing moves on its own.
+   FOUR-LEVEL CARDS — emotions/body/thoughts/actions, all visible at
+   once (no tab to click, no figure to read) — same glass-card
+   language as conditions and courses above.
    ------------------------------------------------------------------ */
-.model2{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:stretch}
-@media(max-width:900px){.model2{grid-template-columns:1fr}.model2-right{order:-1}}
+.lvl-grid{grid-template-columns:repeat(2,1fr)}
+@media(max-width:760px){.lvl-grid{grid-template-columns:1fr}}
 
-.model2-left{display:flex;flex-direction:column;gap:16px}
-.model2-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:clamp(20px,2.4vw,28px)}
-.model2-bottom{flex:1;display:flex;flex-direction:column}
-.model2-bottom .model-body{flex:1}
+.lvl{position:relative;overflow:hidden;isolation:isolate;
+  background:color-mix(in srgb,var(--ct) 65%,white);
+  border:1px solid rgba(255,255,255,.7);border-radius:var(--r-lg);
+  padding:clamp(24px,2.6vw,32px);
+  box-shadow:0 18px 40px -30px rgba(28,20,60,.22);
+  transition:transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
+.lvl::before{content:"";position:absolute;top:-95px;right:-85px;width:210px;height:210px;
+  border-radius:50%;background:var(--c);filter:blur(60px);opacity:.16;z-index:0;
+  transition:opacity .4s ease}
+.lvl:hover{transform:translateY(-4px);box-shadow:0 26px 55px -30px rgba(28,20,60,.32)}
+.lvl:hover::before{opacity:.26}
+.lvl>*{position:relative;z-index:1}
 
-/* правая панель красится в цвет активного уровня — от пастельной заливки к её же тёмной линии */
-.model2-right{position:relative;overflow:hidden;border-radius:var(--r-lg);
-  background:linear-gradient(155deg,var(--washt) 0%,var(--wash) 52%,var(--line) 130%);
-  min-height:420px;display:flex;align-items:flex-end;justify-content:center;
-  box-shadow:0 26px 60px -40px rgba(28,20,60,.32);
-  transition:background .6s ease}
-@media(max-width:900px){.model2-right{min-height:340px}}
+.lvl-head{display:flex;align-items:center;gap:13px}
+.lvl-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;flex:none;
+  background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
+.lvl-head h3{font-size:clamp(19px,2vw,22px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
 
-.figbox{position:relative;width:100%;max-width:min(300px,54vw);margin:0 auto;
-  padding-top:clamp(28px,4vw,44px)}
-
-.model2-caption{position:absolute;left:0;right:0;bottom:0;padding:74px 24px 22px;color:#fff;
-  background:linear-gradient(to top,rgba(14,9,26,.88) 0%,rgba(14,9,26,.6) 45%,rgba(14,9,26,0) 100%)}
-.mc-title{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em}
-.mc-text{margin-top:6px;font-size:14px;line-height:1.55;opacity:.92;max-width:46ch}
-
-/* сам манекен: его альфа-канал — маска, градиент внутри выбирает зону */
-.mq{position:relative;width:100%;aspect-ratio:419/688;isolation:isolate}
-.mq::before{content:"";position:absolute;left:12%;right:6%;bottom:-1%;height:5%;
-  background:radial-gradient(ellipse at center,rgba(96,86,140,.22),rgba(96,86,140,0) 70%)}
-.mq-base,.mq-lit{position:absolute;inset:0;background-repeat:no-repeat;
-  background-size:contain;background-position:center}
-.mq-base{background-image:var(--mq)}
-.mq-lit{
-  -webkit-mask-image:var(--mq);mask-image:var(--mq);
-  -webkit-mask-size:contain;mask-size:contain;
-  -webkit-mask-position:center;mask-position:center;
-  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
-  mix-blend-mode:multiply;opacity:0;
-  transition:opacity .45s cubic-bezier(.2,.7,.3,1)}
-.mq-lit.on{opacity:1}
-__SPOTS__
-
-.hot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);
-  width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;
-  display:grid;place-items:center;z-index:2}
-.hot i{display:block;width:12px;height:12px;border-radius:50%;background:var(--surface);
-  border:2px solid var(--c);box-shadow:0 2px 10px rgba(60,50,110,.22);
-  transition:all .4s cubic-bezier(.2,.7,.3,1)}
-.hot:hover i{transform:scale(1.18)}
-.hot[aria-pressed="true"] i{background:var(--c);transform:scale(1.35);
-  box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}
-.hot:focus-visible{outline:2px solid var(--c);outline-offset:2px;border-radius:50%}
-.hot .lbl{position:absolute;left:50%;top:-30px;transform:translateX(-50%);
-  white-space:nowrap;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--ink);
-  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 11px;
-  opacity:0;pointer-events:none;transition:opacity .3s ease}
-.hot:hover .lbl,.hot:focus-visible .lbl,.hot[aria-pressed="true"] .lbl{opacity:1}
-
-.model-tabs{display:flex;flex-wrap:nowrap;gap:6px;padding:5px;
-  background:var(--ground-2);border-radius:999px}
-.model-tab{flex:1 1 0;min-width:0;text-align:center;
-  padding:11px 14px;border-radius:999px;background:transparent;white-space:nowrap;
-  border:1.5px solid transparent;color:var(--ink-2);font-size:14.5px;cursor:pointer;
-  transition:all .3s ease}
-.model-tab:hover{border-color:var(--c);color:var(--ink)}
-.model-tab[aria-selected="true"]{background:var(--surface);border-color:var(--c);
-  color:var(--ink);font-weight:600;box-shadow:0 4px 14px -8px rgba(28,20,60,.4)}
-.model-tab:focus-visible{outline:2px solid var(--c);outline-offset:3px}
-
-.model-body{margin-top:26px;min-height:300px}
-.model-pane[hidden]{display:none}
-.model-pane{animation:paneIn .38s cubic-bezier(.2,.7,.3,1) both}
-@keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.pane-count{margin-top:0;font-size:11px;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--ci)}
-.model-pane ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.model-pane li{position:relative;padding:13px 0 13px 28px;font-size:15.5px;line-height:1.55;
-  color:var(--ink-2);border-top:1px solid var(--line)}
-.model-pane li:first-child{border-top:0}
-.model-pane li::before{content:"";position:absolute;left:0;top:19px;width:8px;height:8px;
-  border-radius:50%;background:var(--c);box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 18%,transparent)}
-@media(max-width:900px){.model-body{min-height:0}}
-
-@media(prefers-reduced-motion:reduce){.model-pane{animation:none}}
+.lvl-cap{margin-top:16px;font-size:15px;line-height:1.62;color:var(--ink-2);max-width:54ch}
+.lvl-count{margin-top:18px;font-size:11px;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--c)}
+.lvl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.lvl-list li{position:relative;padding:12px 0 12px 24px;font-size:15px;line-height:1.55;
+  color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
+.lvl-list li:first-child{border-top:0}
+.lvl-list li::before{content:"";position:absolute;left:0;top:18px;width:7px;height:7px;
+  border-radius:50%;background:var(--c)}
 
 /* ------------------------------------------------------------------
    PROGRAMS — colour encodes rank, not variety. The main programme is
@@ -829,12 +775,10 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
   .rv{opacity:1;transform:none}
 }
 
-/* на телефоне четыре уровня и кнопки первого экрана держим в одну строку */
+/* на телефоне заголовки в две строки без переноса по <br> */
 @media(max-width:620px){
   h2{font-size:25px;line-height:1.18}
   h2 br{display:none}
-  .model-tabs{flex-wrap:nowrap;gap:6px}
-  .model-tab{padding:11px 6px;font-size:clamp(11px,3.1vw,14px)}
 }
 @media(max-width:940px){
   .hero-act .btn-row{flex-wrap:nowrap;gap:10px}

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Пакует страницу для вставки в Zero Block на Tilda.
 
-В отличие от index.html и preview.html, свои картинки (фото Павла с
-манекеном, шапка, скриншоты бонуса) здесь НЕ вшиваются base64 — Zero Block
+В отличие от index.html и preview.html, свои картинки (шапка, логотип,
+фото Павла в программе, скриншоты бонуса) здесь НЕ вшиваются base64 — Zero Block
 у Tilda отказывается сохранять блок, если в нём слишком много контента.
 Вместо этого картинки подгружаются по прямой ссылке с уже опубликованного
 GitHub Pages — код остаётся маленьким, а сама картинка остаётся той же.
@@ -28,14 +28,15 @@ def gh_shots(folder):
 
 
 doc = build.with_fonts(build.render(shots=gh_shots), build.GILROY)
-doc = doc.replace("__MANNEQUIN__", f"{GH_BASE}/assets/mannequin.png")
 doc = doc.replace("{HERO_CARD}", f"{GH_BASE}/assets/hero-card.jpg")
 
-# prog_photo() вшивает assets/pavel-course.jpg как base64 безусловно —
-# меняем именно эту строку на ссылку, ничего в build.py не трогая
-pavel_b64 = ("data:image/jpeg;base64,"
-             + base64.b64encode(open("assets/pavel-course.jpg", "rb").read()).decode())
-doc = doc.replace(pavel_b64, f"{GH_BASE}/assets/pavel-course.jpg")
+# prog_photo() и logo_uri() вшивают свои картинки как base64 безусловно —
+# меняем именно эти строки на ссылки, ничего в build.py не трогая
+def _b64(path, mime):
+    return f"data:{mime};base64," + base64.b64encode(open(path, "rb").read()).decode()
+
+doc = doc.replace(_b64("assets/pavel-course.jpg", "image/jpeg"), f"{GH_BASE}/assets/pavel-course.jpg")
+doc = doc.replace(_b64("assets/logo-tree.png", "image/png"), f"{GH_BASE}/assets/logo-tree.png")
 
 lines = doc.split("\n")
 assert lines[0].startswith("<meta charset")

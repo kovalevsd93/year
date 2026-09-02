@@ -4,7 +4,6 @@ from data import *
 from css import CSS
 from icons import icon, cond_icon, any_icon, marker_uri
 import dims
-from figure import figure, spot_css, HOTSPOTS
 
 ACCENT = "#6C5FC0"
 MUTED  = "#6F6A85"
@@ -115,27 +114,21 @@ def conditions():
 </section>"""
 
 # ---------------------------------------------------------------- levels
-def level_colors():
-    return {ic: LEVEL_COLORS[i][0] for i, (_, ic, _, _) in enumerate(LEVELS)}
-
 def levels():
-    hots, tabs, panes = [], [], []
+    cards = []
     for i, (title, ic, cap, items) in enumerate(LEVELS):
-        x, y = HOTSPOTS[ic]
-        wash, line, tint = LEVEL_COLORS[i]
-        pressed = "true" if i == 0 else "false"
-        hots.append(f'<button class="hot" data-i="{i}" aria-pressed="{pressed}" '
-                    f'style="--x:{x};--y:{y};--c:{line}" aria-label="{title}">'
-                    f'<span class="lbl">{title}</span><i></i></button>')
-        tabs.append(f'<button class="model-tab" role="tab" id="mt{i}" aria-controls="mp{i}" '
-                    f'aria-selected="{pressed}" data-wash="{wash}" data-tint="{tint}" '
-                    f'data-line="{line}" data-title="{title}" data-cap="{cap}" '
-                    f'style="--c:{line};--ct:{tint}">{title}</button>')
+        wash, _line, tint = LEVEL_COLORS[i]
+        ink = LEVEL_INK[i]
         li = "".join(f"<li>{x}</li>" for x in items)
-        panes.append(f'<div class="model-pane" role="tabpanel" id="mp{i}" aria-labelledby="mt{i}"'
-                     f'{"" if i == 0 else " hidden"} style="--c:{line};--ci:{LEVEL_INK[i]}">'
-                     f'<div class="pane-count">{len(items)} проявлений</div>'
-                     f'<ul>{li}</ul></div>')
+        cards.append(f"""<article class="lvl rv" style="--c:{ink};--ct:{tint}">
+   <div class="lvl-head">
+     <span class="lvl-ico">{icon(ic, ink)}</span>
+     <h3>{title}</h3>
+   </div>
+   <p class="lvl-cap">{cap}</p>
+   <div class="lvl-count">{len(items)} проявлений</div>
+   <ul class="lvl-list">{li}</ul>
+  </article>""")
 
     return f"""
 <section class="sec sec-alt">
@@ -145,24 +138,7 @@ def levels():
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
 
-  <div class="model2 rv" id="model"
-       style="--wash:{LEVEL_COLORS[0][0]};--washt:{LEVEL_COLORS[0][2]};--line:{LEVEL_COLORS[0][1]}">
-   <div class="model2-left">
-     <div class="model2-card model2-top">
-       <div class="model-tabs" role="tablist" aria-label="Уровни работы">{''.join(tabs)}</div>
-     </div>
-     <div class="model2-card model2-bottom">
-       <div class="model-body">{''.join(panes)}</div>
-     </div>
-   </div>
-   <div class="model2-right">
-     <div class="figbox">{figure(LEVELS)}{''.join(hots)}</div>
-     <div class="model2-caption" id="modelCaption">
-       <div class="mc-title">{LEVELS[0][0]}</div>
-       <div class="mc-text">{LEVELS[0][2]}</div>
-     </div>
-   </div>
-  </div>
+  <div class="grid g2 lvl-grid">{''.join(cards)}</div>
  </div>
 </section>"""
 
@@ -545,44 +521,6 @@ JS = """
     el.style.transitionDelay = ((i%%3)*90) + "ms"; io.observe(el);
   });
 
-  var mTabs = [].slice.call(document.querySelectorAll(".model-tab"));
-  var mHots = [].slice.call(document.querySelectorAll(".hot"));
-  var mZones = [].slice.call(document.querySelectorAll(".mq-lit"));
-  var modelBox = document.getElementById("model");
-  var modelCap = document.getElementById("modelCaption");
-  function selectLevel(i){
-    if(modelBox && mTabs[i]){
-      modelBox.style.setProperty("--wash", mTabs[i].dataset.wash);
-      modelBox.style.setProperty("--washt", mTabs[i].dataset.tint);
-      modelBox.style.setProperty("--line", mTabs[i].dataset.line);
-    }
-    if(modelCap && mTabs[i]){
-      modelCap.querySelector(".mc-title").textContent = mTabs[i].dataset.title;
-      modelCap.querySelector(".mc-text").textContent = mTabs[i].dataset.cap;
-    }
-    mTabs.forEach(function(t,j){
-      t.setAttribute("aria-selected", j===i ? "true":"false");
-      document.getElementById("mp"+j).hidden = (j!==i);
-    });
-    mHots.forEach(function(h,j){ h.setAttribute("aria-pressed", j===i ? "true":"false"); });
-    mZones.forEach(function(z,j){ z.classList.toggle("on", j===i); });
-  }
-  mTabs.forEach(function(t,i){ t.addEventListener("click", function(){ selectLevel(i); }); });
-  mHots.forEach(function(h,i){
-    h.addEventListener("click", function(){ selectLevel(i); });
-    h.addEventListener("mouseenter", function(){ selectLevel(i); });
-  });
-  mTabs.forEach(function(t,i){
-    t.addEventListener("keydown", function(e){
-      var d = e.key==="ArrowRight" ? 1 : e.key==="ArrowLeft" ? -1 : 0;
-      if(!d) return;
-      e.preventDefault();
-      var n = (i + d + mTabs.length) %% mTabs.length;
-      selectLevel(n); mTabs[n].focus();
-    });
-  });
-  if(mZones.length) mZones[0].classList.add("on");
-
   var tabs = [].slice.call(document.querySelectorAll(".tab"));
   tabs.forEach(function(t,i){
     t.addEventListener("click", function(){
@@ -654,7 +592,7 @@ def render(inline=None, shots=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Год спокойствия</title>
 <meta name="description" content="Годовая подписка к новому учебному году: доступ на 12 месяцев ко всем программам Павла Федоренко и закрытому терапевтическому клубу.">
-<style>{CSS.replace("__SPOTS__", spot_css(level_colors()))}</style>
+<style>{CSS}</style>
 
 <div class="topbar">
  <div class="topbar-in">
@@ -734,11 +672,6 @@ def hero_card_uri():
     return ("data:image/jpeg;base64,"
             + base64.b64encode(open("assets/hero-card.jpg", "rb").read()).decode())
 
-def mannequin_uri():
-    import base64
-    return ("data:image/png;base64,"
-            + base64.b64encode(open("assets/mannequin.png", "rb").read()).decode())
-
 def logo_uri():
     import base64
     return ("data:image/png;base64,"
@@ -746,7 +679,7 @@ def logo_uri():
 
 if __name__ == "__main__":
     import inline as _inline
-    doc = with_fonts(render(shots=_inline.local_shots), GILROY).replace("__MANNEQUIN__", mannequin_uri())
+    doc = with_fonts(render(shots=_inline.local_shots), GILROY)
     doc = doc.replace("{HERO_CARD}", hero_card_uri())
     doc = shell(doc)
     open("index.html", "w", encoding="utf-8").write(doc)
