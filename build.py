@@ -493,7 +493,7 @@ def footer():
     <img src="{logo}" width="36" height="36" alt="">
     <div class="col" style="color:var(--ink-2)">Академия здорового мышления<br>Павла Федоренко</div>
   </div>
-  <div class="col"><a href="#privacy">Политика конфиденциальности</a><br>
+  <div class="col"><a href="#privacy">Политика в отношении обработки<br>персональных данных</a><br>
     <a href="https://docs.google.com/document/d/1HNUDFnaErp0vLxzUOEkV9jPRO3QccW7aJG2nHTvISOw/edit?usp=sharing"
        target="_blank" rel="noopener">Договор оферты</a></div>
  </div>
