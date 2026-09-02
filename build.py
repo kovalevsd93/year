@@ -7,7 +7,6 @@ import dims
 import tool_shots
 
 ACCENT = "#6C5FC0"
-MUTED  = "#6F6A85"
 # ведёт практику с 2012 года; считаем от года акции, чтобы не забыть обновить
 YEARS_IN_PRACTICE = int(DEADLINE_ISO[:4]) - 2012
 
@@ -67,10 +66,6 @@ def hero():
       <div class="btn-row">
         {cta()}
         <a class="btn btn-lg btn-quiet" href="#programs">Что входит в подписку{ARROW}</a>
-      </div>
-      <div class="hero-meta">
-        <span>{icon('calendar', MUTED)} Акция действует до {DEADLINE_TEXT}</span>
-        <span>{icon('users', MUTED)} Осталось 29 из 50 абонементов</span>
       </div>
     </div>
    </div>
@@ -290,19 +285,6 @@ def club():
    <p>Это место, где вас понимают с полуслова, ежедневно поддерживают и помогают двигаться
       вперёд, <b>даже когда очень трудно и опускаются руки.</b></p>
   </blockquote>
-
-  <div class="clock rv">
-   <div class="clock-h">Почему круглосуточно</div>
-   <div class="clock-track">
-     <div class="clock-seg clock-night"><span>ночь и раннее утро</span></div>
-     <div class="clock-seg clock-day"><span>рабочие часы</span></div>
-     <div class="clock-seg clock-night"><span>вечер и ночь</span></div>
-   </div>
-   <div class="clock-legend">
-     <span><i class="cl-dot cl-day"></i>Отвечают психологи и кураторы</span>
-     <span><i class="cl-dot cl-night"></i>Отвечают участники из разных стран и часовых поясов</span>
-   </div>
-  </div>
 
   <div class="club-list">{''.join(cards)}</div>
  </div>

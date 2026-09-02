@@ -244,10 +244,6 @@ p{margin:0}
   .offer > a + a{padding-left:0;border-left:0;border-top:1px solid var(--line)}
 }
 
-.hero-meta{font-size:13.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;
-  align-items:center;gap:8px 22px}
-.hero-meta span{display:inline-flex;align-items:center;gap:7px}
-
 .hero-figure{position:relative;justify-self:center;width:100%;max-width:520px;margin:0}
 .shot{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--field);
   box-shadow:0 34px 80px -44px rgba(28,20,60,.50)}
@@ -437,7 +433,9 @@ p{margin:0}
 .prog-pair > .prog + .prog{border-top:1px solid var(--accent-line)}
 
 .prog-anchor{border-color:var(--accent-line)}
-.prog-anchor .prog-top{background:var(--accent-tint);border-bottom:0}
+.prog-anchor .prog-top{
+  background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%);
+  border-bottom:0}
 .prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--ink-2)}
 .prog-anchor .prog-inner{display:grid;grid-template-columns:1.38fr .62fr;gap:0}
 .prog-anchor .prog-bot{border-left:1px solid var(--accent-line)}
@@ -519,28 +517,6 @@ p{margin:0}
 @media(max-width:760px){.quote{grid-template-columns:1fr;gap:16px}}
 .quote b{color:var(--ink);font-weight:600}
 
-/* how "24/7" actually works: two shifts, one day */
-.clock{max-width:760px;margin:0 auto;text-align:center}
-.clock-h{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-3);text-align:center}
-.clock-track{display:grid;grid-template-columns:1.15fr 1.4fr 1.45fr;gap:4px;margin-top:14px}
-.clock-seg{height:44px;border-radius:10px;display:grid;place-items:center;padding:0 8px}
-.clock-seg span{font-size:11.5px;line-height:1.3;text-align:center;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.clock-night{background:var(--ground-2);border:1px solid var(--line);color:var(--ink-3)}
-.clock-day{background:var(--accent);color:#fff}
-.clock-day span{font-weight:600}
-.clock-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;
-  margin-top:14px;font-size:13.5px;color:var(--ink-2)}
-.clock-legend span{display:inline-flex;align-items:center;gap:9px}
-.cl-dot{width:10px;height:10px;border-radius:50%;flex:none}
-.cl-day{background:var(--accent)}
-.cl-night{background:var(--ground-2);border:1px solid var(--line-2)}
-@media(max-width:620px){
-  .clock-track{grid-template-columns:1fr;gap:6px}
-  .clock-seg{height:38px}
-  .clock-seg span{white-space:normal}
-}
 
 
 /* ------------------------------------------------------------------
@@ -872,10 +848,6 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
         <a class="btn btn-lg" href="#order">Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a>
         <a class="btn btn-lg btn-quiet" href="#programs">Что входит в подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></a>
       </div>
-      <div class="hero-meta">
-        <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6F6A85" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/></svg> Акция действует до 7 сентября</span>
-        <span><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6F6A85" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/></svg> Осталось 29 из 50 абонементов</span>
-      </div>
     </div>
    </div>
 
@@ -1045,19 +1017,6 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
    <p>Это место, где вас понимают с полуслова, ежедневно поддерживают и помогают двигаться
       вперёд, <b>даже когда очень трудно и опускаются руки.</b></p>
   </blockquote>
-
-  <div class="clock rv">
-   <div class="clock-h">Почему круглосуточно</div>
-   <div class="clock-track">
-     <div class="clock-seg clock-night"><span>ночь и раннее утро</span></div>
-     <div class="clock-seg clock-day"><span>рабочие часы</span></div>
-     <div class="clock-seg clock-night"><span>вечер и ночь</span></div>
-   </div>
-   <div class="clock-legend">
-     <span><i class="cl-dot cl-day"></i>Отвечают психологи и кураторы</span>
-     <span><i class="cl-dot cl-night"></i>Отвечают участники из разных стран и часовых поясов</span>
-   </div>
-  </div>
 
   <div class="club-list"><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#A84955" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19C4 12 8.5 6.5 19 5.5 19.5 15 14 19.5 7 19"/><path d="M5 19c2.5-3.5 5.5-6 9.5-8"/></svg></div><h3>Здоровая и поддерживающая среда</h3><div class="txt"><p class="club-lead">Сообщество работает по чётким правилам: уважение, спокойствие, конструктив.</p><p>Без жалобных монологов, драм и бесконечного обсуждения симптомов.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>Это пространство, где общение реально помогает улучшать состояние, а не усугублять его.</span></p></div></article><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8C623D" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 1.8"/></svg></div><h3>Поддержка 24/7 — вы никогда не остаётесь одни</h3><div class="txt"><p class="club-lead">Вопрос можно задать в любое время суток.</p><p>В рабочие часы отвечают психологи и кураторы, в остальное — участники из разных стран и часовых поясов.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>В Клубе практически всегда есть кто-то, кто поможет, подскажет или просто выслушает.</span></p></div></article><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C6C36" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="2.8"/><path d="M3.8 19a5.4 5.4 0 0 1 10.4 0"/><path d="M16 6.4a2.8 2.8 0 0 1 0 5.4M17.4 14.4A5.4 5.4 0 0 1 20.5 19"/></svg></div><h3>Психологи и кураторы, которые сами прошли путь восстановления</h3><div class="txt"><p class="club-lead">Это не случайные люди и не «волонтёры по доброте».</p><p>Каждый специалист когда-то жил с тревожно-фобическими расстройствами, справился, прошёл профессиональное обучение и выбрал делом жизни помогать другим.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>Они знают ваши страхи изнутри и умеют мягко и уверенно вести вас к восстановлению.</span></p></div></article><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#477934" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="14" height="13" rx="3"/><path d="M17 11.2l4-2.4v6.4l-4-2.4z"/></svg></div><h3>Регулярные прямые эфиры со специалистами</h3><div class="txt"><p class="club-lead">Проводятся встречи, на которых психологи и кураторы разбирают ваши ситуации, помогают применять практики и дают ответы на вопросы.</p><p>Эфиры помогают не застревать на трудных этапах и дают ощущение реального живого сопровождения.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>Это формат, который удерживает вас в процессе и даёт дополнительные опоры.</span></p></div></article><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#33786B" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l1.7 4.6L18.5 10l-4.8 1.4L12 16l-1.7-4.6L5.5 10l4.8-1.4L12 4Z"/><path d="M18 16.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8.8-2Z"/></svg></div><h3>Дневник успехов — ежедневная порция вдохновения</h3><div class="txt"><p class="club-lead">Есть отдельный раздел, где участники каждый день делятся маленькими и большими победами.</p><p>Живые истории таких же людей дают опору, уверенность и вдохновение продолжать работать над собой.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>Это постоянное напоминание, что прогресс возможен даже тогда, когда всё казалось безнадёжным.</span></p></div></article><article class="club rv" style="--c:#477934;--ct:#EDF9E9"><div class="ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4966AC" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.2"/><path d="M14.8 9.2l-1.6 4.2-4.2 1.6 1.6-4.2 4.2-1.6Z"/></svg></div><h3>Разбор тревожных ситуаций и обучение навыкам КПТ</h3><div class="txt"><p class="club-lead">Любую тревожную или неприятную ситуацию можно разобрать прямо «по горячим следам».</p><p>Психологи помогают увидеть, что запускает эмоции, какие мысли усиливают тревогу и какие шаги реально работают.</p><p class="club-take"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 10.5l3.3 3.3L15.5 6"/></svg><span>Вы учитесь правильным стратегиям, меняете реакции и перестраиваете поведение в реальной жизни, а не только «в теории».</span></p></div></article></div>
  </div>

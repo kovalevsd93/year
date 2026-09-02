@@ -225,10 +225,6 @@ p{margin:0}
   .offer > a + a{padding-left:0;border-left:0;border-top:1px solid var(--line)}
 }
 
-.hero-meta{font-size:13.5px;color:var(--ink-3);display:flex;flex-wrap:wrap;
-  align-items:center;gap:8px 22px}
-.hero-meta span{display:inline-flex;align-items:center;gap:7px}
-
 .hero-figure{position:relative;justify-self:center;width:100%;max-width:520px;margin:0}
 .shot{position:relative;border-radius:var(--r-lg);overflow:hidden;background:var(--field);
   box-shadow:0 34px 80px -44px rgba(28,20,60,.50)}
@@ -418,7 +414,9 @@ p{margin:0}
 .prog-pair > .prog + .prog{border-top:1px solid var(--accent-line)}
 
 .prog-anchor{border-color:var(--accent-line)}
-.prog-anchor .prog-top{background:var(--accent-tint);border-bottom:0}
+.prog-anchor .prog-top{
+  background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%);
+  border-bottom:0}
 .prog-anchor .prog-kicker{border-color:var(--accent-line);color:var(--ink-2)}
 .prog-anchor .prog-inner{display:grid;grid-template-columns:1.38fr .62fr;gap:0}
 .prog-anchor .prog-bot{border-left:1px solid var(--accent-line)}
@@ -500,28 +498,6 @@ p{margin:0}
 @media(max-width:760px){.quote{grid-template-columns:1fr;gap:16px}}
 .quote b{color:var(--ink);font-weight:600}
 
-/* how "24/7" actually works: two shifts, one day */
-.clock{max-width:760px;margin:0 auto;text-align:center}
-.clock-h{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--ink-3);text-align:center}
-.clock-track{display:grid;grid-template-columns:1.15fr 1.4fr 1.45fr;gap:4px;margin-top:14px}
-.clock-seg{height:44px;border-radius:10px;display:grid;place-items:center;padding:0 8px}
-.clock-seg span{font-size:11.5px;line-height:1.3;text-align:center;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.clock-night{background:var(--ground-2);border:1px solid var(--line);color:var(--ink-3)}
-.clock-day{background:var(--accent);color:#fff}
-.clock-day span{font-weight:600}
-.clock-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 26px;
-  margin-top:14px;font-size:13.5px;color:var(--ink-2)}
-.clock-legend span{display:inline-flex;align-items:center;gap:9px}
-.cl-dot{width:10px;height:10px;border-radius:50%;flex:none}
-.cl-day{background:var(--accent)}
-.cl-night{background:var(--ground-2);border:1px solid var(--line-2)}
-@media(max-width:620px){
-  .clock-track{grid-template-columns:1fr;gap:6px}
-  .clock-seg{height:38px}
-  .clock-seg span{white-space:normal}
-}
 
 
 /* ------------------------------------------------------------------
