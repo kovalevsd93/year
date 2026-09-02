@@ -791,17 +791,8 @@ __SPOTS__
 .pay-modal-body{display:block;width:100%;height:min(70vh,620px);border:0}
 
 /* ------------------------------------------------------------------
-   CONSULT / FOOTER / LEGAL
+   FOOTER / LEGAL
    ------------------------------------------------------------------ */
-.consult{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);
-  padding:clamp(28px,3.6vw,48px);display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:center}
-@media(max-width:820px){.consult{grid-template-columns:1fr}}
-.consult h3{font-size:clamp(20px,2.2vw,26px);font-weight:400;letter-spacing:-.026em}
-.consult p{margin-top:13px;font-size:15.5px;line-height:1.68;color:var(--ink-2);max-width:52ch}
-.consult .note{margin-top:13px;font-size:12.5px;color:var(--ink-3);line-height:1.6}
-.consult .btn-row{justify-content:flex-end}
-@media(max-width:820px){.consult .btn-row{justify-content:flex-start}}
-
 footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--ground-2)}
 .foot{display:flex;flex-wrap:wrap;gap:26px;justify-content:space-between;align-items:flex-start}
 .foot img{width:32px;height:32px}

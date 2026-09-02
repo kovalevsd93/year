@@ -475,26 +475,6 @@ def reviews(inline=None):
   <button class="lb-close" id="lbClose" aria-label="Закрыть">✕</button><img alt="Отзыв участника" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
 </div>"""
 
-# ---------------------------------------------------------------- consult
-def consult():
-    return f"""
-<section class="sec">
- <div class="wrap">
-  <div class="consult rv">
-   <div>
-    <h3>Не уверены, что подписка подойдёт именно вам?</h3>
-    <p>Оставьте заявку на бесплатную консультацию, и в течение 10 минут с вами свяжется
-       наш специалист и ответит на все интересующие вопросы.</p>
-    <p class="note">Нажимая на кнопку, вы даёте согласие на обработку персональных данных
-       и соглашаетесь с политикой конфиденциальности.</p>
-   </div>
-   <div class="btn-row">
-     <a class="btn btn-lg btn-quiet" href="{CONSULT_LINK}">Получить консультацию{ARROW}</a>
-   </div>
-  </div>
- </div>
-</section>"""
-
 # ---------------------------------------------------------------- footer / legal
 def footer():
     return f"""
@@ -676,7 +656,6 @@ def render(inline=None, shots=None):
 {bonuses(shots)}
 {price()}
 {reviews(inline)}
-{consult()}
 {footer()}
 {legal(privacy_html())}
 {pay_modal()}
@@ -708,6 +687,7 @@ def shell(doc):
 <html lang="ru">
 <head>
 <meta charset="utf-8">
+<script>if(location.protocol==="http:"&&!/^(localhost|127\\.0\\.0\\.1)$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#FBFAFD">
 <link rel="icon" href="{favicon_uri()}">
