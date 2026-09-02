@@ -478,7 +478,7 @@ p{margin:0}
   gap:0 clamp(20px,3vw,48px);align-items:start;
   padding:clamp(22px,2.6vw,34px) 0;border-bottom:1px solid #D6CEEE;
   transition:background .35s ease}
-.club:hover{background:rgba(255,255,255,.45)}
+.club:hover{background:rgba(255,255,255,.45);border-radius:20px}
 .club .ico{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;
   background:var(--surface);box-shadow:var(--shadow-s)}
 .club .head{display:contents}
@@ -643,13 +643,7 @@ p{margin:0}
 
 .side{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:820px){.side{grid-template-columns:1fr}}
-.side .box{position:relative;overflow:hidden;isolation:isolate;
-  background:rgba(255,255,255,.7);backdrop-filter:blur(6px);
-  border:1px solid rgba(255,255,255,.7);border-radius:var(--r-md);clip-path:inset(0 round var(--r-md));padding:24px;
-  box-shadow:0 14px 30px -24px rgba(28,20,60,.22)}
-.side .box::before{content:"";position:absolute;top:-70px;right:-60px;width:160px;height:160px;
-  border-radius:50%;background:var(--ctile);filter:blur(46px);opacity:.5;z-index:0}
-.side .box>*{position:relative;z-index:1}
+.side .box{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px}
 .box-ico{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;
   background:var(--ctile);margin-bottom:16px}
 .side p{margin-top:10px;font-size:13.5px;line-height:1.65;color:var(--ink-3)}
