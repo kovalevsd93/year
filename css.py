@@ -111,10 +111,10 @@ p{margin:0}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 .sec{position:relative;padding:78px 0}
 .sec-tight{padding:56px 0}
-.sec-alt{background:var(--field)}
-/* секция-поле: цвет держит целую область, а не рассыпан акцентами */
-.sec-field{background:var(--field)}
-.sec-field .card,.sec-field .club,.sec-field .panel{border-color:#DCD5F0}
+/* тот же мягкий градиент, что в hero — вместо плоской лавандовой заливки */
+.sec-alt{background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%)}
+.sec-field{background:linear-gradient(180deg,#FAF7FB 0%,#F7F4FC 42%,#FBF7F6 74%,var(--ground) 100%)}
+.sec-field .card,.sec-field .club,.sec-field .panel{border-color:#E7E3F2}
 .sec-warm{background:var(--field-warm)}
 /* соседние секции на одном фоне не должны складывать отступы */
 .sec-alt + .sec-alt{padding-top:0}
