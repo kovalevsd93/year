@@ -327,23 +327,37 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   HUBLIST — four stages of one reaction, read top to bottom: an
-   editorial numbered spread, not a card. The number carries real
-   sequence (emotion leads to body leads to thought leads to action),
-   so it earns its place here. Each row reserves a media slot for a
-   real photo later; today it's just colour and an icon.
+   HUBLIST — four stages of one reaction, read top to bottom: emotion
+   leads to body leads to thought leads to action, so the sequence is
+   real and the number earns its place. Collapsed by default except
+   the first; opening one is a disclosure, not a tab (native <details>,
+   grouped so opening one closes the others). Each row reserves a
+   media slot for a real photo later — plainly a placeholder, not a
+   finished tile, until one is dropped in.
    ------------------------------------------------------------------ */
 .hublist{border-top:1px solid var(--line)}
-.hl-row{display:grid;grid-template-columns:52px 1fr 116px;gap:24px;align-items:start;
-  padding:clamp(26px,3vw,36px) 0;border-bottom:1px solid var(--line)}
-@media(max-width:760px){.hl-row{grid-template-columns:36px 1fr;}
-  .hl-media{grid-column:1/-1;order:3;width:100%;height:140px;margin-top:4px}}
+.hl-row{border-bottom:1px solid var(--line)}
+
+.hl-summary{list-style:none;cursor:pointer;display:grid;
+  grid-template-columns:52px 1fr 22px;gap:20px;align-items:center;
+  padding:clamp(22px,2.6vw,28px) 0;-webkit-tap-highlight-color:transparent}
+.hl-summary::-webkit-details-marker{display:none}
+.hl-summary::marker{content:""}
 
 .hl-num{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--c);
-  font-variant-numeric:tabular-nums;padding-top:2px}
+  font-variant-numeric:tabular-nums}
+.hl-summary h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.hl-chevron{display:grid;place-items:center;color:var(--ink-3);transition:transform .3s ease,color .3s ease}
+.hl-chevron svg{width:18px;height:18px}
+.hl-row[open] .hl-chevron{transform:rotate(180deg);color:var(--c)}
+.hl-summary:focus-visible{outline:2px solid var(--c);outline-offset:4px;border-radius:8px}
 
-.hl-body h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.hl-cap{margin-top:10px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:60ch}
+.hl-panel{display:grid;grid-template-columns:1fr 140px;gap:24px;
+  padding:0 0 clamp(24px,2.8vw,30px) 72px;animation:hlOpen .3s ease both}
+@keyframes hlOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.hl-panel{animation:none}}
+
+.hl-cap{font-size:15px;line-height:1.6;color:var(--ink-2);max-width:60ch}
 .hl-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
 .hl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0;max-width:60ch}
@@ -353,9 +367,16 @@ p{margin:0}
 .hl-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
-.hl-media{width:116px;height:116px;border-radius:16px;flex:none;
-  display:grid;place-items:center}
-.hl-media svg{width:30px;height:30px}
+.hl-media{width:140px;height:140px;border-radius:16px;flex:none;align-self:start;
+  display:grid;place-items:center;border:1.5px dashed var(--line-2);
+  background:var(--ground-2);color:var(--ink-3)}
+.hl-media svg{width:28px;height:28px}
+
+@media(max-width:640px){
+  .hl-summary{grid-template-columns:32px 1fr 20px;gap:14px}
+  .hl-panel{grid-template-columns:1fr;padding-left:0}
+  .hl-media{width:100%;height:120px}
+}
 
 /* ------------------------------------------------------------------
    PROGRAMS — colour encodes rank, not variety. The main programme is
@@ -880,47 +901,67 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
  </div>
 </section>
 
-<section class="sec sec-alt">
+<section class="sec">
  <div class="wrap stack stack-l">
   <div class="stack stack-m center rv"><h2>Комплексное решение <br>для устойчивого результата</h2><p class="lead">Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, мыслей и поведения — ради устойчивого результата.</p></div>
 
-  <div class="hublist rv"><div class="hl-row" style="--c:#87691F;--ct:#FBF3DF">
-   <div class="hl-num">01</div>
-   <div class="hl-body">
+  <div class="hublist rv"><details class="hl-row" name="levels" style="--c:#87691F;--ct:#FBF3DF" open>
+   <summary class="hl-summary">
+     <span class="hl-num">01</span>
      <h3>Эмоции</h3>
-     <p class="hl-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
-     <div class="hl-count">5 проявлений</div>
-     <ul class="hl-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
+     <span class="hl-chevron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+   </summary>
+   <div class="hl-panel">
+     <div class="hl-text">
+       <p class="hl-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
+       <div class="hl-count">5 проявлений</div>
+       <ul class="hl-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
+     </div>
+     <div class="hl-media"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 0 0-2.1 0L4 20"/></svg></div>
    </div>
-   <div class="hl-media" style="background:#F2D48B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.65-7 9-7 9Z"/></svg></div>
-  </div><div class="hl-row" style="--c:#45784A;--ct:#E9F4EA">
-   <div class="hl-num">02</div>
-   <div class="hl-body">
+  </details><details class="hl-row" name="levels" style="--c:#45784A;--ct:#E9F4EA">
+   <summary class="hl-summary">
+     <span class="hl-num">02</span>
      <h3>Тело</h3>
-     <p class="hl-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
-     <div class="hl-count">5 проявлений</div>
-     <ul class="hl-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
+     <span class="hl-chevron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+   </summary>
+   <div class="hl-panel">
+     <div class="hl-text">
+       <p class="hl-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
+       <div class="hl-count">5 проявлений</div>
+       <ul class="hl-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
+     </div>
+     <div class="hl-media"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 0 0-2.1 0L4 20"/></svg></div>
    </div>
-   <div class="hl-media" style="background:#ABD9AE"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.6v7M12 14.6 8.6 20M12 14.6 15.4 20M7.5 10.5h9"/></svg></div>
-  </div><div class="hl-row" style="--c:#6A60AB;--ct:#EFECFC">
-   <div class="hl-num">03</div>
-   <div class="hl-body">
+  </details><details class="hl-row" name="levels" style="--c:#6A60AB;--ct:#EFECFC">
+   <summary class="hl-summary">
+     <span class="hl-num">03</span>
      <h3>Мысли</h3>
-     <p class="hl-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
-     <div class="hl-count">5 проявлений</div>
-     <ul class="hl-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
+     <span class="hl-chevron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+   </summary>
+   <div class="hl-panel">
+     <div class="hl-text">
+       <p class="hl-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
+       <div class="hl-count">5 проявлений</div>
+       <ul class="hl-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
+     </div>
+     <div class="hl-media"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 0 0-2.1 0L4 20"/></svg></div>
    </div>
-   <div class="hl-media" style="background:#BDB2F1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 19.5a4 4 0 0 0 3.2-6.4A4.2 4.2 0 0 0 16.4 6a4.4 4.4 0 0 0-8.6.7A4 4 0 0 0 6.4 14a4 4 0 0 0 3.4 5.5"/><path d="M12 7v13"/></svg></div>
-  </div><div class="hl-row" style="--c:#995D36;--ct:#FCEFE4">
-   <div class="hl-num">04</div>
-   <div class="hl-body">
+  </details><details class="hl-row" name="levels" style="--c:#995D36;--ct:#FCEFE4">
+   <summary class="hl-summary">
+     <span class="hl-num">04</span>
      <h3>Поведение</h3>
-     <p class="hl-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
-     <div class="hl-count">5 проявлений</div>
-     <ul class="hl-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
+     <span class="hl-chevron"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></span>
+   </summary>
+   <div class="hl-panel">
+     <div class="hl-text">
+       <p class="hl-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
+       <div class="hl-count">5 проявлений</div>
+       <ul class="hl-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
+     </div>
+     <div class="hl-media"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 0 0-2.1 0L4 20"/></svg></div>
    </div>
-   <div class="hl-media" style="background:#F4C39D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg></div>
-  </div></div>
+  </details></div>
  </div>
 </section>
 

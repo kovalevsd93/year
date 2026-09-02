@@ -17,6 +17,9 @@ ICONS = {
  "shield":'<path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.5-7 9.3-4.1-1.8-7-5.1-7-9.3V6l7-2.5Z"/>',
  "users": '<circle cx="12" cy="8" r="3"/><path d="M5.5 19.5a6.5 6.5 0 0 1 13 0"/>',
  "calendar":'<rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/>',
+ "chevron":'<path d="M6 9l6 6 6-6"/>',
+ "photo":  '<rect x="3" y="4.5" width="18" height="15" rx="2.5"/>'
+           '<circle cx="8.5" cy="9.5" r="1.6"/><path d="M21 15.5l-5.2-5.2a1.5 1.5 0 0 0-2.1 0L4 20"/>',
 }
 def icon(name, color="#6558BC"):
     return _s(ICONS[name], color)

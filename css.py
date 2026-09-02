@@ -308,23 +308,37 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   HUBLIST — four stages of one reaction, read top to bottom: an
-   editorial numbered spread, not a card. The number carries real
-   sequence (emotion leads to body leads to thought leads to action),
-   so it earns its place here. Each row reserves a media slot for a
-   real photo later; today it's just colour and an icon.
+   HUBLIST — four stages of one reaction, read top to bottom: emotion
+   leads to body leads to thought leads to action, so the sequence is
+   real and the number earns its place. Collapsed by default except
+   the first; opening one is a disclosure, not a tab (native <details>,
+   grouped so opening one closes the others). Each row reserves a
+   media slot for a real photo later — plainly a placeholder, not a
+   finished tile, until one is dropped in.
    ------------------------------------------------------------------ */
 .hublist{border-top:1px solid var(--line)}
-.hl-row{display:grid;grid-template-columns:52px 1fr 116px;gap:24px;align-items:start;
-  padding:clamp(26px,3vw,36px) 0;border-bottom:1px solid var(--line)}
-@media(max-width:760px){.hl-row{grid-template-columns:36px 1fr;}
-  .hl-media{grid-column:1/-1;order:3;width:100%;height:140px;margin-top:4px}}
+.hl-row{border-bottom:1px solid var(--line)}
+
+.hl-summary{list-style:none;cursor:pointer;display:grid;
+  grid-template-columns:52px 1fr 22px;gap:20px;align-items:center;
+  padding:clamp(22px,2.6vw,28px) 0;-webkit-tap-highlight-color:transparent}
+.hl-summary::-webkit-details-marker{display:none}
+.hl-summary::marker{content:""}
 
 .hl-num{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--c);
-  font-variant-numeric:tabular-nums;padding-top:2px}
+  font-variant-numeric:tabular-nums}
+.hl-summary h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.hl-chevron{display:grid;place-items:center;color:var(--ink-3);transition:transform .3s ease,color .3s ease}
+.hl-chevron svg{width:18px;height:18px}
+.hl-row[open] .hl-chevron{transform:rotate(180deg);color:var(--c)}
+.hl-summary:focus-visible{outline:2px solid var(--c);outline-offset:4px;border-radius:8px}
 
-.hl-body h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.hl-cap{margin-top:10px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:60ch}
+.hl-panel{display:grid;grid-template-columns:1fr 140px;gap:24px;
+  padding:0 0 clamp(24px,2.8vw,30px) 72px;animation:hlOpen .3s ease both}
+@keyframes hlOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.hl-panel{animation:none}}
+
+.hl-cap{font-size:15px;line-height:1.6;color:var(--ink-2);max-width:60ch}
 .hl-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
 .hl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0;max-width:60ch}
@@ -334,9 +348,16 @@ p{margin:0}
 .hl-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
-.hl-media{width:116px;height:116px;border-radius:16px;flex:none;
-  display:grid;place-items:center}
-.hl-media svg{width:30px;height:30px}
+.hl-media{width:140px;height:140px;border-radius:16px;flex:none;align-self:start;
+  display:grid;place-items:center;border:1.5px dashed var(--line-2);
+  background:var(--ground-2);color:var(--ink-3)}
+.hl-media svg{width:28px;height:28px}
+
+@media(max-width:640px){
+  .hl-summary{grid-template-columns:32px 1fr 20px;gap:14px}
+  .hl-panel{grid-template-columns:1fr;padding-left:0}
+  .hl-media{width:100%;height:120px}
+}
 
 /* ------------------------------------------------------------------
    PROGRAMS — colour encodes rank, not variety. The main programme is

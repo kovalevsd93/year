@@ -115,28 +115,35 @@ def conditions():
 
 # ---------------------------------------------------------------- levels
 def levels():
-    """Нумерованный список-разворот: эмоции → тело → мысли → поведение
-    как четыре последовательные стадии одной реакции, а не произвольный
-    набор. Каждая строка резервирует место под фото справа (сейчас
-    заглушка цветом и иконкой — заменить на <img>, когда появятся кадры)."""
+    """Раскрывающийся список: эмоции → тело → мысли → поведение как
+    четыре последовательные стадии одной реакции. Первая строка открыта
+    сразу, остальные сворачивают текст и список за собой — как в
+    референсе. У каждой строки есть место под фото (заглушка, пока
+    кадров нет — просто заменить .hl-media на <img>)."""
     rows = []
     for i, (title, ic, cap, items) in enumerate(LEVELS):
-        wash, _line, tint = LEVEL_COLORS[i]
+        _wash, _line, tint = LEVEL_COLORS[i]
         ink = LEVEL_INK[i]
         li = "".join(f"<li>{x}</li>" for x in items)
-        rows.append(f"""<div class="hl-row" style="--c:{ink};--ct:{tint}">
-   <div class="hl-num">0{i + 1}</div>
-   <div class="hl-body">
+        open_attr = " open" if i == 0 else ""
+        rows.append(f"""<details class="hl-row" name="levels" style="--c:{ink};--ct:{tint}"{open_attr}>
+   <summary class="hl-summary">
+     <span class="hl-num">0{i + 1}</span>
      <h3>{title}</h3>
-     <p class="hl-cap">{cap}</p>
-     <div class="hl-count">{len(items)} проявлений</div>
-     <ul class="hl-list">{li}</ul>
+     <span class="hl-chevron">{icon('chevron', 'currentColor')}</span>
+   </summary>
+   <div class="hl-panel">
+     <div class="hl-text">
+       <p class="hl-cap">{cap}</p>
+       <div class="hl-count">{len(items)} проявлений</div>
+       <ul class="hl-list">{li}</ul>
+     </div>
+     <div class="hl-media">{icon('photo', 'currentColor')}</div>
    </div>
-   <div class="hl-media" style="background:{wash}">{icon(ic, '#241F35')}</div>
-  </div>""")
+  </details>""")
 
     return f"""
-<section class="sec sec-alt">
+<section class="sec">
  <div class="wrap stack stack-l">
   {heading(None,
            'Комплексное решение <br>для устойчивого результата',
