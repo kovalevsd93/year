@@ -4,6 +4,7 @@ from data import *
 from css import CSS
 from icons import icon, cond_icon, any_icon, marker_uri
 import dims
+import tool_shots
 
 ACCENT = "#6C5FC0"
 MUTED  = "#6F6A85"
@@ -117,15 +118,31 @@ def conditions():
 def levels():
     """Раскрывающийся список: эмоции → тело → мысли → поведение как
     четыре последовательные стадии одной реакции. Первая строка открыта
-    сразу, остальные сворачивают текст и список за собой — как в
-    референсе. У каждой строки есть место под фото (заглушка, пока
-    кадров нет — просто заменить .hl-media на <img>)."""
+    сразу, остальные сворачивают текст и список за собой.
+
+    Справа от списка проявлений — медиа-слот с инструментом платформы,
+    который отвечает на «а как вы это лечите». Настоящих скриншотов
+    ещё нет (готовит клиент — см. ТЗ), поэтому вместо <picture> сейчас
+    линейная иллюстрация; сетка и обёртка .hl-shot-frame рассчитаны на
+    прямую замену её содержимого на <picture> без переверстки."""
     rows = []
     for i, (title, ic, cap, items) in enumerate(LEVELS):
         _wash, _line, tint = LEVEL_COLORS[i]
         ink = LEVEL_INK[i]
+        _shot_cap, shot_alt = LEVEL_MEDIA[i]
         li = "".join(f"<li>{x}</li>" for x in items)
         open_attr = " open" if i == 0 else ""
+        if i == 2:
+            # «Мысли» — реальная картинка вместо линейной заглушки; альт
+            # описывает то, что действительно на ней, а не будущий скриншот
+            d = dims.attrs("assets/mind-brain.png")
+            frame = (f'<div class="hl-shot-frame">'
+                      f'<img src="{mind_brain_uri()}"{d} '
+                      f'alt="Стилизованная объёмная иллюстрация мозга, символ уровня «Мысли»" '
+                      f'loading="lazy" decoding="async"></div>')
+        else:
+            frame = (f'<div class="hl-shot-frame" role="img" aria-label="{shot_alt}">'
+                      f'{tool_shots.placeholder(i)}</div>')
         rows.append(f"""<details class="hl-row" name="levels" style="--c:{ink};--ct:{tint}"{open_attr}>
    <summary class="hl-summary">
      <span class="hl-num">0{i + 1}</span>
@@ -138,7 +155,7 @@ def levels():
        <div class="hl-count">{len(items)} проявлений</div>
        <ul class="hl-list">{li}</ul>
      </div>
-     <div class="hl-media">{icon('photo', 'currentColor')}</div>
+     <div class="hl-shot">{frame}</div>
    </div>
   </details>""")
 
@@ -688,6 +705,11 @@ def logo_uri():
     import base64
     return ("data:image/png;base64,"
             + base64.b64encode(open("assets/logo-tree.png", "rb").read()).decode())
+
+def mind_brain_uri():
+    import base64
+    return ("data:image/png;base64,"
+            + base64.b64encode(open("assets/mind-brain.png", "rb").read()).decode())
 
 if __name__ == "__main__":
     import inline as _inline

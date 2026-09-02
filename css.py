@@ -331,9 +331,9 @@ p{margin:0}
 .hl-chevron{display:grid;place-items:center;color:var(--ink-3);transition:transform .3s ease,color .3s ease}
 .hl-chevron svg{width:18px;height:18px}
 .hl-row[open] .hl-chevron{transform:rotate(180deg);color:var(--c)}
-.hl-summary:focus-visible{outline:2px solid var(--c);outline-offset:-2px}
+.hl-summary:focus-visible{outline:none;background:var(--ct);border-radius:10px}
 
-.hl-panel{display:grid;grid-template-columns:1fr 140px;gap:24px;
+.hl-panel{display:grid;grid-template-columns:1.22fr 1fr;gap:32px;align-items:start;
   padding:0 0 clamp(24px,2.8vw,30px) 72px;animation:hlOpen .3s ease both}
 @keyframes hlOpen{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.hl-panel{animation:none}}
@@ -348,15 +348,18 @@ p{margin:0}
 .hl-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
-.hl-media{width:140px;height:140px;border-radius:16px;flex:none;align-self:start;
-  display:grid;place-items:center;border:1.5px dashed var(--line-2);
-  background:var(--ground-2);color:var(--ink-3)}
-.hl-media svg{width:28px;height:28px}
+/* медиа-слот инструмента платформы: рамка фиксированных пропорций,
+   чтобы будущий <picture> со скриншотом не сдвинул раскладку */
+.hl-shot{margin:0}
+.hl-shot-frame{aspect-ratio:4/3;border-radius:14px;
+  display:grid;place-items:center;padding:18px;overflow:hidden;color:var(--c)}
+.hl-shot-frame svg{width:100%;height:100%}
+.hl-shot-frame img{width:100%;height:100%;object-fit:cover;object-position:center}
 
 @media(max-width:640px){
   .hl-summary{grid-template-columns:32px 1fr 20px;gap:14px}
-  .hl-panel{grid-template-columns:1fr;padding-left:0}
-  .hl-media{width:100%;height:120px}
+  .hl-panel{grid-template-columns:1fr;padding-left:0;gap:20px}
+  .hl-shot-frame{aspect-ratio:16/10}
 }
 
 /* ------------------------------------------------------------------
