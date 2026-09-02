@@ -140,7 +140,10 @@ def levels():
         ink = LEVEL_INK[i]
         _shot_cap, shot_alt = LEVEL_MEDIA[i]
         li = "".join(f"<li>{x}</li>" for x in items)
+        # первый пункт открыт всегда и не входит в общую группу — не
+        # закрывается, когда открывают остальные три
         open_attr = " open" if i == 0 else ""
+        name_attr = "" if i == 0 else ' name="levels"'
         if i in LEVEL_SHOT_IMAGES:
             # реальная картинка вместо линейной заглушки; альт описывает
             # то, что действительно на ней, а не будущий скриншот
@@ -152,7 +155,7 @@ def levels():
         else:
             frame = (f'<div class="hl-shot-frame" role="img" aria-label="{shot_alt}">'
                       f'{tool_shots.placeholder(i)}</div>')
-        rows.append(f"""<details class="hl-row" name="levels" style="--c:{ink};--ct:{tint}"{open_attr}>
+        rows.append(f"""<details class="hl-row"{name_attr} style="--c:{ink};--ct:{tint}"{open_attr}>
    <summary class="hl-summary">
      <span class="hl-num">0{i + 1}</span>
      <h3>{title}</h3>
