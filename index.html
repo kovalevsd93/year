@@ -298,7 +298,7 @@ p{margin:0}
 .cond:hover::before{opacity:.26}
 
 .cond-ico{position:relative;z-index:1;display:grid;place-items:center;width:48px;height:48px;
-  border-radius:15px;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);color:var(--c);
+  border-radius:15px;background:rgba(255,255,255,.8);color:var(--c);
   margin-bottom:20px;transition:background .35s ease,color .35s ease}
 .cond-txt{position:relative;z-index:1;display:block}
 .cond-h{display:block;font-size:17.5px;font-weight:600;color:var(--ink);transition:color .35s ease;
@@ -471,7 +471,7 @@ p{margin:0}
 .course>*{position:relative;z-index:1}
 .course-head{display:flex;align-items:center;gap:12px}
 .course-ico{flex:none;width:46px;height:46px;border-radius:14px;display:grid;place-items:center;
-  background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
+  background:rgba(255,255,255,.8)}
 .course-kicker{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
   color:var(--c);line-height:1.4}
 .course-title{margin-top:18px;font-size:clamp(20px,2.1vw,26px);font-weight:500;line-height:1.2;
@@ -582,7 +582,7 @@ p{margin:0}
 /* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
 .shots-nav{position:absolute;top:calc(50% - 26px);z-index:3;width:46px;height:46px;
   border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);
-  backdrop-filter:blur(8px);color:var(--accent);cursor:pointer;display:grid;place-items:center;
+  color:var(--accent);cursor:pointer;display:grid;place-items:center;
   box-shadow:0 10px 26px -12px rgba(28,20,60,.35);
   transition:opacity .25s ease,transform .25s ease,background .25s ease,color .25s ease}
 .shots-nav svg{width:20px;height:20px;stroke-width:2.4}
@@ -594,7 +594,10 @@ p{margin:0}
 .no-nav .shots-nav{display:none}
 @media(hover:none){.shots-nav{display:none}}
 @media(max-width:640px){.shots-nav{display:none}}
-.bonus-shots button{flex:none;width:min(540px,84vw);padding:0;border:1px solid var(--line);
+/* ширина карточки считается от самой ленты, а не от экрана: на телефоне
+   84vw давало карточку ШИРЕ видимой области ленты, и scroll-snap в iOS
+   отбрасывал палец назад — лента не листалась совсем */
+.bonus-shots button{flex:none;width:min(540px,calc(100% - 34px));padding:0;border:1px solid var(--line);
   background:var(--surface);border-radius:14px;overflow:hidden;cursor:zoom-in;display:block;
   scroll-snap-align:start;transition:border-color .3s ease,transform .4s cubic-bezier(.2,.7,.3,1)}
 .bonus-shots button:hover{transform:translateY(-2px);border-color:var(--accent-line)}
@@ -751,9 +754,11 @@ p{margin:0}
 .rev{columns:5;column-gap:14px;margin-top:36px}
 @media(max-width:1000px){.rev{columns:3}}
 @media(max-width:620px){.rev{columns:2}}
+/* без backdrop-filter: в многоколоночной вёрстке iOS Safari берёт для него
+   не ту область фона, и карточка в правой колонке отрисовывалась пустой */
 .rev-card{break-inside:avoid;width:100%;margin:0 0 14px;padding:0;
-  border:1px solid rgba(255,255,255,.7);background:rgba(255,255,255,.7);
-  backdrop-filter:blur(6px);border-radius:var(--r-sm);
+  border:1px solid var(--line);background:var(--surface);
+  border-radius:var(--r-sm);
   box-shadow:0 14px 30px -24px rgba(28,20,60,.24);
   overflow:hidden;display:flex;flex-direction:column;
   transition:border-color .3s ease,transform .4s cubic-bezier(.2,.7,.3,1)}
