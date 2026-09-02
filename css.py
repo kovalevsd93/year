@@ -331,7 +331,7 @@ p{margin:0}
 .hl-chevron{display:grid;place-items:center;color:var(--ink-3);transition:transform .3s ease,color .3s ease}
 .hl-chevron svg{width:18px;height:18px}
 .hl-row[open] .hl-chevron{transform:rotate(180deg);color:var(--c)}
-.hl-summary:focus-visible{outline:2px solid var(--c);outline-offset:4px;border-radius:8px}
+.hl-summary:focus-visible{outline:2px solid var(--c);outline-offset:-2px}
 
 .hl-panel{display:grid;grid-template-columns:1fr 140px;gap:24px;
   padding:0 0 clamp(24px,2.8vw,30px) 72px;animation:hlOpen .3s ease both}
