@@ -493,9 +493,13 @@ def footer():
     <img src="{logo}" width="36" height="36" alt="">
     <div class="col" style="color:var(--ink-2)">Академия здорового мышления<br>Павла Федоренко</div>
   </div>
-  <div class="col"><a href="#privacy">Политика в отношении обработки<br>персональных данных</a><br>
+  <div class="col">ИП «Федоренко Павел Алексеевич»<br>
+    ИНН 645 117 313 599<br>
+    Служба тех. поддержки: <a href="mailto:info@fdrk.ru">info@fdrk.ru</a></div>
+  <div class="col"><a href="#privacy">Политика конфиденциальности</a><br>
     <a href="https://docs.google.com/document/d/1HNUDFnaErp0vLxzUOEkV9jPRO3QccW7aJG2nHTvISOw/edit?usp=sharing"
-       target="_blank" rel="noopener">Договор оферты</a></div>
+       target="_blank" rel="noopener">Договор оферты</a><br>
+    <a href="#privacy">Политика в отношении обработки персональных данных</a></div>
  </div>
 </footer>"""
 
@@ -505,9 +509,6 @@ def legal(body):
  <div class="wrap">
   <details><summary>Политика в отношении обработки персональных данных</summary>
    <div class="body">{body}</div></details>
-  <p class="copyright">ИП «Федоренко Павел Алексеевич»<br>
-   ИНН 645 117 313 599<br>
-   Служба тех. поддержки: <a href="mailto:info@fdrk.ru">info@fdrk.ru</a></p>
   <p class="copyright">Copyright © 2012 — 2026.</p>
  </div>
 </section>"""

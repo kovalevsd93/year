@@ -115,8 +115,8 @@ p{margin:0}
 /* от белого к белому через едва заметный оттенок посередине — так
    верхняя и нижняя кромка секции всегда совпадают с соседней белой
    секцией пиксель в пиксель, и стыка не видно при любой высоте блока */
-.sec-alt{background:linear-gradient(180deg,var(--ground) 0%,#F7F4FC 50%,var(--ground) 100%)}
-.sec-field{background:linear-gradient(180deg,var(--ground) 0%,#F7F4FC 50%,var(--ground) 100%)}
+.sec-alt{background:linear-gradient(180deg,var(--ground) 0%,#FBF9FE 50%,var(--ground) 100%)}
+.sec-field{background:linear-gradient(180deg,var(--ground) 0%,#FBF9FE 50%,var(--ground) 100%)}
 .sec-field .card,.sec-field .club,.sec-field .panel{border-color:#E7E3F2}
 .sec-warm{background:var(--field-warm)}
 /* соседние секции на одном фоне не должны складывать отступы */
@@ -474,11 +474,15 @@ p{margin:0}
    CLUB
    ------------------------------------------------------------------ */
 .club-list{border-top:1px solid #D6CEEE}
-.club{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.25fr);
+.club{position:relative;isolation:isolate;
+  display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.25fr);
   gap:0 clamp(20px,3vw,48px);align-items:start;
-  padding:clamp(22px,2.6vw,34px) 0;border-bottom:1px solid #D6CEEE;
-  transition:background .35s ease}
-.club:hover{background:rgba(255,255,255,.45);border-radius:20px}
+  padding:clamp(22px,2.6vw,34px) 0;border-bottom:1px solid #D6CEEE}
+.club::before{content:"";position:absolute;top:0;bottom:0;left:50%;right:50%;
+  margin-left:-50vw;margin-right:-50vw;width:100vw;background:rgba(255,255,255,.45);
+  opacity:0;transition:opacity .35s ease;z-index:0;pointer-events:none}
+.club:hover::before{opacity:1}
+.club>*{position:relative;z-index:1}
 .club .ico{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;
   background:var(--surface);box-shadow:var(--shadow-s)}
 .club .head{display:contents}
@@ -510,7 +514,7 @@ p{margin:0}
    BONUSES
    ------------------------------------------------------------------ */
 .bonus{position:relative;overflow:hidden;isolation:isolate;
-  background:color-mix(in srgb,var(--ct) 55%,white);
+  background:color-mix(in srgb,var(--ct) 28%,white);
   border:1px solid rgba(255,255,255,.7);border-radius:var(--r-lg);
   clip-path:inset(0 round var(--r-lg));
   padding:clamp(26px,3vw,40px);box-shadow:0 18px 40px -30px rgba(28,20,60,.22)}
@@ -605,7 +609,7 @@ p{margin:0}
 .price-sec > .wrap{position:relative;z-index:1}
 .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
 .glow-a{width:460px;height:460px;left:-170px;top:60px;background:#F4EBCF;opacity:.5}
-.glow-b{width:420px;height:420px;right:-150px;bottom:-60px;background:#CFDAF4;opacity:.45}
+.glow-b{width:420px;height:420px;right:-220px;bottom:-180px;background:#CFDAF4;opacity:.28;filter:blur(130px)}
 
 .price-main{position:relative;overflow:hidden;background:var(--surface);
   border:1px solid var(--line);border-radius:var(--r-lg);
@@ -782,10 +786,8 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
 .legal .body{padding:0 0 34px;max-height:440px;overflow:auto;font-size:13px;line-height:1.75;color:var(--ink-3)}
 .legal .body h4{font-size:13.5px;color:var(--ink-2);margin:20px 0 8px;font-weight:600}
 .legal .body p{margin:0 0 9px}
-.copyright{max-width:var(--maxw);margin:0 auto;text-align:center;
-  font-size:12px;line-height:1.7;color:var(--ink-3)}
-.copyright:first-of-type{padding:16px 0 0;border-top:1px solid var(--line)}
-.copyright:last-of-type{padding:6px 0 20px}
+.copyright{max-width:var(--maxw);margin:0 auto;text-align:center;padding:16px 0 20px;
+  border-top:1px solid var(--line);font-size:12px;line-height:1.7;color:var(--ink-3)}
 
 /* ------------------------------------------------------------------
    MOTION
