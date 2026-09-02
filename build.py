@@ -47,7 +47,6 @@ def hero():
     </div>
 
     <div class="hero-copy stack stack-m">
-      <div class="label">Годовая подписка · новый учебный год</div>
       <h1>Начните учебный год <br>со спокойствия</h1>
       <p class="hero-sub">Скидка до 85% на все программы Павла Федоренко
         по преодолению тревожных расстройств и неврозов.</p>
@@ -109,7 +108,7 @@ def conditions():
     return f"""
 <section class="sec" id="problems">
  <div class="wrap stack stack-l">
-  {heading('Кому помогает подписка', 'С какими проблемами поможет подписка?',
+  {heading(None, 'С какими проблемами поможет подписка?',
            'Это ваша возможность восстановиться от следующих тревожно-фобических расстройств.')}
   <div class="grid g3 cond-grid">{''.join(cards)}</div>
  </div>
@@ -141,7 +140,7 @@ def levels():
     return f"""
 <section class="sec sec-alt">
  <div class="wrap stack stack-l">
-  {heading('Четыре уровня работы',
+  {heading(None,
            'Вы получаете комплексное решение <br>для устойчивого результата',
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
@@ -218,7 +217,7 @@ def programs():
     return f"""
 <section class="sec" id="programs">
  <div class="wrap stack stack-l">
-  {heading('Вот что входит в подписку',
+  {heading(None,
            'Вы получаете доступ к 6 программам <br>Академии здорового мышления',
            'Это научно обоснованные знания и самые эффективные методы преодоления '
            'тревожных расстройств и неврозов.')}
@@ -256,7 +255,7 @@ def club():
     return f"""
 <section class="sec sec-field">
  <div class="wrap stack stack-l">
-  {heading('Самое главное', 'Терапевтический клуб <br>с поддержкой 24/7')}
+  {heading(None, 'Терапевтический клуб <br>с поддержкой 24/7')}
 
   <blockquote class="quote rv">
    <p>Вы получаете <b>не просто доступ к видеоурокам</b> и массив материалов, которые завтра же
@@ -355,7 +354,7 @@ def bonuses(shots=None):
     return f"""
 <section class="sec sec-alt" id="bonuses">
  <div class="wrap stack stack-l">
-  {heading('Бонусы к подписке', 'Два бонуса, которые работают между занятиями',
+  {heading(None, 'Два бонуса, которые работают между занятиями',
            'Программы дают метод. Эти два инструмента помогают применять его в тот самый '
            'момент, когда тревога уже здесь.')}
   <div class="stack stack-m">{''.join(cards)}</div>
@@ -465,7 +464,7 @@ def reviews(inline=None):
     return f"""
 <section class="sec sec-alt">
  <div class="wrap stack stack-l">
-  {heading('Отзывы', 'Наши программы прошли более <br>100 000 человек по всему миру',
+  {heading(None, 'Наши программы прошли более <br>100 000 человек по всему миру',
            'Вот малая часть их отзывов.')}
   <div class="tabs rv" role="tablist" aria-label="Категории отзывов">{''.join(tabs)}</div>
   <div>{''.join(panels)}</div>
@@ -483,8 +482,7 @@ def consult():
  <div class="wrap">
   <div class="consult rv">
    <div>
-    <div class="label">Заявка на консультацию</div>
-    <h3 style="margin-top:16px">Не уверены, что подписка подойдёт именно вам?</h3>
+    <h3>Не уверены, что подписка подойдёт именно вам?</h3>
     <p>Оставьте заявку на бесплатную консультацию, и в течение 10 минут с вами свяжется
        наш специалист и ответит на все интересующие вопросы.</p>
     <p class="note">Нажимая на кнопку, вы даёте согласие на обработку персональных данных
