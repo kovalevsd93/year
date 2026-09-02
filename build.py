@@ -42,7 +42,7 @@ def hero():
   <div class="hero-in">
    <div class="hero-left stack stack-l">
     <div class="brandline">
-      <img src="{LOGO}" alt="" width="36" height="36">
+      <img src="{logo_uri()}" alt="" width="36" height="36">
       <span><b>Академия здорового мышления</b>Павла Федоренко</span>
     </div>
 
@@ -723,6 +723,11 @@ def mannequin_uri():
     import base64
     return ("data:image/png;base64,"
             + base64.b64encode(open("assets/mannequin.png", "rb").read()).decode())
+
+def logo_uri():
+    import base64
+    return ("data:image/png;base64,"
+            + base64.b64encode(open("assets/logo-tree.png", "rb").read()).decode())
 
 if __name__ == "__main__":
     import inline as _inline
