@@ -559,10 +559,14 @@ p{margin:0}
 .shots-wrap{position:relative;margin-top:16px}
 /* overscroll-behavior-x не отдаёт горизонтальный жест странице и системному
    свайпу «назад» в iOS — без него палец на ленте листал не ленту, а историю */
+/* touch-action:pan-y — вертикаль остаётся браузеру, горизонталь ведёт JS
+   (см. shots-wrap в скрипте). scroll-snap убран: он дерётся с ручной
+   прокруткой и в iOS отбрасывал ленту обратно к началу */
 .bonus-shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;
-  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
-  scroll-snap-type:x proximity;scrollbar-width:thin;
-  scrollbar-color:var(--line-2) transparent}
+  touch-action:pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+/* иначе палец/мышь начинают «тащить картинку» вместо ленты */
+.bonus-shots img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 /* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
 .shots-nav{position:absolute;top:calc(50% - 26px);z-index:3;width:46px;height:46px;
   border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);
@@ -702,6 +706,15 @@ p{margin:0}
 .tariff-inst{font-size:14px;color:var(--ink-3)}
 .tariff-best .tariff-inst{color:rgba(255,255,255,.72)}
 .tariff .btn{align-self:flex-start;margin-top:4px}
+/* «сразу после оплаты» — главный вопрос в момент решения, поэтому отдельной
+   плашкой сразу под кнопкой, а не строкой среди прочего в списке */
+.tariff-now{display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:14px;
+  background:var(--accent-tint);color:var(--accent-on-tint);font-size:14px;line-height:1.45}
+.tariff-now svg{width:19px;height:19px;flex:none}
+.tariff-now b{font-weight:600}
+/* на фиолетовой карточке плашку затемняем, а не осветляем: белый текст поверх
+   осветлённого фиолетового давал 3.65:1, поверх затемнённого — 6.3:1 */
+.tariff-best .tariff-now{background:rgba(0,0,0,.12);color:#fff}
 .tariff-best .btn{background:#fff;color:var(--ink)}
 .tariff-best .btn:hover{background:#fff}
 .tariff-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}

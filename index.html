@@ -578,10 +578,14 @@ p{margin:0}
 .shots-wrap{position:relative;margin-top:16px}
 /* overscroll-behavior-x не отдаёт горизонтальный жест странице и системному
    свайпу «назад» в iOS — без него палец на ленте листал не ленту, а историю */
+/* touch-action:pan-y — вертикаль остаётся браузеру, горизонталь ведёт JS
+   (см. shots-wrap в скрипте). scroll-snap убран: он дерётся с ручной
+   прокруткой и в iOS отбрасывал ленту обратно к началу */
 .bonus-shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;
-  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
-  scroll-snap-type:x proximity;scrollbar-width:thin;
-  scrollbar-color:var(--line-2) transparent}
+  touch-action:pan-y;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  scrollbar-width:thin;scrollbar-color:var(--line-2) transparent}
+/* иначе палец/мышь начинают «тащить картинку» вместо ленты */
+.bonus-shots img{-webkit-user-drag:none;user-select:none;-webkit-user-select:none}
 /* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
 .shots-nav{position:absolute;top:calc(50% - 26px);z-index:3;width:46px;height:46px;
   border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.92);
@@ -721,6 +725,15 @@ p{margin:0}
 .tariff-inst{font-size:14px;color:var(--ink-3)}
 .tariff-best .tariff-inst{color:rgba(255,255,255,.72)}
 .tariff .btn{align-self:flex-start;margin-top:4px}
+/* «сразу после оплаты» — главный вопрос в момент решения, поэтому отдельной
+   плашкой сразу под кнопкой, а не строкой среди прочего в списке */
+.tariff-now{display:flex;align-items:center;gap:10px;padding:12px 15px;border-radius:14px;
+  background:var(--accent-tint);color:var(--accent-on-tint);font-size:14px;line-height:1.45}
+.tariff-now svg{width:19px;height:19px;flex:none}
+.tariff-now b{font-weight:600}
+/* на фиолетовой карточке плашку затемняем, а не осветляем: белый текст поверх
+   осветлённого фиолетового давал 3.65:1, поверх затемнённого — 6.3:1 */
+.tariff-best .tariff-now{background:rgba(0,0,0,.12);color:#fff}
 .tariff-best .btn{background:#fff;color:var(--ink)}
 .tariff-best .btn:hover{background:#fff}
 .tariff-list{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0}
@@ -1111,6 +1124,8 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
    <div class="tariff-inst">В рассрочку от 1 374 ₽/мес · 365 дней доступа</div>
    <button class="btn btn-lg" type="button" data-pay-page="//sale-azm.ru/pay/base.html"
      >Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></button>
+   <div class="tariff-now"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5.5 13.2h5.2L11 21l7.5-10.2h-5.2L13 3Z"/></svg><span>Доступ ко всем материалам
+     открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list"><li class="yes">Главная программа «Свобода от тревоги, паники и страхов»</li><li class="yes">Продвинутый курс «Здоровое мышление»</li><li class="yes">Практический курс «Паники.НЕТ»</li><li class="yes">Практический курс «Свобода от страха за здоровье»</li><li class="yes">Практический курс «7 телесных практик от тревоги»</li><li class="yes">Курс «Как не воспитать невротика»</li><li class="sep">Не входит в этот тариф</li><li class="no">Поддержка психологов и кураторов</li><li class="no">ИИ-ассистент Павла Федоренко</li><li class="no">Интерактивная платформа для работы с тревогой</li></ul>
   </article><article class="tariff tariff-best rv">
    <span class="tariff-tag">Рекомендуем</span>
@@ -1124,6 +1139,8 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
    <div class="tariff-inst">В рассрочку от 1 658 ₽/мес · 365 дней доступа</div>
    <button class="btn btn-lg" type="button" data-pay-page="//sale-azm.ru/pay/full.html"
      >Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></button>
+   <div class="tariff-now"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5.5 13.2h5.2L11 21l7.5-10.2h-5.2L13 3Z"/></svg><span>Доступ ко всем материалам
+     открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list"><li class="yes">Все шесть программ Академии</li><li class="yes">Поддержка психологов и кураторов 24/7</li><li class="yes">ИИ-ассистент Павла Федоренко</li><li class="yes">Интерактивная платформа для работы с тревогой</li></ul>
   </article>
   </div>
@@ -1246,6 +1263,32 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
     strip.addEventListener("scroll", sync, {passive: true});
     addEventListener("resize", sync);
     sync();
+
+    /* Горизонталь ведём сами: в iOS Safari родная прокрутка внутрь ленты
+       не доходила — палец её просто не двигал. touch-action:pan-y оставляет
+       браузеру вертикаль (страница листается как обычно), а горизонталь
+       целиком наша, поэтому ведёт себя одинаково везде. */
+    var dragging = false, startX = 0, startScroll = 0, dist = 0, blockClick = false;
+    strip.addEventListener("pointerdown", function(e){
+      dragging = true; dist = 0; startX = e.clientX; startScroll = strip.scrollLeft;
+    });
+    strip.addEventListener("pointermove", function(e){
+      if(!dragging) return;
+      var dx = e.clientX - startX;
+      if(Math.abs(dx) > dist) dist = Math.abs(dx);
+      if(dist > 4) strip.scrollLeft = startScroll - dx;
+    });
+    function endDrag(){
+      if(!dragging) return;
+      dragging = false;
+      blockClick = dist > 4;      /* это был свайп, а не тап — лайтбокс не открываем */
+    }
+    strip.addEventListener("pointerup", endDrag);
+    strip.addEventListener("pointercancel", endDrag);
+    strip.addEventListener("pointerleave", endDrag);
+    strip.addEventListener("click", function(e){
+      if(blockClick){ e.preventDefault(); e.stopPropagation(); blockClick = false; }
+    }, true);
   });
 
   var lb = document.getElementById("lb"), lbImg = lb.querySelector("img");

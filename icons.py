@@ -17,6 +17,7 @@ ICONS = {
  "shield":'<path d="M12 3.5 19 6v5.2c0 4.2-2.9 7.5-7 9.3-4.1-1.8-7-5.1-7-9.3V6l7-2.5Z"/>',
  "calendar":'<rect x="4" y="5.5" width="16" height="14" rx="3"/><path d="M4 10h16M9 3.5v4M15 3.5v4"/>',
  "chevron":'<path d="M6 9l6 6 6-6"/>',
+ "bolt":  '<path d="M13 3 5.5 13.2h5.2L11 21l7.5-10.2h-5.2L13 3Z"/>',
 }
 def icon(name, color="#6558BC"):
     return _s(ICONS[name], color)

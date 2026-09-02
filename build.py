@@ -401,6 +401,8 @@ def tariff_card(t):
    <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
    <button class="btn btn-lg" type="button" data-pay-page="//{SITE_URL.split('://', 1)[1]}/{t['widget_page']}"
      >Оформить подписку{ARROW}</button>
+   <div class="tariff-now">{icon('bolt', 'currentColor')}<span>Доступ ко всем материалам
+     открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list">{has}{no}</ul>
   </article>"""
 
@@ -585,6 +587,32 @@ JS = """
     strip.addEventListener("scroll", sync, {passive: true});
     addEventListener("resize", sync);
     sync();
+
+    /* Горизонталь ведём сами: в iOS Safari родная прокрутка внутрь ленты
+       не доходила — палец её просто не двигал. touch-action:pan-y оставляет
+       браузеру вертикаль (страница листается как обычно), а горизонталь
+       целиком наша, поэтому ведёт себя одинаково везде. */
+    var dragging = false, startX = 0, startScroll = 0, dist = 0, blockClick = false;
+    strip.addEventListener("pointerdown", function(e){
+      dragging = true; dist = 0; startX = e.clientX; startScroll = strip.scrollLeft;
+    });
+    strip.addEventListener("pointermove", function(e){
+      if(!dragging) return;
+      var dx = e.clientX - startX;
+      if(Math.abs(dx) > dist) dist = Math.abs(dx);
+      if(dist > 4) strip.scrollLeft = startScroll - dx;
+    });
+    function endDrag(){
+      if(!dragging) return;
+      dragging = false;
+      blockClick = dist > 4;      /* это был свайп, а не тап — лайтбокс не открываем */
+    }
+    strip.addEventListener("pointerup", endDrag);
+    strip.addEventListener("pointercancel", endDrag);
+    strip.addEventListener("pointerleave", endDrag);
+    strip.addEventListener("click", function(e){
+      if(blockClick){ e.preventDefault(); e.stopPropagation(); blockClick = false; }
+    }, true);
   });
 
   var lb = document.getElementById("lb"), lbImg = lb.querySelector("img");
