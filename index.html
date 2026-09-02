@@ -327,39 +327,39 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   FOUR-LEVEL CARDS — emotions/body/thoughts/actions, all visible at
-   once (no tab to click, no figure to read) — same glass-card
-   language as conditions and courses above.
+   SPECTRUM — one ribbon, not four cards. Emotions/body/thoughts/
+   actions sit edge to edge as bands of one shape, because the point
+   of the section is that they're one integrated system, not four
+   unrelated topics. Each band reserves a media slot for a real photo
+   later; today it's just colour and an icon.
    ------------------------------------------------------------------ */
-.lvl-grid{grid-template-columns:repeat(2,1fr)}
-@media(max-width:760px){.lvl-grid{grid-template-columns:1fr}}
+.spectrum{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
+@media(max-width:900px){.spectrum{flex-direction:column}}
 
-.lvl{position:relative;overflow:hidden;isolation:isolate;
-  background:color-mix(in srgb,var(--ct) 65%,white);
-  border:1px solid rgba(255,255,255,.7);border-radius:var(--r-lg);
-  padding:clamp(24px,2.6vw,32px);
-  box-shadow:0 18px 40px -30px rgba(28,20,60,.22);
-  transition:transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
-.lvl::before{content:"";position:absolute;top:-95px;right:-85px;width:210px;height:210px;
-  border-radius:50%;background:var(--c);filter:blur(60px);opacity:.16;z-index:0;
-  transition:opacity .4s ease}
-.lvl:hover{transform:translateY(-4px);box-shadow:0 26px 55px -30px rgba(28,20,60,.32)}
-.lvl:hover::before{opacity:.26}
-.lvl>*{position:relative;z-index:1}
+.sz{flex:1;min-width:0;position:relative;
+  background:color-mix(in srgb,var(--ct) 72%,white);
+  padding:clamp(22px,2.4vw,30px);
+  border-left:1px solid rgba(255,255,255,.7)}
+.sz:first-child{border-left:0}
+@media(max-width:900px){
+  .sz{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
+  .sz:first-child{border-top:0}
+}
 
-.lvl-head{display:flex;align-items:center;gap:13px}
-.lvl-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;flex:none;
-  background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
-.lvl-head h3{font-size:clamp(19px,2vw,22px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.sz-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+  margin-bottom:16px}
+.sz-media svg{width:26px;height:26px}
 
-.lvl-cap{margin-top:16px;font-size:15px;line-height:1.62;color:var(--ink-2);max-width:54ch}
-.lvl-count{margin-top:18px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.sz h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.sz-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
+.sz-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
-.lvl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.lvl-list li{position:relative;padding:12px 0 12px 24px;font-size:15px;line-height:1.55;
+.sz-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.sz-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
   color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
-.lvl-list li:first-child{border-top:0}
-.lvl-list li::before{content:"";position:absolute;left:0;top:18px;width:7px;height:7px;
+.sz-list li:first-child{border-top:0}
+.sz-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
 /* ------------------------------------------------------------------
@@ -889,39 +889,31 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
  <div class="wrap stack stack-l">
   <div class="stack stack-m center rv"><h2>Комплексное решение <br>для устойчивого результата</h2><p class="lead">Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, мыслей и поведения — ради устойчивого результата.</p></div>
 
-  <div class="grid g2 lvl-grid"><article class="lvl rv" style="--c:#87691F;--ct:#FBF3DF">
-   <div class="lvl-head">
-     <span class="lvl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#87691F" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.65-7 9-7 9Z"/></svg></span>
-     <h3>Эмоции</h3>
-   </div>
-   <p class="lvl-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
-   <div class="lvl-count">5 проявлений</div>
-   <ul class="lvl-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
-  </article><article class="lvl rv" style="--c:#45784A;--ct:#E9F4EA">
-   <div class="lvl-head">
-     <span class="lvl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#45784A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.6v7M12 14.6 8.6 20M12 14.6 15.4 20M7.5 10.5h9"/></svg></span>
-     <h3>Тело</h3>
-   </div>
-   <p class="lvl-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
-   <div class="lvl-count">5 проявлений</div>
-   <ul class="lvl-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
-  </article><article class="lvl rv" style="--c:#6A60AB;--ct:#EFECFC">
-   <div class="lvl-head">
-     <span class="lvl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6A60AB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 19.5a4 4 0 0 0 3.2-6.4A4.2 4.2 0 0 0 16.4 6a4.4 4.4 0 0 0-8.6.7A4 4 0 0 0 6.4 14a4 4 0 0 0 3.4 5.5"/><path d="M12 7v13"/></svg></span>
-     <h3>Мысли</h3>
-   </div>
-   <p class="lvl-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
-   <div class="lvl-count">5 проявлений</div>
-   <ul class="lvl-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
-  </article><article class="lvl rv" style="--c:#995D36;--ct:#FCEFE4">
-   <div class="lvl-head">
-     <span class="lvl-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#995D36" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg></span>
-     <h3>Поведение</h3>
-   </div>
-   <p class="lvl-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
-   <div class="lvl-count">5 проявлений</div>
-   <ul class="lvl-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
-  </article></div>
+  <div class="spectrum rv"><div class="sz" style="--c:#87691F;--ct:#FBF3DF">
+   <div class="sz-media" style="background:#F2D48B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.65-7 9-7 9Z"/></svg></div>
+   <h3>Эмоции</h3>
+   <p class="sz-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
+   <div class="sz-count">5 проявлений</div>
+   <ul class="sz-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
+  </div><div class="sz" style="--c:#45784A;--ct:#E9F4EA">
+   <div class="sz-media" style="background:#ABD9AE"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.6v7M12 14.6 8.6 20M12 14.6 15.4 20M7.5 10.5h9"/></svg></div>
+   <h3>Тело</h3>
+   <p class="sz-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
+   <div class="sz-count">5 проявлений</div>
+   <ul class="sz-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
+  </div><div class="sz" style="--c:#6A60AB;--ct:#EFECFC">
+   <div class="sz-media" style="background:#BDB2F1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 19.5a4 4 0 0 0 3.2-6.4A4.2 4.2 0 0 0 16.4 6a4.4 4.4 0 0 0-8.6.7A4 4 0 0 0 6.4 14a4 4 0 0 0 3.4 5.5"/><path d="M12 7v13"/></svg></div>
+   <h3>Мысли</h3>
+   <p class="sz-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
+   <div class="sz-count">5 проявлений</div>
+   <ul class="sz-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
+  </div><div class="sz" style="--c:#995D36;--ct:#FCEFE4">
+   <div class="sz-media" style="background:#F4C39D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg></div>
+   <h3>Поведение</h3>
+   <p class="sz-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
+   <div class="sz-count">5 проявлений</div>
+   <ul class="sz-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
+  </div></div>
  </div>
 </section>
 

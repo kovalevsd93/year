@@ -115,20 +115,22 @@ def conditions():
 
 # ---------------------------------------------------------------- levels
 def levels():
-    cards = []
+    """Одна цельная лента из четырёх зон — не четыре отдельные карточки,
+    а один объект (визуально отвечает заголовку «комплексное решение»).
+    В каждой зоне — место под фотографию/иллюстрацию (сейчас заглушка
+    цветом и иконкой, легко заменить на <img> позже, когда будут кадры)."""
+    zones = []
     for i, (title, ic, cap, items) in enumerate(LEVELS):
         wash, _line, tint = LEVEL_COLORS[i]
         ink = LEVEL_INK[i]
         li = "".join(f"<li>{x}</li>" for x in items)
-        cards.append(f"""<article class="lvl rv" style="--c:{ink};--ct:{tint}">
-   <div class="lvl-head">
-     <span class="lvl-ico">{icon(ic, ink)}</span>
-     <h3>{title}</h3>
-   </div>
-   <p class="lvl-cap">{cap}</p>
-   <div class="lvl-count">{len(items)} проявлений</div>
-   <ul class="lvl-list">{li}</ul>
-  </article>""")
+        zones.append(f"""<div class="sz" style="--c:{ink};--ct:{tint}">
+   <div class="sz-media" style="background:{wash}">{icon(ic, '#241F35')}</div>
+   <h3>{title}</h3>
+   <p class="sz-cap">{cap}</p>
+   <div class="sz-count">{len(items)} проявлений</div>
+   <ul class="sz-list">{li}</ul>
+  </div>""")
 
     return f"""
 <section class="sec sec-alt">
@@ -138,7 +140,7 @@ def levels():
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
 
-  <div class="grid g2 lvl-grid">{''.join(cards)}</div>
+  <div class="spectrum rv">{''.join(zones)}</div>
  </div>
 </section>"""
 

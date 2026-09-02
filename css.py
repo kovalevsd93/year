@@ -308,39 +308,39 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   FOUR-LEVEL CARDS — emotions/body/thoughts/actions, all visible at
-   once (no tab to click, no figure to read) — same glass-card
-   language as conditions and courses above.
+   SPECTRUM — one ribbon, not four cards. Emotions/body/thoughts/
+   actions sit edge to edge as bands of one shape, because the point
+   of the section is that they're one integrated system, not four
+   unrelated topics. Each band reserves a media slot for a real photo
+   later; today it's just colour and an icon.
    ------------------------------------------------------------------ */
-.lvl-grid{grid-template-columns:repeat(2,1fr)}
-@media(max-width:760px){.lvl-grid{grid-template-columns:1fr}}
+.spectrum{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
+@media(max-width:900px){.spectrum{flex-direction:column}}
 
-.lvl{position:relative;overflow:hidden;isolation:isolate;
-  background:color-mix(in srgb,var(--ct) 65%,white);
-  border:1px solid rgba(255,255,255,.7);border-radius:var(--r-lg);
-  padding:clamp(24px,2.6vw,32px);
-  box-shadow:0 18px 40px -30px rgba(28,20,60,.22);
-  transition:transform .5s cubic-bezier(.2,.7,.3,1),box-shadow .4s ease}
-.lvl::before{content:"";position:absolute;top:-95px;right:-85px;width:210px;height:210px;
-  border-radius:50%;background:var(--c);filter:blur(60px);opacity:.16;z-index:0;
-  transition:opacity .4s ease}
-.lvl:hover{transform:translateY(-4px);box-shadow:0 26px 55px -30px rgba(28,20,60,.32)}
-.lvl:hover::before{opacity:.26}
-.lvl>*{position:relative;z-index:1}
+.sz{flex:1;min-width:0;position:relative;
+  background:color-mix(in srgb,var(--ct) 72%,white);
+  padding:clamp(22px,2.4vw,30px);
+  border-left:1px solid rgba(255,255,255,.7)}
+.sz:first-child{border-left:0}
+@media(max-width:900px){
+  .sz{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
+  .sz:first-child{border-top:0}
+}
 
-.lvl-head{display:flex;align-items:center;gap:13px}
-.lvl-ico{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;flex:none;
-  background:rgba(255,255,255,.8);backdrop-filter:blur(6px)}
-.lvl-head h3{font-size:clamp(19px,2vw,22px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.sz-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+  margin-bottom:16px}
+.sz-media svg{width:26px;height:26px}
 
-.lvl-cap{margin-top:16px;font-size:15px;line-height:1.62;color:var(--ink-2);max-width:54ch}
-.lvl-count{margin-top:18px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.sz h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.sz-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
+.sz-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
-.lvl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.lvl-list li{position:relative;padding:12px 0 12px 24px;font-size:15px;line-height:1.55;
+.sz-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.sz-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
   color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
-.lvl-list li:first-child{border-top:0}
-.lvl-list li::before{content:"";position:absolute;left:0;top:18px;width:7px;height:7px;
+.sz-list li:first-child{border-top:0}
+.sz-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
 /* ------------------------------------------------------------------
