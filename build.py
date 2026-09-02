@@ -493,7 +493,6 @@ def footer():
     <img src="{logo}" width="36" height="36" alt="">
     <div class="col" style="color:var(--ink-2)">Академия здорового мышления<br>Павла Федоренко</div>
   </div>
-  <div class="col">Служба тех. поддержки:<br><a href="mailto:info@fdrk.ru">info@fdrk.ru</a></div>
   <div class="col"><a href="#privacy">Политика конфиденциальности</a><br>
     <a href="https://docs.google.com/document/d/1HNUDFnaErp0vLxzUOEkV9jPRO3QccW7aJG2nHTvISOw/edit?usp=sharing"
        target="_blank" rel="noopener">Договор оферты</a></div>
@@ -506,7 +505,10 @@ def legal(body):
  <div class="wrap">
   <details><summary>Политика в отношении обработки персональных данных</summary>
    <div class="body">{body}</div></details>
-  <p class="copyright">ИП Федоренко Павел<br>Copyright © 2012 — 2026 · ИНН 645117313599</p>
+  <p class="copyright">ИП «Федоренко Павел Алексеевич»<br>
+   ИНН 645 117 313 599<br>
+   Служба тех. поддержки: <a href="mailto:info@fdrk.ru">info@fdrk.ru</a></p>
+  <p class="copyright">Copyright © 2012 — 2026.</p>
  </div>
 </section>"""
 
@@ -682,6 +684,8 @@ def shell(doc):
 </head>
 <body>
 {body.strip()}
+<script>window.qualitySchoolHash='06eb61b839a0cefee4967c67ccb099dc'</script>
+<script src="https://getcourse.ru/public/js/qr-hidden-banner.js"></script>
 </body>
 </html>
 """
