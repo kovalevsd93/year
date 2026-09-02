@@ -115,6 +115,14 @@ def conditions():
 </section>"""
 
 # ---------------------------------------------------------------- levels
+# стилизованные иллюстрации вместо линейной заглушки — там, где они уже есть;
+# «Эмоции» (0) пока остаётся на tool_shots.placeholder()
+LEVEL_SHOT_IMAGES = {
+ 1: ("assets/body-heart.png", "Стилизованная объёмная иллюстрация сердца, символ уровня «Тело»"),
+ 2: ("assets/mind-brain.png", "Стилизованная объёмная иллюстрация мозга, символ уровня «Мысли»"),
+ 3: ("assets/behavior-compass.png", "Стилизованный объёмный компас, символ уровня «Поведение»"),
+}
+
 def levels():
     """Раскрывающийся список: эмоции → тело → мысли → поведение как
     четыре последовательные стадии одной реакции. Первая строка открыта
@@ -132,13 +140,13 @@ def levels():
         _shot_cap, shot_alt = LEVEL_MEDIA[i]
         li = "".join(f"<li>{x}</li>" for x in items)
         open_attr = " open" if i == 0 else ""
-        if i == 2:
-            # «Мысли» — реальная картинка вместо линейной заглушки; альт
-            # описывает то, что действительно на ней, а не будущий скриншот
-            d = dims.attrs("assets/mind-brain.png")
+        if i in LEVEL_SHOT_IMAGES:
+            # реальная картинка вместо линейной заглушки; альт описывает
+            # то, что действительно на ней, а не будущий скриншот
+            path, shot_img_alt = LEVEL_SHOT_IMAGES[i]
+            d = dims.attrs(path)
             frame = (f'<div class="hl-shot-frame">'
-                      f'<img src="{mind_brain_uri()}"{d} '
-                      f'alt="Стилизованная объёмная иллюстрация мозга, символ уровня «Мысли»" '
+                      f'<img src="{png_uri(path)}"{d} alt="{shot_img_alt}" '
                       f'loading="lazy" decoding="async"></div>')
         else:
             frame = (f'<div class="hl-shot-frame" role="img" aria-label="{shot_alt}">'
@@ -706,10 +714,9 @@ def logo_uri():
     return ("data:image/png;base64,"
             + base64.b64encode(open("assets/logo-tree.png", "rb").read()).decode())
 
-def mind_brain_uri():
+def png_uri(path):
     import base64
-    return ("data:image/png;base64,"
-            + base64.b64encode(open("assets/mind-brain.png", "rb").read()).decode())
+    return "data:image/png;base64," + base64.b64encode(open(path, "rb").read()).decode()
 
 if __name__ == "__main__":
     import inline as _inline
