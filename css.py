@@ -515,7 +515,7 @@ p{margin:0}
    ------------------------------------------------------------------ */
 .bonus{position:relative;overflow:hidden;isolation:isolate;
   background:color-mix(in srgb,var(--ct) 28%,white);
-  border:1px solid rgba(255,255,255,.7);border-radius:var(--r-lg);
+  border:1px solid var(--line-2);border-radius:var(--r-lg);
   clip-path:inset(0 round var(--r-lg));
   padding:clamp(26px,3vw,40px);box-shadow:0 18px 40px -30px rgba(28,20,60,.22)}
 .bonus::before{content:"";position:absolute;top:-90px;right:-80px;width:200px;height:200px;
@@ -537,10 +537,10 @@ p{margin:0}
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236C5FC0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'><path d='M20 6L9 17l-5-5'/></svg>");
   background-size:contain;background-repeat:no-repeat;background-position:center}
 .tools{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:24px;
-  border-top:1px solid var(--line)}
+  border-top:1px solid var(--line-2)}
 .tool{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 14px;align-items:start;
-  padding:18px 22px 18px 0;border-bottom:1px solid var(--line)}
-.tool:nth-child(even){padding-left:22px;border-left:1px solid var(--line)}
+  padding:18px 22px 18px 0;border-bottom:1px solid var(--line-2)}
+.tool:nth-child(even){padding-left:22px;border-left:1px solid var(--line-2)}
 .tool-ico{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;
   background:var(--ctile)}
 .tool-ico svg{width:19px;height:19px}
@@ -607,9 +607,13 @@ p{margin:0}
 /* мягкие цветные пятна за секцией со стоимостью */
 .price-sec{overflow:hidden}
 .price-sec > .wrap{position:relative;z-index:1}
-.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0}
-.glow-a{width:460px;height:460px;left:-170px;top:60px;background:#F4EBCF;opacity:.5}
-.glow-b{width:420px;height:420px;right:-220px;bottom:-180px;background:#CFDAF4;opacity:.28;filter:blur(130px)}
+/* радиальные пятна гаснут до полной прозрачности внутри своей же коробки —
+   overflow:hidden секции режет только прозрачные пиксели, стыка не видно */
+.glow{position:absolute;pointer-events:none;z-index:0}
+.glow-a{width:680px;height:680px;left:-120px;top:0;
+  background:radial-gradient(circle closest-side,#F4EBCF 0%,rgba(244,235,207,0) 72%);opacity:.55}
+.glow-b{width:700px;height:700px;right:-120px;bottom:0;
+  background:radial-gradient(circle closest-side,#CFDAF4 0%,rgba(207,218,244,0) 72%);opacity:.5}
 
 .price-main{position:relative;overflow:hidden;background:var(--surface);
   border:1px solid var(--line);border-radius:var(--r-lg);
@@ -776,16 +780,20 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
 .foot a:hover{color:var(--accent)}
 
 .legal{background:var(--ground-2)}
-.legal details{max-width:var(--maxw);margin:0 auto;border-top:1px solid var(--line)}
-.legal summary{cursor:pointer;padding:22px 0;font-size:14px;color:var(--ink-3);list-style:none;
-  display:flex;justify-content:space-between;align-items:center;gap:16px}
-.legal summary::-webkit-details-marker{display:none}
-.legal summary:hover{color:var(--ink-2)}
-.legal summary::after{content:"+";font-size:19px;line-height:1}
-.legal details[open] summary::after{content:"–"}
-.legal .body{padding:0 0 34px;max-height:440px;overflow:auto;font-size:13px;line-height:1.75;color:var(--ink-3)}
-.legal .body h4{font-size:13.5px;color:var(--ink-2);margin:20px 0 8px;font-weight:600}
-.legal .body p{margin:0 0 9px}
+.legal-modal{position:fixed;inset:0;z-index:100;background:rgba(36,31,53,.6);backdrop-filter:blur(8px);
+  display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.legal-modal.on{opacity:1;pointer-events:auto}
+.legal-modal-card{position:relative;width:100%;max-width:720px;max-height:88vh;overflow:auto;
+  background:var(--surface);border-radius:var(--r-lg);padding:clamp(24px,3vw,36px);
+  box-shadow:0 40px 90px -30px rgba(28,20,60,.45)}
+.legal-modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:16px;
+  color:var(--ink);line-height:1;z-index:1}
+.legal-modal-title{max-width:calc(100% - 54px);font-size:clamp(17px,2vw,21px);font-weight:600;
+  letter-spacing:-.018em;line-height:1.3;margin-bottom:18px}
+.legal-body{font-size:13px;line-height:1.75;color:var(--ink-3)}
+.legal-body h4{font-size:13.5px;color:var(--ink-2);margin:20px 0 8px;font-weight:600}
+.legal-body p{margin:0 0 9px}
 .copyright{max-width:var(--maxw);margin:0 auto;text-align:center;padding:16px 0 20px;
   border-top:1px solid var(--line);font-size:12px;line-height:1.7;color:var(--ink-3)}
 

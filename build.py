@@ -496,10 +496,10 @@ def footer():
   <div class="col">ИП «Федоренко Павел Алексеевич»<br>
     ИНН 645 117 313 599<br>
     Служба тех. поддержки: <a href="mailto:info@fdrk.ru">info@fdrk.ru</a></div>
-  <div class="col"><a href="#privacy">Политика конфиденциальности</a><br>
+  <div class="col"><a href="#privacy" data-legal-open>Политика конфиденциальности</a><br>
     <a href="https://docs.google.com/document/d/1HNUDFnaErp0vLxzUOEkV9jPRO3QccW7aJG2nHTvISOw/edit?usp=sharing"
        target="_blank" rel="noopener">Договор оферты</a><br>
-    <a href="#privacy">Политика в отношении обработки персональных данных</a></div>
+    <a href="#privacy" data-legal-open>Политика в отношении обработки персональных данных</a></div>
  </div>
 </footer>"""
 
@@ -507,11 +507,18 @@ def legal(body):
     return f"""
 <section class="legal" id="privacy">
  <div class="wrap">
-  <details><summary>Политика в отношении обработки персональных данных</summary>
-   <div class="body">{body}</div></details>
   <p class="copyright">Copyright © 2012 — 2026.</p>
  </div>
-</section>"""
+</section>
+
+<div class="legal-modal" id="legalModal" role="dialog" aria-modal="true"
+     aria-label="Политика в отношении обработки персональных данных">
+  <div class="legal-modal-card">
+    <button class="legal-modal-close" id="legalModalClose" aria-label="Закрыть">✕</button>
+    <h3 class="legal-modal-title">Политика в отношении обработки персональных данных</h3>
+    <div class="legal-body">{body}</div>
+  </div>
+</div>"""
 
 def pay_modal():
     return """
@@ -610,6 +617,24 @@ JS = """
   payModal.addEventListener("click", function(e){ if(e.target===payModal) closePay(); });
   document.addEventListener("keydown", function(e){
     if(e.key==="Escape" && payModal.classList.contains("on")) closePay();
+  });
+
+  var legalModal = document.getElementById("legalModal");
+  function closeLegal(){
+    legalModal.classList.remove("on");
+    document.body.style.overflow = "";
+  }
+  document.querySelectorAll("[data-legal-open]").forEach(function(a){
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      legalModal.classList.add("on");
+      document.body.style.overflow = "hidden";
+    });
+  });
+  document.getElementById("legalModalClose").addEventListener("click", closeLegal);
+  legalModal.addEventListener("click", function(e){ if(e.target===legalModal) closeLegal(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key==="Escape" && legalModal.classList.contains("on")) closeLegal();
   });
 })();
 """ % DEADLINE_ISO
