@@ -327,39 +327,50 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   SPECTRUM — one ribbon, not four cards. Emotions/body/thoughts/
-   actions sit edge to edge as bands of one shape, because the point
-   of the section is that they're one integrated system, not four
-   unrelated topics. Each band reserves a media slot for a real photo
-   later; today it's just colour and an icon.
+   HUB — anxiety is one thing with four faces, not four unrelated
+   topics: a central core with a line running out to each of them.
+   Each node reserves a media slot for a real photo later; today it's
+   just colour and an icon.
    ------------------------------------------------------------------ */
-.spectrum{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
-  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
-@media(max-width:900px){.spectrum{flex-direction:column}}
+.hub{position:relative}
+.hub-diagram{position:relative;height:64px;display:flex;justify-content:center}
+.hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub-lines line{stroke:var(--line-2);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.hub-core{position:relative;z-index:1;width:88px;height:88px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#9086E3 0%,#6C5FC0 55%,#493D9C 100%);
+  box-shadow:0 22px 40px -14px rgba(76,64,164,.55),
+    inset 0 -8px 14px rgba(20,14,50,.28), inset 0 6px 10px rgba(255,255,255,.32);
+  display:grid;place-items:center;text-align:center}
+.hub-core span{color:#fff;font-size:13px;font-weight:600;letter-spacing:-.01em}
+@media(max-width:900px){.hub-lines{display:none}}
 
-.sz{flex:1;min-width:0;position:relative;
+.hub-row{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
+@media(max-width:900px){.hub-row{flex-direction:column}.hub-diagram{height:36px}}
+
+.hub-node{flex:1;min-width:0;position:relative;
   background:color-mix(in srgb,var(--ct) 72%,white);
   padding:clamp(22px,2.4vw,30px);
   border-left:1px solid rgba(255,255,255,.7)}
-.sz:first-child{border-left:0}
+.hub-node:first-child{border-left:0}
 @media(max-width:900px){
-  .sz{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
-  .sz:first-child{border-top:0}
+  .hub-node{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
+  .hub-node:first-child{border-top:0}
 }
 
-.sz-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+.hub-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
   margin-bottom:16px}
-.sz-media svg{width:26px;height:26px}
+.hub-media svg{width:26px;height:26px}
 
-.sz h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.sz-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
-.sz-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.hub-node h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.hub-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
+.hub-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
-.sz-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.sz-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
+.hub-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.hub-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
   color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
-.sz-list li:first-child{border-top:0}
-.sz-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
+.hub-list li:first-child{border-top:0}
+.hub-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
 /* ------------------------------------------------------------------
@@ -889,31 +900,37 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);background:var(--gro
  <div class="wrap stack stack-l">
   <div class="stack stack-m center rv"><h2>Комплексное решение <br>для устойчивого результата</h2><p class="lead">Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, мыслей и поведения — ради устойчивого результата.</p></div>
 
-  <div class="spectrum rv"><div class="sz" style="--c:#87691F;--ct:#FBF3DF">
-   <div class="sz-media" style="background:#F2D48B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.65-7 9-7 9Z"/></svg></div>
+  <div class="hub rv">
+   <div class="hub-diagram">
+     <svg class="hub-lines" viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true"><line x1="50" y1="14" x2="12.5" y2="44"/><line x1="50" y1="14" x2="37.5" y2="44"/><line x1="50" y1="14" x2="62.5" y2="44"/><line x1="50" y1="14" x2="87.5" y2="44"/></svg>
+     <div class="hub-core"><span>Тревога</span></div>
+   </div>
+   <div class="hub-row"><div class="hub-node" style="--c:#87691F;--ct:#FBF3DF">
+   <div class="hub-media" style="background:#F2D48B"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.65-7 9-7 9Z"/></svg></div>
    <h3>Эмоции</h3>
-   <p class="sz-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
-   <div class="sz-count">5 проявлений</div>
-   <ul class="sz-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
-  </div><div class="sz" style="--c:#45784A;--ct:#E9F4EA">
-   <div class="sz-media" style="background:#ABD9AE"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.6v7M12 14.6 8.6 20M12 14.6 15.4 20M7.5 10.5h9"/></svg></div>
+   <p class="hub-cap">Мы помогаем справиться с эмоциональными состояниями, которые изматывают годами:</p>
+   <div class="hub-count">5 проявлений</div>
+   <ul class="hub-list"><li>постоянное внутреннее напряжение и «фон тревоги»</li><li>острые всплески страха и волн тревоги без видимых причин</li><li>чувство вины и стыда за своё состояние перед близкими</li><li>раздражительность, срывы, слёзы «на ровном месте»</li><li>ощущение беспомощности и мысли «со мной что-то не так»</li></ul>
+  </div><div class="hub-node" style="--c:#45784A;--ct:#E9F4EA">
+   <div class="hub-media" style="background:#ABD9AE"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 7.6v7M12 14.6 8.6 20M12 14.6 15.4 20M7.5 10.5h9"/></svg></div>
    <h3>Тело</h3>
-   <p class="sz-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
-   <div class="sz-count">5 проявлений</div>
-   <ul class="sz-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
-  </div><div class="sz" style="--c:#6A60AB;--ct:#EFECFC">
-   <div class="sz-media" style="background:#BDB2F1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 19.5a4 4 0 0 0 3.2-6.4A4.2 4.2 0 0 0 16.4 6a4.4 4.4 0 0 0-8.6.7A4 4 0 0 0 6.4 14a4 4 0 0 0 3.4 5.5"/><path d="M12 7v13"/></svg></div>
+   <p class="hub-cap">Работаем с множественными телесными проявлениями тревоги, которые чаще всего пугают:</p>
+   <div class="hub-count">5 проявлений</div>
+   <ul class="hub-list"><li>сердцебиение, перебои, ощущение «схватило сердце»</li><li>головокружение, туман в голове, шаткость походки</li><li>чувство нехватки воздуха, ком в горле, поверхностное дыхание</li><li>скачки давления, приливы жара, озноб, потливость</li><li>дрожь, слабость, «ватные руки и ноги», внезапная усталость</li></ul>
+  </div><div class="hub-node" style="--c:#6A60AB;--ct:#EFECFC">
+   <div class="hub-media" style="background:#BDB2F1"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.5 19.5a4 4 0 0 0 3.2-6.4A4.2 4.2 0 0 0 16.4 6a4.4 4.4 0 0 0-8.6.7A4 4 0 0 0 6.4 14a4 4 0 0 0 3.4 5.5"/><path d="M12 7v13"/></svg></div>
    <h3>Мысли</h3>
-   <p class="sz-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
-   <div class="sz-count">5 проявлений</div>
-   <ul class="sz-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
-  </div><div class="sz" style="--c:#995D36;--ct:#FCEFE4">
-   <div class="sz-media" style="background:#F4C39D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg></div>
+   <p class="hub-cap">Помогаем изменить тревожные мыслительные шаблоны, которые создают тревогу:</p>
+   <div class="hub-count">5 проявлений</div>
+   <ul class="hub-list"><li>катастрофические сценарии («вдруг умру», «вдруг сойду с ума»)</li><li>навязчивые мысли о здоровье, отношениях, будущем</li><li>постоянный «сканер» тела и поиск опасных симптомов</li><li>зацикленность на контроле и поиске стопроцентных гарантий</li><li>самообвинения и обесценивание себя («я слабый», «я ненормальный»)</li></ul>
+  </div><div class="hub-node" style="--c:#995D36;--ct:#FCEFE4">
+   <div class="hub-media" style="background:#F4C39D"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#241F35" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19h4v-4h4v-4h4V7h4"/></svg></div>
    <h3>Поведение</h3>
-   <p class="sz-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
-   <div class="sz-count">5 проявлений</div>
-   <ul class="sz-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
+   <p class="hub-cap">Меняем поведение, которое закрепляет тревогу и сужает жизнь:</p>
+   <div class="hub-count">5 проявлений</div>
+   <ul class="hub-list"><li>избегание мест и ситуаций (магазины, транспорт, поездки, встречи)</li><li>зависимость от «безопасных» людей, маршрутов, условий</li><li>бесконечный поиск врачей, анализов, обследований и успокоений</li><li>отказ от поездок, работы, хобби, общения из-за страха и симптомов</li><li>ритуалы, проверки, «подстраховки», без которых сложно выйти из дома</li></ul>
   </div></div>
+  </div>
  </div>
 </section>
 

@@ -115,22 +115,25 @@ def conditions():
 
 # ---------------------------------------------------------------- levels
 def levels():
-    """Одна цельная лента из четырёх зон — не четыре отдельные карточки,
-    а один объект (визуально отвечает заголовку «комплексное решение»).
-    В каждой зоне — место под фотографию/иллюстрацию (сейчас заглушка
-    цветом и иконкой, легко заменить на <img> позже, когда будут кадры)."""
-    zones = []
+    """Тревога — один центральный узел («шар»), а эмоции/тело/мысли/
+    поведение — её четыре составляющие, расходящиеся от него линиями.
+    Каждый узел резервирует место под фото (сейчас заглушка цветом и
+    иконкой — заменить на <img>, когда появятся кадры)."""
+    nodes = []
     for i, (title, ic, cap, items) in enumerate(LEVELS):
         wash, _line, tint = LEVEL_COLORS[i]
         ink = LEVEL_INK[i]
         li = "".join(f"<li>{x}</li>" for x in items)
-        zones.append(f"""<div class="sz" style="--c:{ink};--ct:{tint}">
-   <div class="sz-media" style="background:{wash}">{icon(ic, '#241F35')}</div>
+        nodes.append(f"""<div class="hub-node" style="--c:{ink};--ct:{tint}">
+   <div class="hub-media" style="background:{wash}">{icon(ic, '#241F35')}</div>
    <h3>{title}</h3>
-   <p class="sz-cap">{cap}</p>
-   <div class="sz-count">{len(items)} проявлений</div>
-   <ul class="sz-list">{li}</ul>
+   <p class="hub-cap">{cap}</p>
+   <div class="hub-count">{len(items)} проявлений</div>
+   <ul class="hub-list">{li}</ul>
   </div>""")
+
+    lines = "".join(
+        f'<line x1="50" y1="14" x2="{x}" y2="44"/>' for x in (12.5, 37.5, 62.5, 87.5))
 
     return f"""
 <section class="sec sec-alt">
@@ -140,7 +143,13 @@ def levels():
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
 
-  <div class="spectrum rv">{''.join(zones)}</div>
+  <div class="hub rv">
+   <div class="hub-diagram">
+     <svg class="hub-lines" viewBox="0 0 100 44" preserveAspectRatio="none" aria-hidden="true">{lines}</svg>
+     <div class="hub-core"><span>Тревога</span></div>
+   </div>
+   <div class="hub-row">{''.join(nodes)}</div>
+  </div>
  </div>
 </section>"""
 

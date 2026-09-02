@@ -308,39 +308,50 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   SPECTRUM — one ribbon, not four cards. Emotions/body/thoughts/
-   actions sit edge to edge as bands of one shape, because the point
-   of the section is that they're one integrated system, not four
-   unrelated topics. Each band reserves a media slot for a real photo
-   later; today it's just colour and an icon.
+   HUB — anxiety is one thing with four faces, not four unrelated
+   topics: a central core with a line running out to each of them.
+   Each node reserves a media slot for a real photo later; today it's
+   just colour and an icon.
    ------------------------------------------------------------------ */
-.spectrum{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
-  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
-@media(max-width:900px){.spectrum{flex-direction:column}}
+.hub{position:relative}
+.hub-diagram{position:relative;height:64px;display:flex;justify-content:center}
+.hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.hub-lines line{stroke:var(--line-2);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.hub-core{position:relative;z-index:1;width:88px;height:88px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#9086E3 0%,#6C5FC0 55%,#493D9C 100%);
+  box-shadow:0 22px 40px -14px rgba(76,64,164,.55),
+    inset 0 -8px 14px rgba(20,14,50,.28), inset 0 6px 10px rgba(255,255,255,.32);
+  display:grid;place-items:center;text-align:center}
+.hub-core span{color:#fff;font-size:13px;font-weight:600;letter-spacing:-.01em}
+@media(max-width:900px){.hub-lines{display:none}}
 
-.sz{flex:1;min-width:0;position:relative;
+.hub-row{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
+  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
+@media(max-width:900px){.hub-row{flex-direction:column}.hub-diagram{height:36px}}
+
+.hub-node{flex:1;min-width:0;position:relative;
   background:color-mix(in srgb,var(--ct) 72%,white);
   padding:clamp(22px,2.4vw,30px);
   border-left:1px solid rgba(255,255,255,.7)}
-.sz:first-child{border-left:0}
+.hub-node:first-child{border-left:0}
 @media(max-width:900px){
-  .sz{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
-  .sz:first-child{border-top:0}
+  .hub-node{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
+  .hub-node:first-child{border-top:0}
 }
 
-.sz-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
+.hub-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
   margin-bottom:16px}
-.sz-media svg{width:26px;height:26px}
+.hub-media svg{width:26px;height:26px}
 
-.sz h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.sz-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
-.sz-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.hub-node h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.hub-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
+.hub-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
-.sz-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.sz-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
+.hub-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
+.hub-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
   color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
-.sz-list li:first-child{border-top:0}
-.sz-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
+.hub-list li:first-child{border-top:0}
+.hub-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
 
 /* ------------------------------------------------------------------
