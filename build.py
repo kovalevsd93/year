@@ -485,15 +485,15 @@ def reviews(inline=None):
 
 # ---------------------------------------------------------------- footer / legal
 def footer():
+    logo = logo_uri()
     return f"""
 <footer>
  <div class="wrap foot">
   <div style="display:flex;gap:14px;align-items:center">
-    <img src="{LOGO_FOOT}"{dims.attrs(LOGO_FOOT)} alt="">
+    <img src="{logo}" width="36" height="36" alt="">
     <div class="col" style="color:var(--ink-2)">Академия здорового мышления<br>Павла Федоренко</div>
   </div>
-  <div class="col">Copyright © 2012 — 2026. ИП «Федоренко Павел Алексеевич»<br>
-    ИНН 645117313599<br>Служба тех. поддержки: <a href="mailto:info@fdrk.ru">info@fdrk.ru</a></div>
+  <div class="col">Служба тех. поддержки:<br><a href="mailto:info@fdrk.ru">info@fdrk.ru</a></div>
   <div class="col"><a href="#privacy">Политика конфиденциальности</a><br>
     <a href="https://docs.google.com/document/d/1HNUDFnaErp0vLxzUOEkV9jPRO3QccW7aJG2nHTvISOw/edit?usp=sharing"
        target="_blank" rel="noopener">Договор оферты</a></div>
@@ -506,6 +506,7 @@ def legal(body):
  <div class="wrap">
   <details><summary>Политика в отношении обработки персональных данных</summary>
    <div class="body">{body}</div></details>
+  <p class="copyright">ИП Федоренко Павел<br>Copyright © 2012 — 2026 · ИНН 645117313599</p>
  </div>
 </section>"""
 

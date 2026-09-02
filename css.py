@@ -788,6 +788,8 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
 .legal .body{padding:0 0 34px;max-height:440px;overflow:auto;font-size:13px;line-height:1.75;color:var(--ink-3)}
 .legal .body h4{font-size:13.5px;color:var(--ink-2);margin:20px 0 8px;font-weight:600}
 .legal .body p{margin:0 0 9px}
+.copyright{max-width:var(--maxw);margin:0 auto;padding:16px 0 20px;
+  border-top:1px solid var(--line);font-size:12px;line-height:1.7;color:var(--ink-3)}
 
 /* ------------------------------------------------------------------
    MOTION

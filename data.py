@@ -3,7 +3,6 @@ DEADLINE_TEXT = "7 сентября"
 DEADLINE_ISO  = "2026-09-07T23:59:59+03:00"
 
 CDN = "https://static.tildacdn.com/"
-LOGO_FOOT = CDN + "tild6665-3862-4238-a432-663835363962/Logo.png"
 
 # боевой адрес — нужен для абсолютных ссылок в og-тегах
 SITE_URL = "https://sale-azm.ru"
