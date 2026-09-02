@@ -312,24 +312,30 @@ p{margin:0}
    Selecting a level lights the part of the body it works on and
    swaps in that level's symptoms. Nothing moves on its own.
    ------------------------------------------------------------------ */
-.model{display:grid;grid-template-columns:.85fr 1.15fr;align-items:stretch;
-  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
-  overflow:hidden;box-shadow:0 26px 60px -40px rgba(28,20,60,.28)}
-@media(max-width:900px){.model{grid-template-columns:1fr}
-  .figbox{max-width:min(240px,56vw)}
-  .model-fig{padding-top:clamp(18px,5vw,32px)}}
+.model2{display:grid;grid-template-columns:.85fr 1.15fr;gap:20px;align-items:stretch}
+@media(max-width:900px){.model2{grid-template-columns:1fr}.model2-right{order:-1}}
 
-/* фигура стоит на собственном фоне, который красится в цвет активного уровня */
-.model-fig{position:relative;display:grid;place-items:end center;
-  padding:clamp(20px,3vw,40px) clamp(16px,2vw,32px) 0;
-  background:var(--washt);transition:background .55s ease}
-.model-fig::before{content:"";position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);
-  width:104%;padding-bottom:104%;border-radius:50%;
-  background:radial-gradient(circle,var(--wash) 0%,transparent 66%);
-  opacity:.42;transition:background .55s ease}
-.model-panel{padding:clamp(24px,3vw,44px)}
+.model2-left{display:flex;flex-direction:column;gap:16px}
+.model2-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(20px,2.4vw,28px)}
+.model2-bottom{flex:1;display:flex;flex-direction:column}
+.model2-bottom .model-body{flex:1}
 
-.figbox{position:relative;width:100%;max-width:min(320px,60vw);margin:0 auto}
+/* правая панель красится в цвет активного уровня — от пастельной заливки к её же тёмной линии */
+.model2-right{position:relative;overflow:hidden;border-radius:var(--r-lg);
+  background:linear-gradient(155deg,var(--washt) 0%,var(--wash) 52%,var(--line) 130%);
+  min-height:420px;display:flex;align-items:flex-end;justify-content:center;
+  box-shadow:0 26px 60px -40px rgba(28,20,60,.32);
+  transition:background .6s ease}
+@media(max-width:900px){.model2-right{min-height:340px}}
+
+.figbox{position:relative;width:100%;max-width:min(300px,54vw);margin:0 auto;
+  padding-top:clamp(28px,4vw,44px)}
+
+.model2-caption{position:absolute;left:0;right:0;bottom:0;padding:74px 24px 22px;color:#fff;
+  background:linear-gradient(to top,rgba(14,9,26,.88) 0%,rgba(14,9,26,.6) 45%,rgba(14,9,26,0) 100%)}
+.mc-title{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em}
+.mc-text{margin-top:6px;font-size:14px;line-height:1.55;opacity:.92;max-width:46ch}
 
 /* сам манекен: его альфа-канал — маска, градиент внутри выбирает зону */
 .mq{position:relative;width:100%;aspect-ratio:419/688;isolation:isolate}
@@ -379,8 +385,7 @@ __SPOTS__
 .model-pane[hidden]{display:none}
 .model-pane{animation:paneIn .38s cubic-bezier(.2,.7,.3,1) both}
 @keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.model-pane .cap{font-size:16px;line-height:1.62;color:var(--ink-2);max-width:52ch}
-.pane-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.pane-count{margin-top:0;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--ci)}
 .model-pane ul{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
 .model-pane li{position:relative;padding:13px 0 13px 28px;font-size:15.5px;line-height:1.55;

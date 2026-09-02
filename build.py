@@ -78,7 +78,7 @@ def hero():
    <figure class="hero-figure">
      <div class="shot">
        <div class="shot-tags"><span class="tag-glass">ИИ-ассистент</span>
-         <span class="tag-glass">Платформа</span><span class="tag-glass">Клуб 24/7</span></div>
+         <span class="tag-glass">Платформа</span><span class="tag-glass">Поддержка 24/7</span></div>
        <img src="{{HERO_CARD}}" width="900" height="1120" alt="Павел Федоренко" loading="eager">
        <figcaption class="shot-foot">
          <div class="nm">Павел Федоренко</div>
@@ -129,11 +129,11 @@ def levels():
                     f'<span class="lbl">{title}</span><i></i></button>')
         tabs.append(f'<button class="model-tab" role="tab" id="mt{i}" aria-controls="mp{i}" '
                     f'aria-selected="{pressed}" data-wash="{wash}" data-tint="{tint}" '
+                    f'data-line="{line}" data-title="{title}" data-cap="{cap}" '
                     f'style="--c:{line};--ct:{tint}">{title}</button>')
         li = "".join(f"<li>{x}</li>" for x in items)
         panes.append(f'<div class="model-pane" role="tabpanel" id="mp{i}" aria-labelledby="mt{i}"'
                      f'{"" if i == 0 else " hidden"} style="--c:{line};--ci:{LEVEL_INK[i]}">'
-                     f'<p class="cap">{cap}</p>'
                      f'<div class="pane-count">{len(items)} проявлений</div>'
                      f'<ul>{li}</ul></div>')
 
@@ -145,13 +145,22 @@ def levels():
            'Научно обоснованными методами прорабатываем тревогу на уровне эмоций, тела, '
            'мыслей и поведения — ради устойчивого результата.')}
 
-  <div class="model rv" id="model" style="--wash:{LEVEL_COLORS[0][0]};--washt:{LEVEL_COLORS[0][2]}">
-   <div class="model-fig">
-     <div class="figbox">{figure(LEVELS)}{''.join(hots)}</div>
+  <div class="model2 rv" id="model"
+       style="--wash:{LEVEL_COLORS[0][0]};--washt:{LEVEL_COLORS[0][2]};--line:{LEVEL_COLORS[0][1]}">
+   <div class="model2-left">
+     <div class="model2-card model2-top">
+       <div class="model-tabs" role="tablist" aria-label="Уровни работы">{''.join(tabs)}</div>
+     </div>
+     <div class="model2-card model2-bottom">
+       <div class="model-body">{''.join(panes)}</div>
+     </div>
    </div>
-   <div class="model-panel">
-     <div class="model-tabs" role="tablist" aria-label="Уровни работы">{''.join(tabs)}</div>
-     <div class="model-body">{''.join(panes)}</div>
+   <div class="model2-right">
+     <div class="figbox">{figure(LEVELS)}{''.join(hots)}</div>
+     <div class="model2-caption" id="modelCaption">
+       <div class="mc-title">{LEVELS[0][0]}</div>
+       <div class="mc-text">{LEVELS[0][2]}</div>
+     </div>
    </div>
   </div>
  </div>
@@ -540,10 +549,16 @@ JS = """
   var mHots = [].slice.call(document.querySelectorAll(".hot"));
   var mZones = [].slice.call(document.querySelectorAll(".mq-lit"));
   var modelBox = document.getElementById("model");
+  var modelCap = document.getElementById("modelCaption");
   function selectLevel(i){
     if(modelBox && mTabs[i]){
       modelBox.style.setProperty("--wash", mTabs[i].dataset.wash);
       modelBox.style.setProperty("--washt", mTabs[i].dataset.tint);
+      modelBox.style.setProperty("--line", mTabs[i].dataset.line);
+    }
+    if(modelCap && mTabs[i]){
+      modelCap.querySelector(".mc-title").textContent = mTabs[i].dataset.title;
+      modelCap.querySelector(".mc-text").textContent = mTabs[i].dataset.cap;
     }
     mTabs.forEach(function(t,j){
       t.setAttribute("aria-selected", j===i ? "true":"false");
