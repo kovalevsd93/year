@@ -30,7 +30,8 @@ def heading(label, title, lead=None, center=True, wide=False):
     c = " center" if center else ""
     lc = "lead lead-w" if wide else "lead"
     l = f'<p class="{lc}">{lead}</p>' if lead else ""
-    return (f'<div class="stack stack-m{c} rv"><div class="label">{label}</div>'
+    kicker = f'<div class="label">{label}</div>' if label else ""
+    return (f'<div class="stack stack-m{c} rv">{kicker}'
             f'<h2>{title}</h2>{l}</div>')
 
 # ---------------------------------------------------------------- hero
@@ -409,7 +410,7 @@ def price():
  <div class="glow glow-a"></div>
  <div class="glow glow-b"></div>
  <div class="wrap stack stack-l">
-  {heading('Тариф', 'Знания и методики, которые меняют жизнь',
+  {heading(None, 'Знания и методики, которые меняют жизнь',
            'Подписка на 1 год (365 дней) на библиотеку всех программ '
            'по преодолению тревожных расстройств и неврозов.')}
 
