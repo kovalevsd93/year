@@ -668,13 +668,21 @@ def render(inline=None, shots=None):
 """
 
 def favicon_uri():
-    """Логотип академии как иконка вкладки."""
-    import base64, subprocess, os
-    src, dst = "assets/Logo_for_web.png", "cache/favicon64.png"
+    """Логотип-дерево с сайта как иконка вкладки: тот же файл, что в шапке
+       и футере, ужатый до 64px и дополненный до квадрата прозрачным полем —
+       исходник 192x195, а вкладке нужна ровно квадратная картинка."""
+    import base64, subprocess, os, png
+    src, fit, dst = "assets/logo-tree.png", "cache/favicon-tree-fit.png", "cache/favicon-tree64.png"
     os.makedirs("cache", exist_ok=True)
     if not os.path.exists(dst):
-        subprocess.run(["sips", "-Z", "64", src, "--out", dst],
-                       check=True, capture_output=True)
+        subprocess.run(["sips", "-Z", "64", src, "--out", fit], check=True, capture_output=True)
+        w, h, rgba = png.read(fit)
+        sq = bytearray(64 * 64 * 4)
+        ox, oy = (64 - w) // 2, (64 - h) // 2
+        for y in range(h):
+            row = (oy + y) * 64 * 4 + ox * 4
+            sq[row:row + w * 4] = rgba[y * w * 4:(y + 1) * w * 4]
+        png.write(dst, 64, 64, sq)
     return "data:image/png;base64," + base64.b64encode(open(dst, "rb").read()).decode()
 
 DESCRIPTION = ("Годовая подписка к новому учебному году: 12 месяцев доступа ко всем "
