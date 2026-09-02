@@ -308,51 +308,35 @@ p{margin:0}
 
 
 /* ------------------------------------------------------------------
-   HUB — anxiety is one thing with four faces, not four unrelated
-   topics: a central core with a line running out to each of them.
-   Each node reserves a media slot for a real photo later; today it's
-   just colour and an icon.
+   HUBLIST — four stages of one reaction, read top to bottom: an
+   editorial numbered spread, not a card. The number carries real
+   sequence (emotion leads to body leads to thought leads to action),
+   so it earns its place here. Each row reserves a media slot for a
+   real photo later; today it's just colour and an icon.
    ------------------------------------------------------------------ */
-.hub{position:relative}
-.hub-diagram{position:relative;height:64px;display:flex;justify-content:center}
-.hub-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.hub-lines line{stroke:var(--line-2);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.hub-core{position:relative;z-index:1;width:88px;height:88px;border-radius:50%;
-  background:radial-gradient(circle at 32% 28%,#9086E3 0%,#6C5FC0 55%,#493D9C 100%);
-  box-shadow:0 22px 40px -14px rgba(76,64,164,.55),
-    inset 0 -8px 14px rgba(20,14,50,.28), inset 0 6px 10px rgba(255,255,255,.32);
-  display:grid;place-items:center;text-align:center}
-.hub-core span{color:#fff;font-size:13px;font-weight:600;letter-spacing:-.01em}
-@media(max-width:900px){.hub-lines{display:none}}
+.hublist{border-top:1px solid var(--line)}
+.hl-row{display:grid;grid-template-columns:52px 1fr 116px;gap:24px;align-items:start;
+  padding:clamp(26px,3vw,36px) 0;border-bottom:1px solid var(--line)}
+@media(max-width:760px){.hl-row{grid-template-columns:36px 1fr;}
+  .hl-media{grid-column:1/-1;order:3;width:100%;height:140px;margin-top:4px}}
 
-.hub-row{display:flex;align-items:stretch;border-radius:var(--r-lg);overflow:hidden;
-  background:var(--surface);box-shadow:0 26px 60px -40px rgba(28,20,60,.30)}
-@media(max-width:900px){.hub-row{flex-direction:column}.hub-diagram{height:36px}}
+.hl-num{font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--c);
+  font-variant-numeric:tabular-nums;padding-top:2px}
 
-.hub-node{flex:1;min-width:0;position:relative;
-  background:color-mix(in srgb,var(--ct) 72%,white);
-  padding:clamp(22px,2.4vw,30px);
-  border-left:1px solid rgba(255,255,255,.7)}
-.hub-node:first-child{border-left:0}
-@media(max-width:900px){
-  .hub-node{border-left:0;border-top:1px solid rgba(255,255,255,.7)}
-  .hub-node:first-child{border-top:0}
-}
-
-.hub-media{width:56px;height:56px;border-radius:14px;display:grid;place-items:center;
-  margin-bottom:16px}
-.hub-media svg{width:26px;height:26px}
-
-.hub-node h3{font-size:clamp(18px,1.8vw,21px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
-.hub-cap{margin-top:12px;font-size:14.5px;line-height:1.58;color:var(--ink-2)}
-.hub-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
+.hl-body h3{font-size:clamp(19px,2vw,23px);font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.hl-cap{margin-top:10px;font-size:15px;line-height:1.6;color:var(--ink-2);max-width:60ch}
+.hl-count{margin-top:16px;font-size:11px;font-weight:600;letter-spacing:.16em;
   text-transform:uppercase;color:var(--c)}
-.hub-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0}
-.hub-list li{position:relative;padding:11px 0 11px 20px;font-size:14px;line-height:1.5;
-  color:var(--ink-2);border-top:1px solid rgba(23,19,32,.08)}
-.hub-list li:first-child{border-top:0}
-.hub-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
+.hl-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:0;max-width:60ch}
+.hl-list li{position:relative;padding:11px 0 11px 20px;font-size:14.5px;line-height:1.5;
+  color:var(--ink-2);border-top:1px solid var(--line)}
+.hl-list li:first-child{border-top:0}
+.hl-list li::before{content:"";position:absolute;left:0;top:17px;width:6px;height:6px;
   border-radius:50%;background:var(--c)}
+
+.hl-media{width:116px;height:116px;border-radius:16px;flex:none;
+  display:grid;place-items:center}
+.hl-media svg{width:30px;height:30px}
 
 /* ------------------------------------------------------------------
    PROGRAMS — colour encodes rank, not variety. The main programme is
