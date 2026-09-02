@@ -532,14 +532,14 @@ p{margin:0}
 /* ------------------------------------------------------------------
    BONUSES
    ------------------------------------------------------------------ */
-.bonus{position:relative;overflow:hidden;isolation:isolate;
+/* ни overflow:hidden, ни clip-path: в iOS Safari они съедают горизонтальный
+   свайп внутри карточки — лента отзывов об ассистенте переставала листаться.
+   Обрезать тут больше нечего: декоративное пятно убрано, а сама лента
+   обрезает себя сама (overflow-x у .bonus-shots) */
+.bonus{position:relative;
   background:color-mix(in srgb,var(--ct) 28%,white);
   border:1px solid var(--line-2);border-radius:var(--r-lg);
-  clip-path:inset(0 round var(--r-lg));
   padding:clamp(26px,3vw,40px);box-shadow:0 18px 40px -30px rgba(28,20,60,.22)}
-.bonus::before{content:"";position:absolute;top:-90px;right:-80px;width:200px;height:200px;
-  border-radius:50%;background:var(--c);filter:blur(60px);opacity:.16;z-index:0}
-.bonus>*{position:relative;z-index:1}
 .bonus-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 26px;align-items:start}
 @media(max-width:680px){.bonus-head{grid-template-columns:1fr;gap:18px}}
 .bonus-mark{display:flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;
@@ -576,7 +576,10 @@ p{margin:0}
 .bonus-shots-h{margin-top:28px;font-size:11px;font-weight:600;letter-spacing:.18em;
   text-transform:uppercase;color:var(--ink-3)}
 .shots-wrap{position:relative;margin-top:16px}
+/* overscroll-behavior-x не отдаёт горизонтальный жест странице и системному
+   свайпу «назад» в iOS — без него палец на ленте листал не ленту, а историю */
 .bonus-shots{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;
+  overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
   scroll-snap-type:x proximity;scrollbar-width:thin;
   scrollbar-color:var(--line-2) transparent}
 /* мышью «листать вбок» нельзя, а в macOS полоса прокрутки скрыта — нужны стрелки */
