@@ -580,10 +580,32 @@ JS = """
       next.disabled = strip.scrollLeft >= max;
       w.classList.toggle("no-nav", max <= 0);
     }
-    prev.addEventListener("click", function(){
-      strip.scrollBy({left: -step(), behavior: "smooth"}); });
-    next.addEventListener("click", function(){
-      strip.scrollBy({left: step(), behavior: "smooth"}); });
+    /* Прокрутку анимируем сами, а не через scrollBy({behavior:"smooth"}):
+       плавную прокрутку Safari понимает только с 15.4, а до этого молча
+       не делает ничего — стрелки на старых айфонах просто не работали бы */
+    var anim = 0, settle = 0;
+    function animateTo(target, ms){
+      if (anim) cancelAnimationFrame(anim);
+      clearTimeout(settle);
+      var from = strip.scrollLeft,
+          max = strip.scrollWidth - strip.clientWidth,
+          to = Math.max(0, Math.min(max, target)),
+          t0 = Date.now();
+      if (Math.abs(to - from) < 1) return;
+      /* плавность — украшение: если rAF недоступен или засыпает, лента всё
+         равно окажется где надо, потому что конечную точку ставим таймером */
+      settle = setTimeout(function(){ strip.scrollLeft = to; sync(); }, ms + 60);
+      if (typeof requestAnimationFrame !== "function"){ strip.scrollLeft = to; sync(); return; }
+      (function frame(){
+        var p = Math.min(1, (Date.now() - t0) / ms),
+            e = p < .5 ? 2*p*p : 1 - Math.pow(-2*p + 2, 2)/2;   /* ease-in-out */
+        strip.scrollLeft = from + (to - from) * e;
+        sync();
+        if (p < 1) anim = requestAnimationFrame(frame);
+      })();
+    }
+    prev.addEventListener("click", function(){ animateTo(strip.scrollLeft - step(), 320); });
+    next.addEventListener("click", function(){ animateTo(strip.scrollLeft + step(), 320); });
     strip.addEventListener("scroll", sync, {passive: true});
     addEventListener("resize", sync);
     sync();
@@ -594,6 +616,8 @@ JS = """
        целиком наша, поэтому ведёт себя одинаково везде. */
     var dragging = false, startX = 0, startScroll = 0, dist = 0, blockClick = false;
     strip.addEventListener("pointerdown", function(e){
+      if (anim) cancelAnimationFrame(anim);   /* палец важнее едущей анимации */
+      clearTimeout(settle);
       dragging = true; dist = 0; startX = e.clientX; startScroll = strip.scrollLeft;
     });
     strip.addEventListener("pointermove", function(e){
@@ -605,6 +629,7 @@ JS = """
     function endDrag(){
       if(!dragging) return;
       dragging = false;
+      sync();
       blockClick = dist > 4;      /* это был свайп, а не тап — лайтбокс не открываем */
     }
     strip.addEventListener("pointerup", endDrag);

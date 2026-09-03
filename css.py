@@ -576,12 +576,21 @@ p{margin:0}
 .shots-nav svg{width:20px;height:20px;stroke-width:2.4}
 .shots-nav.prev{left:-14px}
 .shots-nav.next{right:-14px}
-.shots-nav:hover{background:var(--accent);color:#fff;transform:scale(1.06)}
+/* только для мыши: на тачскрине :hover залипает после нажатия */
+@media(hover:hover){.shots-nav:hover{background:var(--accent);color:#fff;transform:scale(1.06)}}
+.shots-nav:active{background:var(--accent);color:#fff}
 .shots-nav:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .shots-nav[disabled]{opacity:0;pointer-events:none}
 .no-nav .shots-nav{display:none}
-@media(hover:none){.shots-nav{display:none}}
-@media(max-width:640px){.shots-nav{display:none}}
+/* на телефоне стрелки тоже нужны: свайп по ленте в iOS Safari работает не
+   у всех, а листать чем-то надо. Кружки поменьше и почти непрозрачные,
+   чтобы читались поверх фотографии отзыва */
+@media(max-width:640px){
+  .shots-nav{width:40px;height:40px;top:calc(50% - 24px);background:rgba(255,255,255,.96)}
+  .shots-nav svg{width:18px;height:18px}
+  .shots-nav.prev{left:-8px}
+  .shots-nav.next{right:-8px}
+}
 /* ширина карточки считается от самой ленты, а не от экрана: на телефоне
    84vw давало карточку ШИРЕ видимой области ленты, и scroll-snap в iOS
    отбрасывал палец назад — лента не листалась совсем */
@@ -787,6 +796,16 @@ p{margin:0}
   border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:16px;
   color:var(--ink);line-height:1;z-index:1}
 .pay-modal-body{display:block;width:100%;height:min(70vh,620px);border:0}
+/* На телефоне форме не хватало высоты — строку «Я согласен на обработку
+   персональных данных» обрезало снизу. Убираем поля вокруг карточки и отдаём
+   виджету почти весь экран. dvh — потому что в iOS Safari 100vh считается
+   без панелей браузера, и нижний край уезжает под адресную строку */
+@media(max-width:620px){
+  .pay-modal{padding:10px}
+  .pay-modal-card{padding:16px;max-height:94vh;max-height:94dvh}
+  .pay-modal-close{top:10px;right:10px}
+  .pay-modal-body{height:min(88vh,700px);height:min(88dvh,700px)}
+}
 
 /* ------------------------------------------------------------------
    FOOTER / LEGAL
