@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-DEADLINE_TEXT = "7 сентября"
-DEADLINE_ISO  = "2026-09-07T23:59:59+03:00"
+DEADLINE_TEXT = "9 сентября, 21:00"
+DEADLINE_ISO  = "2026-09-09T21:00:00+03:00"
 
 CDN = "https://static.tildacdn.com/"
 
