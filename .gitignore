@@ -23,3 +23,5 @@ __pycache__/
 
 # Конфиг локального окружения
 .claude/
+.agents/
+.codex/
