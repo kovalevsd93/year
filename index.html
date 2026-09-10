@@ -165,6 +165,12 @@ p{margin:0}
 .btn-quiet{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
 .btn-quiet:hover{background:var(--surface);border-color:var(--ink)}
 .btn-lg{padding:19px 34px;font-size:17px}
+/* акция закончилась: кнопка остаётся на месте как статус, а не как действие —
+   светло-серая, без ховера, без курсора-руки. На фиолетовой карточке та же
+   серая, иначе белая кнопка оттуда читается как активная */
+.btn-over,.tariff-best .btn.btn-over{background:var(--line);color:var(--ink-2);
+  border-color:transparent;cursor:default}
+.btn-over:hover,.tariff-best .btn.btn-over:hover{background:var(--line);transform:none}
 .btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .btn-note{font-size:13.5px;color:var(--ink-3);line-height:1.6}
 .price-side .btn-row{margin-top:22px}
@@ -1141,8 +1147,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
      <span class="cut">−85%</span>
    </div>
    <div class="tariff-inst">В рассрочку от 1 374 ₽/мес · 365 дней доступа</div>
-   <button class="btn btn-lg" type="button" data-pay-page="//sale-azm.ru/pay/base.html"
-     >Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></button>
+   <button class="btn btn-lg btn-over" type="button" disabled>Акция завершена</button>
    <div class="tariff-now"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5.5 13.2h5.2L11 21l7.5-10.2h-5.2L13 3Z"/></svg><span>Доступ ко всем материалам
      открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list"><li class="yes">Главная программа «Свобода от тревоги, паники и страхов»</li><li class="yes">Продвинутый курс «Здоровое мышление»</li><li class="yes">Практический курс «Паники.НЕТ»</li><li class="yes">Практический курс «Свобода от страха за здоровье»</li><li class="yes">Практический курс «7 телесных практик от тревоги»</li><li class="yes">Курс «Как не воспитать невротика»</li><li class="sep">Не входит в этот тариф</li><li class="no">Поддержка психологов и кураторов</li><li class="no">ИИ-ассистент Павла Федоренко</li><li class="no">Интерактивная платформа для работы с тревогой</li></ul>
@@ -1156,8 +1161,7 @@ footer{padding:44px 0 38px;border-top:1px solid var(--line);
      <span class="cut">−82%</span>
    </div>
    <div class="tariff-inst">В рассрочку от 1 658 ₽/мес · 365 дней доступа</div>
-   <button class="btn btn-lg" type="button" data-pay-page="//sale-azm.ru/pay/full.html"
-     >Оформить подписку<svg viewBox="0 0 26 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0 7h24M18 1l6 6-6 6"/></svg></button>
+   <button class="btn btn-lg btn-over" type="button" disabled>Акция завершена</button>
    <div class="tariff-now"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3 5.5 13.2h5.2L11 21l7.5-10.2h-5.2L13 3Z"/></svg><span>Доступ ко всем материалам
      открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list"><li class="yes">Все шесть программ Академии</li><li class="yes">Поддержка психологов и кураторов 24/7</li><li class="yes">ИИ-ассистент Павла Федоренко</li><li class="yes">Интерактивная платформа для работы с тревогой</li></ul>

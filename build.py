@@ -399,8 +399,7 @@ def tariff_card(t):
      <span class="cut">{t['cut']}</span>
    </div>
    <div class="tariff-inst">В рассрочку {t['inst']} · 365 дней доступа</div>
-   <button class="btn btn-lg" type="button" data-pay-page="//{SITE_URL.split('://', 1)[1]}/{t['widget_page']}"
-     >Оформить подписку{ARROW}</button>
+   <button class="btn btn-lg btn-over" type="button" disabled>Акция завершена</button>
    <div class="tariff-now">{icon('bolt', 'currentColor')}<span>Доступ ко всем материалам
      открывается <b>сразу после оплаты</b></span></div>
    <ul class="tariff-list">{has}{no}</ul>

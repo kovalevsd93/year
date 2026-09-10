@@ -146,6 +146,12 @@ p{margin:0}
 .btn-quiet{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
 .btn-quiet:hover{background:var(--surface);border-color:var(--ink)}
 .btn-lg{padding:19px 34px;font-size:17px}
+/* акция закончилась: кнопка остаётся на месте как статус, а не как действие —
+   светло-серая, без ховера, без курсора-руки. На фиолетовой карточке та же
+   серая, иначе белая кнопка оттуда читается как активная */
+.btn-over,.tariff-best .btn.btn-over{background:var(--line);color:var(--ink-2);
+  border-color:transparent;cursor:default}
+.btn-over:hover,.tariff-best .btn.btn-over:hover{background:var(--line);transform:none}
 .btn-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
 .btn-note{font-size:13.5px;color:var(--ink-3);line-height:1.6}
 .price-side .btn-row{margin-top:22px}
